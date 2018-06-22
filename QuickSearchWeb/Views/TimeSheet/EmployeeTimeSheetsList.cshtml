@@ -1,0 +1,179 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.TimeSheetListViewModel>
+
+
+@{
+    ViewBag.Title = "TimeSheetsList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+
+        $("#from").datepicker();
+        $("#to").datepicker();
+
+
+
+        window.onload = function () {
+            //debugger;
+            (function getCurrentDate() {
+                var date = new Date();
+                var fromDate = new Date();
+                fromDate.setDate(date.getDate() - 31);
+                var toDate = new Date();
+                toDate.setDate(date.getDate() + 30);
+                //debugger;
+                document.getElementById('from').value = fromDate.getMonth() + 1 + "/" + fromDate.getDate() + "/" + fromDate.getFullYear();
+                document.getElementById('to').value = toDate.getMonth() + 1 + "/" + toDate.getDate() + "/" + toDate.getFullYear();
+                //document.getElementById('from').valueAsDate = new Date(date.getFullYear(), date.getMonth(), 1);
+                //document.getElementById('to').valueAsDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+            }())
+
+
+            TimeSheetFilter();
+
+
+
+        };
+        function TimeSheetFilter() {
+
+            var fromdate = $("#from").val();
+            var todate = $("#to").val();
+            var URL = "";
+             if('@ViewBag.TSRole' == "TimeSheetAdmin") {
+                 URL = "/TimeSheet/GetEmployeeAdminRemainingTimeSheetList?FromDate=" + fromdate + '&Todate=' + todate;
+                }
+                        else if ('@ViewBag.TSRole' == "TimeSheetReportingManager") {
+                 URL = "/TimeSheet/GetEmployeeRepoManRemainingTimeSheetList?FromDate=" + fromdate + '&Todate=' + todate;
+                }
+                        else if ('@ViewBag.TSRole' == "TimeSheetManager") {
+                 URL = "/TimeSheet/GetEmployeeManagerRemainingTimeSheetList?FromDate=" + fromdate + '&Todate=' + todate;
+                }
+            $.ajax({
+                type: "Get",
+                url: URL,
+                success: function (data) {
+
+                    $("#Timesheets").html(data);
+
+                },
+                error: function (err) {
+
+                    alert(err);
+                }
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+
+
+
+}
+
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Employee Timesheets @ViewBag.RoleName </strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+
+
+                @{
+                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                    {
+                        Html.RenderAction("GetEmployeeAdminPendingTimeSheetList", "TimeSheet");
+                    }
+                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                    {
+                        Html.RenderAction("GetEmployeeRepoManPendingTimeSheetList", "TimeSheet");
+                    }
+                    else if (ViewBag.TSRole == "TimeSheetManager")
+                    {
+                        Html.RenderAction("GetEmployeeManagerPendingTimeSheetList", "TimeSheet");
+                    }
+
+                }
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            <div class="card-header">
+                                <h4>Remaining Timesheets</h4>
+                            </div>
+                            <div class="card-body">
+
+
+
+                                <div class="row">
+                                    <label for="from">Show Timesheets Between </label>
+
+                                    <input type="text" id="from" class="form-controldate">
+                                    <label for="to">-</label>
+                                    <input type="text" id="to" class="form-controldate">
+                                    <button class="btn btn-flat btn-default m-b-10 m-l-5" onclick="TimeSheetFilter();">Filter</button>
+
+
+                                </div>
+                                <hr />
+
+
+                                <div id="Timesheets">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

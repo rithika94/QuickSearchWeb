@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSearchWeb", "QuickSearchWeb\QuickSearchWeb.csproj", "{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSearchData", "QuickSearchData\QuickSearchData.csproj", "{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuickSearchBusiness", "QuickSearchBusiness\QuickSearchBusiness.csproj", "{8A75D98A-15F5-44FE-9A07-982B204725DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A75D98A-15F5-44FE-9A07-982B204725DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A75D98A-15F5-44FE-9A07-982B204725DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A75D98A-15F5-44FE-9A07-982B204725DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A75D98A-15F5-44FE-9A07-982B204725DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E7CFB1F1-439B-4D5A-8E62-601080ADE8E9}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://epathusa.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = QuickSearchWeb\\QuickSearchWeb.csproj
+		SccProjectName1 = QuickSearchWeb
+		SccLocalPath1 = QuickSearchWeb
+		SccProjectUniqueName2 = QuickSearchData\\QuickSearchData.csproj
+		SccProjectName2 = QuickSearchData
+		SccLocalPath2 = QuickSearchData
+		SccProjectUniqueName3 = QuickSearchBusiness\\QuickSearchBusiness.csproj
+		SccProjectName3 = QuickSearchBusiness
+		SccLocalPath3 = QuickSearchBusiness
+	EndGlobalSection
+EndGlobal

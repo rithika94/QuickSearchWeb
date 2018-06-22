@@ -1,0 +1,160 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.RolesViewModel>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-alert">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <div class="bootstrap-data-table-panel table-responsive2">
+                    <table id="bootstrap-data-table" class="display table table-borderd table-striped table-responsive advanced-table">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Last Modified
+                                </th>
+
+                                <th>
+                                    Employee Id
+                                </th>
+                                <th>
+                                    UserName
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Module
+                                </th>
+                                <th>
+                                    Admin
+                                </th>
+                                <th>
+                                    RM/Eng
+                                </th>
+                                <th>
+                                    Manager
+                                </th>
+                                <th>
+                                    User
+                                </th>
+                                <th>
+                                    Account Active
+                                </th>
+                            </tr>
+                        </thead>
+                        <tfoot style="display: table-header-group;">
+                            <tr>
+                                <th>
+
+                                </th>
+                                <th>
+                                   
+                                </th>
+                                <th>
+                                    
+                                </th>
+                                <th>
+                                    
+                                </th>
+                                <th>
+                                    
+                                </th>
+
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @if (!(Model == null))
+        {
+
+            foreach (var item in Model)
+            {
+
+                    <tr>
+                        <td>@item.ModifiedDate</td>
+                        <td>@item.EmployeeCode</td>
+                        <td>@item.UserName</td>
+                        <td>@item.FirstName  @item.LastName </td>
+                        <td>
+                            @item.ModuleAbbre
+                        </td>
+                        <td>
+                            @if (item.Admin == false)
+        {
+                    <span class="fa fa-times fa-lg" style="color:red;"></span>
+}
+else if (item.Admin == true)
+{
+                    <span class="fa fa-check fa-lg" style="color:green;"></span>
+}
+
+                        </td>
+                        <td>
+                            @if (item.ReportingManager == false)
+        {
+                    <span class="fa fa-times fa-lg" style="color:red;"></span>
+}
+else if (item.ReportingManager == true)
+{
+                    <span class="fa fa-check fa-lg" style="color:green;"></span>
+}
+
+                        </td>
+                        <td>
+                            @if (item.Manager == false)
+        {
+                    <span class="fa fa-times fa-lg" style="color:red;"></span>
+}
+else if (item.Manager == true)
+{
+                    <span class="fa fa-check fa-lg" style="color:green;"></span>
+}
+
+                        </td>
+                        <td>
+                            @if (item.User == false)
+        {
+                    <span class="fa fa-times fa-lg" style="color:red;"></span>
+}
+else if (item.User == true)
+{
+                    <span class="fa fa-check fa-lg" style="color:green;"></span>
+}
+
+                        </td>
+                        <td>
+                            @if (item.IsActive == false)
+        {
+                    <span class="fa fa-times fa-lg" style="color:red;"></span>
+}
+else if (item.IsActive == true)
+{
+                    <span class="fa fa-check fa-lg" style="color:green;"></span>
+}
+
+                        </td>
+
+
+                    </tr>
+
+}
+}
+
+
+
+                        </tbody>
+
+
+                    </table>
+
+                </div>
+
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

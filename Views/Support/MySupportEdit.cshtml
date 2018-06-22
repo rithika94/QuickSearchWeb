@@ -1,0 +1,330 @@
+﻿@model QuickSearchWeb.Models.SupportViewModel
+@{
+    ViewBag.Title = "MySupportEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script>
+        //Remove uploaded Documents
+   function funImageRemove(id,path,name,supportId) {
+
+        $.ajax({
+            url: "@Url.Action("RemoveImg", "Support")",
+            data: { "imgid": id, "imgname": name, "supportId": supportId },
+        async: false,
+        DataType: 'json',
+        type: "POST",
+        success: function (data) {
+            var result = JSON.parse(JSON.stringify(data));
+            //alert('Table saved successfully.');
+            alert(data);
+            location.reload();
+        },
+        error: function () {
+            alert(data);
+        }
+    });//end ajax
+        alert(imgnameid);
+    }
+
+         function downloadImage(path,name,supportId) {
+
+        $.ajax({
+            url: "@Url.Action("GetImage", "Support")",
+            data: { "imgname": name, "supportId": supportId },
+        async: false,
+        DataType: 'json',
+        type: "POST",
+        success: function (data) {
+            //var result = JSON.parse(JSON.stringify(data));
+            //alert('Table saved successfully.');
+            //alert(data);
+           // location.reload();
+        },
+        error: function () {
+            alert(data);
+        }
+    });//end ajax
+        //alert(imgnameid);
+        }
+
+
+         //Set limit 5 to upload common documents
+function validate(numberofFile)
+{
+
+    for (var i = 0; i < $("#FILEPhoto").get(0).files.length; ++i) {
+        var file1 = $("#FILEPhoto").get(0).files[i].name;
+
+        if (file1) {
+            var file_size = $("#FILEPhoto").get(0).files[i].size;
+            if (file_size < 5242880) {
+                var ext = file1.split('.').pop().toLowerCase();
+                if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'txt']) === -1) {
+                    alert("Please upload only jpg, png, txt files");
+                    return false;
+
+                }
+            } else {
+                alert("File size should be below 5MB.");
+                return false;
+            }
+        }
+    }
+       var fi = document.getElementById('FILEPhoto');
+        var initialFileSize=parseInt('@Model.SupportFilesList.Count()');
+         var totalFileNo = initialFileSize;
+        var fSize = 0;
+        // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        if (fi.files.length > 0) {
+            // RUN A LOOP TO CHECK EACH SELECTED FILE.
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                //fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                totalFileNo = totalFileNo + 1;
+            }
+           // totalFileSize = ((totalFileSize / 1024) / 1024);
+          // alert(totalFileNo);
+            if (totalFileNo <= numberofFile) {
+                return true;
+            }
+            else {
+                alert("Maximum number of 5 File documents Can be uploaded");
+                return false;
+            }
+        }
+        //else {
+        //    //alert("Please Select File for Upload");
+        //    return false;
+        //}
+    }
+
+    </script>
+
+
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to Service Requests" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("MySupportList", "Support")'" />
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Edit Service Request</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MySupportList", "Support")'"*@>My Service Requests</a></li>
+                                <li class="active">Edit Service Request</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="main-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card alert">
+                                        @*<div class="card-header">
+                                                <h4>Add a new inventory</h4>
+                                                <hr />
+                                            </div>*@
+                                        <div class="card-body">
+                                            @using (Html.BeginForm(FormMethod.Post))
+                                            {
+
+                                                @Html.AntiForgeryToken()
+                                                @Html.HiddenFor(m => m.SupportId)
+
+                                                <div class="row">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.SupportCode)
+                                                            @Html.TextBoxFor(m => m.SupportCode, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.AssignToName)
+                                                            @Html.TextBoxFor(m => m.AssignToName, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssueStatus)
+                                                            @Html.TextBoxFor(m => m.LookupCodeMaster1.LookupCodeName, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(m => m.Summary)
+                                                            @Html.TextBoxFor(m => m.Summary, new { @class = "form-control" })
+                                                            @Html.ValidationMessageFor(m => m.Summary, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(m => m.Description)
+                                                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "10", @cols = "20" })
+                                                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssueType)
+                                                            @Html.DropDownListFor(model => model.LookupIssueType, new SelectList(Model.IssueTypeList, "Id", "Name"), "Select Issue Type", new { @class = "form-control", @id = "IssueType" })
+                                                            @Html.ValidationMessageFor(m => m.LookupIssueType, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssuePriority)
+                                                            @Html.DropDownListFor(model => model.LookupIssuePriority, new SelectList(Model.IssuePriorityList, "Id", "Name"), "Select Priority", new { @class = "form-control", @id = "Issue Priority" })
+                                                            @Html.ValidationMessageFor(m => m.LookupIssuePriority, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="form-group  ">
+                                                        <div class="col-md-12">
+                                                            @if (Model.LookupCodeMaster1.LookupCodeName == "Saved")
+                                                            {
+
+                                                                <input type="submit" value="Submit" name="action" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />
+                                                                <input type="submit" value="Update" name="action" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />
+
+                                                                //<input type="button" value="Delete" class="btn btn-flat btn-danger m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("MySupportDelete", "Support",new { id= Model.SupportId})'" />
+                                                                <button type="button" value="Delete" class="btn btn-flat btn-danger m-b-10 m-l-5" data-toggle="modal" data-target="#deleteTS" id="delete">Delete</button>
+
+                                                            }
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                @*<div class="form-group  col-md-5">
+                                                        <input type="submit" value="Update" class="pull-right btn btn-flat btn-info m-b-100 m-l-10" />
+
+                                                        <input type="reset" value="Clear All" class=" btn btn-flat btn-danger m-b-29 m-l-29" />
+                                                    </div>*@
+
+                                            }
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"> Support Documents</div>
+                                                <div class="panel-body">
+                                                    <div class="col-md-4">
+                                                        <!--Common Document Upload-->
+                                                        @using (Html.BeginForm("EditDocumentUpload", "Support", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                        {
+
+                                                            <div>
+                                                                <label for="selectFile" class="hidden">Choose File</label>
+                                                                <input type="file" name="FILEPhoto" id="FILEPhoto" multiple="multiple">
+                                                                @Html.HiddenFor(m => m.SupportId)
+                                                                <input type="submit" value="Upload" class="btn btn-primary" onclick="return validate(5);" />
+                                                            </div>
+
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="bootstrap-data-table-panel">
+                                                                @if (Model.SupportFilesList != null && Model.SupportFilesList.Count > 0)
+                                                                {
+                                                                    string FileName = string.Empty;
+                                                                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Document Name</th>
+                                                                                @*<th>Upload New</th>*@
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach (var item in Model.SupportFilesList)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>@item.FileName</td>
+
+                                                                                    @*<td>
+                                                                                            @using (Html.BeginForm("SaveImge", "Recruitment", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                                                                                            {
+                                                                                                FileName = "flDocument" + @item.Id;
+                                                                                                <input type="file" name="@FileName" id="@FileName" />
+                                                                                                <button type="submit">Update</button>
+                                                                                            }
+                                                                                        </td>*@
+                                                                                    <td>
+                                                                                        <button type="button" class="pull-left btn-danger btn-flat" href="javascript:void(0)" onclick="funImageRemove('@item.Id','@item.FileServerPath','@item.FileName','@item.SupportId');"> <i class="ti-trash"></i></button>
+                                                                                        @using (Html.BeginForm("GetImage", "Support", FormMethod.Get, new { @class = "form-horizontal form-label-left" }))
+                                                                                        {
+                                                                                            <input type="hidden" name="imgname" value="@item.FileName" />
+                                                                                            <input type="hidden" name="supportId" value="@item.SupportId" />
+                                                                                            <button type="submit" class="pull-right btn-warning btn-flat "><i class="ti-download"></i></button>
+                                                                                        }
+                                                                                        @*<button type="button" class="pull-left btn-warning btn-flat m-l-5" href="javascript:void(0)" onclick="downloadImage('@item.FileServerPath','@item.FileName','@item.SupportId');"> <i class="ti-download"></i></button>*@
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <div class="modal fade" id="deleteTS" tabindex="-1" role="dialog" aria-labelledby="deleteTS" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                            <h4 class="modal-title custom_align" id="Heading">Delete Service Request</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            @*<div class="alert alert-warning">*@
+                                                            <span class="fa fa-exclamation-triangle"></span> Are you sure you want to delete this service request?
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="modal-footer ">
+
+                                                            <button type="button" onclick="location.href= '@Url.Action("MySupportDelete", "Support",new { id= Model.SupportId})'" name="submit" class="btn btn-success" id="btnSubmit"><span class="fa fa-check"></span> Yes</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

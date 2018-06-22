@@ -1,0 +1,290 @@
+﻿@model QuickSearchWeb.Models.DashboardViewModels
+@{
+    //ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+
+<body>
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+                <div class="main-content">
+                    <div class="row">
+                       
+                        @*@foreach (var item in Model.DasboardList)
+    {
+                    <div class="col-md-4">
+                        <div class="card">
+                            <a class="stat-widget-four" href=@item.link>
+                               
+                                <div class="stat">
+                                    <div class=" dib">
+                                        <div class="stat-text">@item.title</div>
+                                        <div class="stat-heading">@item.value</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+}*@
+                        @if (User.IsInRole("SupportUser"))
+                        {
+                        @*<div class="col-sm-4">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-wpforms fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">@Model.MyPendingRequestsCount</div>
+                                            <div>Firms Pending Approval</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="../Firm/FirmsPendingApprovalList/">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>*@
+
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("MySupportList", "Support")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-warning p-48">
+                                                <i class="ti-ticket"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Pending Requests</div>
+                                                <div class="stat-digit">@Model.MyPendingRequestsCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("MySupportList", "Support")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-info p-48">
+                                                <i class="ti-ticket"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Done Requests</div>
+                                                <div class="stat-digit">@Model.MyDoneRequestsCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("MySupportList", "Support")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-success p-48">
+                                                <i class="ti-ticket"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Closed Requests</div>
+                                                <div class="stat-digit">@Model.MyClosedRequestsCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        }
+
+                       @if (User.IsInRole("TimeSheetAdmin"))
+                       {
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeAdminTimeSheetsList", "TimeSheet")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-warning p-48">
+                                            <i class="ti-time"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending TimeSheets(Admin)</div>
+                                            <div class="stat-digit">@Model.AdminPendingTimesheetsCount</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeAdminLOAList", "LOA")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-info p-48">
+                                            <i class="ti-envelope"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending LOAs(Admin)</div>
+                                            <div class="stat-digit">@Model.AdminPendingLOAsCount</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeAdminExpensesList", "Expense")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-success p-48">
+                                            <i class="ti-receipt"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending Expense Sheets(Admin)</div>
+                                            <div class="stat-digit">@Model.AdminPendingExpensesCount</div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                       }
+
+                       else if (User.IsInRole("TimeSheetManger"))
+                       {
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeManagerTimeSheetsList", "TimeSheet")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-warning p-48">
+                                            <i class="ti-time"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending TimeSheets(Viewer)</div>
+                                            <div class="stat-digit">@Model.ManagerPendingTimesheetsCount</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeManagerLOAList", "LOA")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-info p-48">
+                                            <i class="ti-envelope"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending LOAs(Viewer)</div>
+                                            <div class="stat-digit">@Model.MangerPendingLOAsCount</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <a href="@Url.Action("EmployeeManagerExpensesList", "Expense")">
+                                <div class="card p-0">
+                                    <div class="stat-widget-three">
+                                        <div class="stat-icon bg-success p-48">
+                                            <i class="ti-receipt"></i>
+                                        </div>
+                                        <div class="stat-content p-30">
+                                            <div class="stat-text">Pending Expense Sheets(Viewer)</div>
+                                            <div class="stat-digit">@Model.MangerPendingExpensesCount</div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+
+                       }
+
+                        @if (User.IsInRole("TimeSheetReportingManager"))
+                        {
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("EmployeeRepoManTimeSheetsList", "TimeSheet")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-warning p-48">
+                                                <i class="ti-time"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Pending TimeSheets(Approver)</div>
+                                                <div class="stat-digit">@Model.ReportingManagerPendingTimesheetsCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("EmployeeRepoManLOAList", "LOA")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-info p-48">
+                                                <i class="ti-envelope"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Pending LOAs(Approver)</div>
+                                                <div class="stat-digit">@Model.ReportingManagerPendingLOAsCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <a href="@Url.Action("EmployeeRepoManExpensesList", "Expense")">
+                                    <div class="card p-0">
+                                        <div class="stat-widget-three">
+                                            <div class="stat-icon bg-success p-48">
+                                                <i class="ti-receipt"></i>
+                                            </div>
+                                            <div class="stat-content p-30">
+                                                <div class="stat-text">Pending Expense Sheets(Approver)</div>
+                                                <div class="stat-digit">@Model.ReportingManagerPendingExpensesCount</div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                        }
+                    </div><!-- /# row -->
+                </div><!-- /# container-fluid -->
+            </div><!-- /# main -->
+        </div>
+    </div>
+
+    
+
+</body>

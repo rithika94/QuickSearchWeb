@@ -1,0 +1,275 @@
+﻿@model QuickSearchWeb.Models.RecruitmentViewModel
+
+@{
+    ViewBag.Title = "Add Recruitment Record";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+    <script type="text/javascript">
+
+       $("#AvailableDate").datepicker();
+
+        function showC2Fields() {
+            debugger;
+            $('#EmploymentTypeDetails').show();
+        }
+        function hideC2CFields() {
+            debugger;
+
+            $('#EmploymentTypeDetails').hide();
+        }
+
+        function FillEmployementType() {
+            debugger;
+            var value = jQuery("#EmployementType option:selected").text();
+            //var value = $(this).val();
+            if (value == 'C2C/1099') {
+                showC2Fields();
+            } else if (value == 'W2') {
+                hideC2CFields();
+            } else {
+                hideC2CFields();
+            }
+        }
+
+
+    //Set limit 5 to upload common documents
+function validate()
+    {
+     var fi = document.getElementById('FILEPhoto');
+        var totalFileNo = 0;
+        var fSize = 0;
+        // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        if (fi.files.length > 0) {
+            // RUN A LOOP TO CHECK EACH SELECTED FILE.
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                //fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                totalFileNo = totalFileNo + 1;
+            }
+           // totalFileSize = ((totalFileSize / 1024) / 1024);
+            if (totalFileNo <= 5) {
+                return true;
+            }
+            else {
+                alert("Maximum 5 documents Can be uploaded");
+
+                return false;
+
+            }
+        }
+        else {
+            //alert("Please Select File for Upload");
+            return false;
+        }
+    }
+
+    </script>
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to Recruitment" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("Index", "Recruitment")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Add New Candidate</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("Index", "Recruitment")'"*@>Recruitment</a></li>
+                                <li class="active">Add New Candidate</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+                <div class="card alert">
+                    
+                    @using (Html.BeginForm("Create", "Recruitment", FormMethod.Post@*, new { enctype = "multipart/form-data" }*@))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    @Html.HiddenFor(m => m.RecruiterId)
+                                </div>
+                            </div>
+                            <div class="panel panel-default">
+                                <div class="panel-heading"> Consultant Information</div>
+                                <div class="panel-body">
+                                    <div class="row">
+
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.FirstName)
+                                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.LastName)
+                                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.PhoneNumber)
+                                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.Email)
+                                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.LookupVisaStatus)
+                                            @Html.DropDownListFor(model => model.LookupVisaStatus, new SelectList(Model.VisaStatusList, "Id", "Name"), "Select a Visa Status", new { @class = "form-control", @id = "VisaStatus", @onchange = "FillVisaStatusType()" })
+                                            @Html.ValidationMessageFor(m => m.LookupVisaStatus, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+
+
+                                            @Html.LabelFor(m => m.AvailableDate)
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                @Html.TextBoxFor(m => m.AvailableDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "AvailableDate" })
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.CurrentLocation)
+                                            @Html.TextBoxFor(m => m.CurrentLocation, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.CurrentLocation, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.Notes)
+                                            @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @rows = 2 })
+                                            @Html.ValidationMessageFor(m => m.Notes, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.PrimarySkillSet)
+                                            @Html.TextAreaFor(m => m.PrimarySkillSet, new { @class = "form-control", @rows = 2 })
+                                            @Html.ValidationMessageFor(m => m.PrimarySkillSet, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            @Html.LabelFor(m => m.SecondarySkillSet)
+                                            @Html.TextAreaFor(m => m.SecondarySkillSet, new { @class = "form-control", @rows = 3 })
+                                            @Html.ValidationMessageFor(m => m.SecondarySkillSet, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="form-group col-md-3" id="EmployementType">
+                                            @Html.LabelFor(m => m.LookupEmployementType)
+                                            @Html.DropDownListFor(model => model.LookupEmployementType, new SelectList(Model.EmployementTypeList, "Id", "Name"), "Select Employement Type", new { @class = "form-control", @id = "EmployementType", @onchange = "FillEmployementType()" })
+                                            @Html.ValidationMessageFor(m => m.EmployementTypeList, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div id="EmploymentTypeDetails" hidden>
+                                        <div class="row">
+                                            <div class=" col-md-12 ">
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"> C2C/1099</div>
+                                                    <div class="panel-body">
+                                                        <div class="row">
+                                                            <div class="form-group col-md-3" id="C2CCompanyName">
+                                                                @Html.LabelFor(m => m.C2CCompanyName)
+                                                                @Html.TextBoxFor(m => m.C2CCompanyName, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.C2CCompanyName, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-3" id="C2CContactNumber">
+                                                                @Html.LabelFor(m => m.C2CContactNumber)
+                                                                @Html.TextBoxFor(m => m.C2CContactNumber, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.C2CContactNumber, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        
+                                                            <div class="form-group col-md-3" id="C2CContactPerson">
+                                                                @Html.LabelFor(m => m.C2CContactPerson)
+                                                                @Html.TextBoxFor(m => m.C2CContactPerson, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.C2CContactPerson, "", new { @class = "text-danger" })
+                                                            </div>
+                                                            <div class="form-group col-md-3" id="C2CEmail">
+                                                                @Html.LabelFor(m => m.C2CEmail)
+                                                                @Html.TextBoxFor(m => m.C2CEmail, new { @class = "form-control" })
+                                                                @Html.ValidationMessageFor(m => m.C2CEmail, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*<div class="row">
+
+                <div class="card-header">
+                    <h4><b>Upload common documents</b></h4>
+                </div>
+                <div class="col-md-12">
+                    <div class="btn btn-default btn-file">
+
+                        <label for="selectFile" class="hidden">Choose File</label>
+                        <input type="file" name="FILEPhoto" id="FILEPhoto" multiple="multiple">
+
+                    </div>
+                </div>
+
+            </div>*@
+
+
+
+
+                                    <div>
+
+                                        <input type="submit" value="Create" class="pull-right btn btn-flat btn-info m-b-10 m-l-5" @*onclick="return validate()"*@ />
+                                        <input type="reset" value="Clear" class="btn btn-flat btn-danger m-b-10 m-l-5" />
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+</div>
+               
+            </div>
+        </div>
+    </div>
+</div>

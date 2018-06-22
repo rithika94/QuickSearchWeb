@@ -1,0 +1,1120 @@
+﻿@model QuickSearchWeb.Models.TimeSheetViewModel
+
+@{
+    ViewBag.Title = "Edit TimeSheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+
+
+<script type="text/javascript">
+
+
+    window.onload = function () {
+        //debugger;
+        var date = $("#StartDate").val();
+        var startDate = new Date(date.replace(/-/g, '\/'));
+        var endDate = addDays(startDate, 6);
+        SetDateHeaders(startDate, endDate);
+
+        UpdateDay1Hours();
+        UpdateDay2Hours();
+        UpdateDay3Hours();
+        UpdateDay4Hours();
+        UpdateDay5Hours();
+        UpdateDay6Hours();
+        UpdateDay7Hours();
+
+        UpdateTotalProjectHours1();
+        UpdateTotalProjectHours2();
+        UpdateTotalProjectHours3();
+        UpdateTotalProjectHours4();
+        UpdateTotalProjectHours5();
+        //UpdateTotalProjectHours6();
+        //UpdateTotalProjectHours7();
+        
+        @*if ('@ViewBag.TSRole' == 'TimeSheetReportingManager' && '@Model.LookupCodeMaster7.LookupCodeName' != 'Approved')
+{
+        CheckForLOAMatch();
+    }*@
+};
+
+//$("#StartDate").on("change", function () {
+
+//    var date = $(this).val();
+//    var startDate = new Date(date.replace(/-/g, '\/'));
+//    var endDate = addDays(startDate, 6);
+//    //var endDate = new Date();
+//    //endDate.setDate(startDate.getDate() + 7);
+//    document.getElementById("EndDate").valueAsDate = endDate;
+
+//    SetDateHeaders(startDate, endDate);
+
+//    //console.log(startDate, startDate.getTime());
+//});
+
+@*function CheckForLOAMatch() {
+    var fromdate = $("#StartDate").val();
+    var todate = $("#EndDate").val();
+    $.ajax
+
+        ({
+            /**/
+            url: "/TimeSheet/GetLOABetweenDatesRepoMan?FromDate=" + fromdate + '&Todate=' + todate + '&UserId=' + @Model.UserID,
+    /**/
+    type: 'POST',
+    datatype: 'application/json',
+    contentType: 'application/json',
+    success: function (result) {
+        //debugger;
+        if (result != null) {
+            alert("LOA with Id " + result.id + " from dates " + result.dates + " matches with this Timesheet dates, Please confirm before Approving")
+        }
+        //else {
+        //    alert("Nodata")
+        //}
+    },
+    //error: function () {
+    //    alert("Whooaaa! Something went wrong..")
+    //},
+});
+}*@
+
+
+function addDays(startDate, numberOfDays) {
+var returnDate = new Date(
+startDate.getFullYear(),
+startDate.getMonth(),
+startDate.getDate() + numberOfDays,
+startDate.getHours(),
+startDate.getMinutes(),
+startDate.getSeconds());
+return returnDate;
+}
+
+
+function UpdateDay1Hours() {
+//debugger
+var dayHours0 = $("#Day1Hours0").val();
+var dayHours1 = $("#Day1Hours1").val();
+var dayHours2 = $("#Day1Hours2").val();
+var dayHours3 = $("#Day1Hours3").val();
+var dayHours4 = $("#Day1Hours4").val();
+//var dayHours5 = $("#Day1Hours5").val();
+//var dayHours6 = $("#Day1Hours6").val();
+
+
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay1").val(regHours);
+$("#OTHoursDay1").val(otHours);
+$("#TotalHoursDay1").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay2Hours() {
+//debugger
+var dayHours0 = $("#Day2Hours0").val();
+var dayHours1 = $("#Day2Hours1").val();
+var dayHours2 = $("#Day2Hours2").val();
+var dayHours3 = $("#Day2Hours3").val();
+var dayHours4 = $("#Day2Hours4").val();
+//var dayHours5 = $("#Day2Hours5").val();
+//var dayHours6 = $("#Day2Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay2").val(regHours);
+$("#OTHoursDay2").val(otHours);
+$("#TotalHoursDay2").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay3Hours() {
+//debugger
+var dayHours0 = $("#Day3Hours0").val();
+var dayHours1 = $("#Day3Hours1").val();
+var dayHours2 = $("#Day3Hours2").val();
+var dayHours3 = $("#Day3Hours3").val();
+var dayHours4 = $("#Day3Hours4").val();
+//var dayHours5 = $("#Day3Hours5").val();
+//var dayHours6 = $("#Day3Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4/* + +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay3").val(regHours);
+$("#OTHoursDay3").val(otHours);
+$("#TotalHoursDay3").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay4Hours() {
+//debugger
+var dayHours0 = $("#Day4Hours0").val();
+var dayHours1 = $("#Day4Hours1").val();
+var dayHours2 = $("#Day4Hours2").val();
+var dayHours3 = $("#Day4Hours3").val();
+var dayHours4 = $("#Day4Hours4").val();
+//var dayHours5 = $("#Day4Hours5").val();
+//var dayHours6 = $("#Day4Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay4").val(regHours);
+$("#OTHoursDay4").val(otHours);
+$("#TotalHoursDay4").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay5Hours() {
+//debugger
+var dayHours0 = $("#Day5Hours0").val();
+var dayHours1 = $("#Day5Hours1").val();
+var dayHours2 = $("#Day5Hours2").val();
+var dayHours3 = $("#Day5Hours3").val();
+var dayHours4 = $("#Day5Hours4").val();
+//var dayHours5 = $("#Day5Hours5").val();
+//var dayHours6 = $("#Day5Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay5").val(regHours);
+$("#OTHoursDay5").val(otHours);
+$("#TotalHoursDay5").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay6Hours() {
+//debugger
+var dayHours0 = $("#Day6Hours0").val();
+var dayHours1 = $("#Day6Hours1").val();
+var dayHours2 = $("#Day6Hours2").val();
+var dayHours3 = $("#Day6Hours3").val();
+var dayHours4 = $("#Day6Hours4").val();
+//var dayHours5 = $("#Day6Hours5").val();
+//var dayHours6 = $("#Day6Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay6").val(regHours);
+$("#OTHoursDay6").val(otHours);
+$("#TotalHoursDay6").val(totalDayHours);
+UpdateTotalHours();
+}
+
+function UpdateDay7Hours() {
+//debugger
+var dayHours0 = $("#Day7Hours0").val();
+var dayHours1 = $("#Day7Hours1").val();
+var dayHours2 = $("#Day7Hours2").val();
+var dayHours3 = $("#Day7Hours3").val();
+var dayHours4 = $("#Day7Hours4").val();
+//var dayHours5 = $("#Day7Hours5").val();
+//var dayHours6 = $("#Day7Hours6").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+var regHours = totalDayHours;
+var otHours = 0;
+if (totalDayHours > 8) {
+var otHours = totalDayHours - 8;
+regHours = 8;
+
+}
+
+regHours = Math.round(regHours * 100) / 100;
+otHours = Math.round(otHours * 100) / 100;
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#RegularHoursDay7").val(regHours);
+$("#OTHoursDay7").val(otHours);
+$("#TotalHoursDay7").val(totalDayHours);
+UpdateTotalHours();
+
+}
+
+function UpdateTotalHours() {
+var Hours0 = $("#TotalHoursDay1").val();
+var Hours1 = $("#TotalHoursDay2").val();
+var Hours2 = $("#TotalHoursDay3").val();
+var Hours3 = $("#TotalHoursDay4").val();
+var Hours4 = $("#TotalHoursDay5").val();
+var Hours5 = $("#TotalHoursDay6").val();
+var Hours6 = $("#TotalHoursDay7").val();
+var totalRegHours = +Hours0 + +Hours1 + +Hours2 + +Hours3 + +Hours4 + +Hours5 + +Hours6;
+
+var otHrs = 0;
+
+if (totalRegHours > 40) {
+otHrs = (totalRegHours - 40);
+totalRegHours = 40;
+}
+
+
+var totalOTHours = otHrs;
+var totalHours = +totalRegHours + +totalOTHours;
+
+
+totalRegHours = Math.round(totalRegHours * 100) / 100;
+totalOTHours = Math.round(totalOTHours * 100) / 100;
+totalHours = Math.round(totalHours * 100) / 100;
+
+
+$("#TotalRegularHours").val(totalRegHours);
+$("#TotalOTHours").val(totalOTHours);
+$("#TotalHours").val(totalHours);
+}
+
+function UpdateTotalProjectHours1() {
+
+
+var dayHours0 = $("#Day1Hours0").val();
+var dayHours1 = $("#Day2Hours0").val();
+var dayHours2 = $("#Day3Hours0").val();
+var dayHours3 = $("#Day4Hours0").val();
+var dayHours4 = $("#Day5Hours0").val();
+var dayHours5 = $("#Day6Hours0").val();
+var dayHours6 = $("#Day7Hours0").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 + +dayHours5 + +dayHours6;
+
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#TotalProjectHours0").val(totalDayHours);
+
+}
+function UpdateTotalProjectHours2() {
+
+
+var dayHours0 = $("#Day1Hours1").val();
+var dayHours1 = $("#Day2Hours1").val();
+var dayHours2 = $("#Day3Hours1").val();
+var dayHours3 = $("#Day4Hours1").val();
+var dayHours4 = $("#Day5Hours1").val();
+var dayHours5 = $("#Day6Hours1").val();
+var dayHours6 = $("#Day7Hours1").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 + +dayHours5 + +dayHours6;
+
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#TotalProjectHours1").val(totalDayHours);
+
+}
+function UpdateTotalProjectHours3() {
+
+
+var dayHours0 = $("#Day1Hours2").val();
+var dayHours1 = $("#Day2Hours2").val();
+var dayHours2 = $("#Day3Hours2").val();
+var dayHours3 = $("#Day4Hours2").val();
+var dayHours4 = $("#Day5Hours2").val();
+var dayHours5 = $("#Day6Hours2").val();
+var dayHours6 = $("#Day7Hours2").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 + +dayHours5 + +dayHours6;
+
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#TotalProjectHours2").val(totalDayHours);
+
+}
+function UpdateTotalProjectHours4() {
+
+
+var dayHours0 = $("#Day1Hours3").val();
+var dayHours1 = $("#Day2Hours3").val();
+var dayHours2 = $("#Day3Hours3").val();
+var dayHours3 = $("#Day4Hours3").val();
+var dayHours4 = $("#Day5Hours3").val();
+var dayHours5 = $("#Day6Hours3").val();
+var dayHours6 = $("#Day7Hours3").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 + +dayHours5 + +dayHours6;
+
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#TotalProjectHours3").val(totalDayHours);
+
+}
+function UpdateTotalProjectHours5() {
+
+
+var dayHours0 = $("#Day1Hours4").val();
+var dayHours1 = $("#Day2Hours4").val();
+var dayHours2 = $("#Day3Hours4").val();
+var dayHours3 = $("#Day4Hours4").val();
+var dayHours4 = $("#Day5Hours4").val();
+var dayHours5 = $("#Day6Hours4").val();
+var dayHours6 = $("#Day7Hours4").val();
+
+var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 + +dayHours5 + +dayHours6;
+
+totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+$("#TotalProjectHours4").val(totalDayHours);
+
+}
+//function UpdateTotalProjectHours6() {
+
+
+//    var dayHours0 = $("#Day1Hours5").val();
+//    var dayHours1 = $("#Day2Hours5").val();
+//    var dayHours2 = $("#Day3Hours5").val();
+//    var dayHours3 = $("#Day4Hours5").val();
+//    var dayHours4 = $("#Day5Hours5").val();
+//    //var dayHours5 = $("#Day6Hours5").val();
+//    //var dayHours6 = $("#Day7Hours5").val();
+
+//    var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+
+//    totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+//    $("#TotalProjectHours5").val(totalDayHours);
+
+//}
+//function UpdateTotalProjectHours7() {
+
+
+//    var dayHours0 = $("#Day1Hours6").val();
+//    var dayHours1 = $("#Day2Hours6").val();
+//    var dayHours2 = $("#Day3Hours6").val();
+//    var dayHours3 = $("#Day4Hours6").val();
+//    var dayHours4 = $("#Day5Hours6").val();
+//    //var dayHours5 = $("#Day6Hours6").val();
+//    //var dayHours6 = $("#Day7Hours6").val();
+
+//    var totalDayHours = +dayHours0 + +dayHours1 + +dayHours2 + +dayHours3 + +dayHours4 /*+ +dayHours5 + +dayHours6*/;
+
+//    totalDayHours = Math.round(totalDayHours * 100) / 100;
+
+//    $("#TotalProjectHours6").val(totalDayHours);
+
+//}
+function SetDateHeaders(startDate, endDate) {
+//debugger;
+var between = [];
+var currentDate = startDate;
+
+while (currentDate <= endDate) {
+between.push(new Date(currentDate));
+currentDate.setDate(currentDate.getDate() + 1);
+}
+var weekday = new Array(7);
+weekday[0] = "Sunday";
+weekday[1] = "Monday";
+weekday[2] = "Tuesday";
+weekday[3] = "Wednesday";
+weekday[4] = "Thursday";
+weekday[5] = "Friday";
+weekday[6] = "Saturday";
+
+$("div#Day1").html(weekday[between[0].getDay()] + "</br>" + (between[0].getMonth() + 1) + "/" + between[0].getDate() + "/" + between[0].getFullYear());
+$("div#Day2").html(weekday[between[1].getDay()] + "</br>" + (between[1].getMonth() + 1) + "/" + between[1].getDate() + "/" + between[1].getFullYear());
+$("div#Day3").html(weekday[between[2].getDay()] + "</br>" + (between[2].getMonth() + 1) + "/" + between[2].getDate() + "/" + between[2].getFullYear());
+$("div#Day4").html(weekday[between[3].getDay()] + "</br>" + (between[3].getMonth() + 1) + "/" + between[3].getDate() + "/" + between[3].getFullYear());
+$("div#Day5").html(weekday[between[4].getDay()] + "</br>" + (between[4].getMonth() + 1) + "/" + between[4].getDate() + "/" + between[4].getFullYear());
+$("div#Day6").html(weekday[between[5].getDay()] + "</br>" + (between[5].getMonth() + 1) + "/" + between[5].getDate() + "/" + between[5].getFullYear());
+$("div#Day7").html(weekday[between[6].getDay()] + "</br>" + (between[6].getMonth() + 1) + "/" + between[6].getDate() + "/" + between[6].getFullYear());
+
+}
+
+function rejectComment() {
+debugger;
+var comments = document.getElementById("comments");
+if (comments.value == "") {
+document.getElementById("error").innerHTML = "Comments are required";
+$("#btnApprove").prop('disabled', false);
+$("#btnReject").prop('disabled', false);
+//comments.setCustomValidity("Please Enter Comments");
+} else {
+document.getElementById("error").innerHTML = "";
+// comments.setCustomValidity(""); // be sure to leave this empty!
+//alert("Correct!");
+
+$("#reject").modal("hide");
+$('.modal-backdrop').remove();
+$(".loader").show();
+var formdata = $("#rejectForm").serialize();
+//debugger;
+$.ajax({
+    type: "POST",
+    url: "/TimeSheet/Reject",
+    data: formdata,
+    success: function () {
+        debugger;
+
+        //debugger;
+        $(".loader").hide();
+        window.location.href = "/TimeSheet/EmployeeRepoManTimeSheetsList";
+        //debugger;
+
+    }
+
+
+})
+
+}
+}
+
+
+
+function ApproveButton() {
+debugger;
+$("#btnApprove").prop('disabled', true);
+$("#btnReject").prop('disabled', true);
+
+}
+
+function RejectButton() {
+debugger;
+$("#btnApprove").prop('disabled', true);
+$("#btnReject").prop('disabled', true);
+
+}
+
+
+
+
+</script>
+
+}
+<style>
+    .form-group {
+        margin-bottom: 0px;
+    }
+
+    /*.form-control {
+        height: auto;
+    }*/
+
+    th {
+        background-color: #6a98bf;
+    }
+
+    .TSHeader {
+        color: white;
+        font-size: 12px;
+    }
+
+    td {
+        padding: 0px !important;
+        vertical-align: middle !important;
+    }
+
+    #TotalRegularHours {
+        background-color: #fbf88e;
+    }
+
+    #TotalOTHours {
+        background-color: #ff8787;
+    }
+
+    #TotalHours {
+        background-color: #a4ff50;
+    }
+</style>
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            @{
+                            if (ViewBag.TSRole == "TimeSheetAdmin")
+                            {
+                            <input type="button" value="Back to Employee Timesheets" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeAdminTimeSheetsList", "TimeSheet")'" />
+
+                            }
+                            else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                            {
+                            <input type="button" value="Back to Employee Timesheets" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeRepoManTimeSheetsList", "TimeSheet")'" />
+                            }
+                            else if (ViewBag.TSRole == "TimeSheetManager")
+                            {
+                            <input type="button" value="Back to Employee Timesheets" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeManagerTimeSheetsList", "TimeSheet")'" />
+                            }
+                            else
+                            {
+                            <input type="button" value="Back to Employee Timesheets" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("MyTimeSheetsList", "TimeSheet")'" />
+                            }
+
+                            }
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Employee Timesheet Details</strong> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a>Employee Timesheets</a></li>
+                                <li class="active">Employee Timesheet Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+
+
+            <div class="container-fluid">
+                <div class="main-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card alert">
+
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                                        @Html.HiddenFor(m => m.UserID)
+
+
+
+                                        <div class="col-md-2">
+                                            @Html.LabelFor(m => m.TimeSheetCode)
+                                            @Html.TextBoxFor(m => m.TimeSheetCode, new { @class = "form-control", @readonly = "true" })
+                                        </div>
+
+                                        <div class="col-md-2">
+                                            <label>Employee code</label>
+                                            @Html.TextBoxFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+                                        </div>
+                                        <div class=" col-md-3">
+                                            <label>Employee Name</label>
+
+                                            <input class="form-control"
+                                                   id="FullName"
+                                                   readonly="readonly"
+                                                   type="text"
+                                                   value="@Model.AspNetUser.Firstname @Model.AspNetUser.LastName" />
+                                        </div>
+                                        <div class="col-md-3">
+                                            @Html.LabelFor(m => m.ReportingManager)
+                                            @Html.TextBoxFor(m => m.ReportingManager, new { @class = "form-control", @readonly = "true" })
+                                        </div>
+
+                                        <div class=" col-md-2">
+                                            @Html.LabelFor(m => m.LookupCodeMaster7)
+                                            @Html.TextBoxFor(m => m.LookupCodeMaster7.LookupCodeName, new { @class = "form-control", @readonly = "true" })
+                                        </div>
+
+                                        <div class=" col-md-3">
+                                            @Html.LabelFor(m => m.StartDate)
+                                            @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "StartDate", @readonly = "true" })
+                                        </div>
+                                        <div class=" col-md-3">
+                                            @Html.LabelFor(m => m.EndDate)
+                                            @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "true", @id = "EndDate" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="table-responsive2">
+                                        <table class="table table-responsive table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th><div class="TSHeader">No</div></th>
+                                                    <th><div class="TSHeader">Project Name</div></th>
+                                                    <th><div class="TSHeader">Description</div></th>
+                                                    <th><div class="TSHeader" id="Day1">Day1 </div></th>
+                                                    <th><div class="TSHeader" id="Day2">Day2 </div></th>
+                                                    <th><div class="TSHeader" id="Day3">Day3 </div></th>
+                                                    <th><div class="TSHeader" id="Day4">Day4 </div></th>
+                                                    <th><div class="TSHeader" id="Day5">Day5 </div></th>
+                                                    <th><div class="TSHeader" id="Day6">Day6 </div></th>
+                                                    <th><div class="TSHeader" id="Day7">Day7 </div></th>
+                                                    <th><div class="TSHeader">Project hours</div></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @for (int i = 0; i < Model.TimeSheetSummaryList.Count; i++)
+                                {
+                                    <tr>
+
+                                        <td>
+                                            @(i + 1)
+                                        </td>
+                                        <td><div class=""> @Html.TextAreaFor(m => Model.TimeSheetSummaryList[i].ProjectName, new { @class = "form-control", @id = "ProjectName" + i.ToString(), @readonly = "true", @cols = "30", @rows = "2", @Style = "min-width:150px" }) </div> </td>
+                                        <td> <div class="">@Html.TextAreaFor(m => Model.TimeSheetSummaryList[i].Description, new { @class = "form-control", @id = "Description" + i.ToString(), @readonly = "true", @cols = "30", @rows = "2", @Style = "min-width:150px" })</div> </td>
+                                        <td> <div class=""> @Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day1Hours, new { @class = "form-control", @id = "Day1Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class="">@Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day2Hours, new { @class = "form-control", @id = "Day2Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class=""> @Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day3Hours, new { @class = "form-control", @id = "Day3Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class="">@Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day4Hours, new { @class = "form-control", @id = "Day4Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class="">@Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day5Hours, new { @class = "form-control", @id = "Day5Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class="">@Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day6Hours, new { @class = "form-control", @id = "Day6Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <div class="">@Html.TextBoxFor(m => Model.TimeSheetSummaryList[i].Day7Hours, new { @class = "form-control", @id = "Day7Hours" + i.ToString(), @readonly = "true" })</div></td>
+                                        <td> <input class="form-control" id="TotalProjectHours@(i.ToString())" readonly="readonly" type="text" value="" /> </td>
+                                    </tr>
+                }
+                                                <tr>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>Leave Type</td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay1).Name
+                                                            @*@Html.DropDownListFor(model => model.LookupAbsenceTypeDay1, new SelectList(Model.AbsenceTypeList, "Id", "Name"), "", new { @class = "form-control", @readonly = "true" })*@
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay2).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay3).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay4).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay5).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay6).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Model.AbsenceTypeList.Single(x => x.Id == Model.LookupAbsenceTypeDay7).Name
+
+                                                        </div>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>Leave Hours</td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay1, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay2, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay3, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay4, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay5, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay6, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="form-group"> @Html.TextBoxFor(m => Model.AbsenceHoursDay7, new { @class = "form-control", @readonly = "true" })</div>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>Regular Hours</td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day1RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay1" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day2RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay2" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day3RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay3" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day4RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay4" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day5RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay5" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day6RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay6" })
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="">
+                                                            @Html.TextBoxFor(m => m.Day7RegularHours, new { @class = "form-control", @readonly = "true", @id = "RegularHoursDay7" })
+                                                        </div>
+                                                    </td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <td> </td>
+                                                    <td> </td>
+                                                    <td>Over Time Hours</td>
+                                                    <td> <div class=""> @Html.TextBoxFor(m => m.Day1OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay1" })</div> </td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day2OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay2" })</div> </td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day3OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay3" })</div> </td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day4OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay4" }) </div></td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day5OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay5" }) </div></td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day6OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay6" }) </div></td>
+                                                    <td> <div class="">  @Html.TextBoxFor(m => m.Day7OverHours, new { @class = "form-control", @readonly = "true", @id = "OTHoursDay7" }) </div></td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <input class="form-control" id="TotalHoursDay1" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay2" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay3" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay4" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay5" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay6" readonly="readonly" type="hidden" value="" />
+                                        <input class="form-control" id="TotalHoursDay7" readonly="readonly" type="hidden" value="" />
+                                        <div class="row">
+                                            <div class="col-sm-2">
+
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="col-sm-4">
+                                                    <label>
+                                                        Regular Hours
+                                                    </label>
+                                                    <div>
+                                                        @Html.TextBoxFor(m => m.RegularHours, new { @class = "form-control", @readonly = "true", @id = "TotalRegularHours" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <label>
+                                                        OT Hours
+                                                    </label>
+                                                    <div class="form-group">  @Html.TextBoxFor(m => m.OverTimeHours, new { @class = "form-control", @readonly = "true", @id = "TotalOTHours" })</div>
+
+                                                </div>
+                                                <div class="col-sm-4">
+
+                                                    <label>
+                                                        Total Hours
+                                                    </label>
+                                                    <div class="form-group">
+                                                        @Html.TextBoxFor(m => m.TotalHours, new { @class = "form-control", @readonly = "true", @id = "TotalHours" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-2">
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class=" col-md-12">
+
+
+
+
+                                            @if (ViewBag.TSRole == "TimeSheetReportingManager" && Model.LookupCodeMaster7.LookupCodeName != "Approved" && Model.LookupCodeMaster7.LookupCodeName != "Rejected")
+    {
+
+
+                                        <button type="button" value="Reject" class=" btn btn-flat btn-warning m-b-10 m-l-5" data-toggle="modal" data-target="#reject" id="Save">Reject</button>
+
+                                        <button type="button" value="Approve" class=" btn btn-flat btn-success m-b-10 m-l-5" data-toggle="modal" data-target="#approve" id="Save">Approve</button>
+
+}
+
+                                            @{
+        if (ViewBag.TSRole == "TimeSheetAdmin")
+        {
+                                        <input type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeAdminTimeSheetDownload", "TimeSheet", new { id = Model.TimeSheetID})'" />
+
+}
+else if (ViewBag.TSRole == "TimeSheetReportingManager")
+{
+                                        <input type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeRepoManTimeSheetDownload", "TimeSheet", new { id = Model.TimeSheetID})'" />
+
+}
+else if (ViewBag.TSRole == "TimeSheetManager")
+{
+                                        <input type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeManagerTimeSheetDownload", "TimeSheet", new { id = Model.TimeSheetID})'" />
+
+}
+                                            }
+
+                                           
+
+
+
+
+
+                                        </div>
+                                        <div class="col-md-12" style="border: 1px solid; padding:10px">
+                                            @Html.LabelFor(m => m.Comments)
+                                            <br />
+                                            <span>@Html.Raw(Model.Comments)</span>
+
+
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+                    </div><!-- /# column -->
+                    <div class="row col-md-12">
+                        <h3>Matching LOA's</h3>
+                        @foreach (var item in Model.LoasAssociated)
+                        {
+                        <div class="col-md-6">
+                            <div class="card alert">
+                                <div class="card-body">
+                                    <dl class="dl-horizontal" style="overflow-x:scroll">
+                                        <dt>
+                                            LOAId
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.LoaCode)
+                                        </dd>
+                                        <dt>
+                                            From Date:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.StartDate)
+                                        </dd>
+
+                                        <dt>
+                                            To Date:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.EndDate)
+                                        </dd>
+                                        <dt>
+                                            Time of Day:
+                                        </dt>
+
+                                        <dd>
+                                            @if (item.TimeOfDayList.FirstOrDefault(x => x.Id == item.LookupTimeOfDay).Name == "Other")
+        {
+                                    @Html.DisplayFor(model => item.OtherTimeOfDay)
+}
+else
+{
+                                    @item.TimeOfDayList.FirstOrDefault(x => x.Id == item.LookupTimeOfDay).Name
+
+}
+                                        </dd>
+                                        <dt>
+                                            Type of Leave:
+                                        </dt>
+
+                                        <dd>
+                                            @item.TypeOfLeaveList.FirstOrDefault(x => x.Id == item.LookupTypeOfLeave).Name
+                                        </dd>
+                                        <dt>
+                                            Status:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.LookupCodeMaster2.LookupCodeName)
+                                        </dd>
+                                        <dt>
+                                            Approved By:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.ApprovedBy)
+                                        </dd>
+                                        <dt>
+                                            Reason for Leave:
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => item.ReasonForLeave)
+                                        </dd>
+
+                                    </dl>
+
+                                </div>
+                            </div>
+                        </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="approve" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Approve Time Sheet</h4>
+                    </div>
+                    <div class="modal-body">
+
+
+                        <span class="fa fa-exclamation-triangle"></span> Are you sure you want to Approve this Time Sheet?
+
+
+                    </div>
+                    <div class="modal-footer ">
+
+                        <button type="button" onclick="ApproveButton();location.href= '@Url.Action("Approve", "TimeSheet", new {timeSheetId = Model.TimeSheetID})'" name="submit" class="btn btn-success" id="btnApprove"><span class="fa fa-check"></span> Yes</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="reject" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                        <h4 class="modal-title custom_align" id="Heading">Reject Time Sheet</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="alert">
+                            <span class="fa fa-exclamation-triangle"></span> Are you sure you want to Reject this Time Sheet? If Yes,  Please enter the reason for rejection.
+                        </div>
+
+
+                        <form id="rejectForm">
+                            <div class=" row">
+                                <div class="form-group col-md-6">
+                                    @Html.HiddenFor(m => m.TimeSheetID)
+                                    @Html.LabelFor(m => m.TempComments)
+                                    @Html.TextAreaFor(m => m.TempComments, new { @class = "form-control", @id = "comments" })
+                                    <p class="text-danger" id="error"></p>
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer ">
+
+
+
+                        <button type="button" class="btn btn-success" id="btnReject" onclick="RejectButton();rejectComment();"><span class="fa fa-check"></span> Yes</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+

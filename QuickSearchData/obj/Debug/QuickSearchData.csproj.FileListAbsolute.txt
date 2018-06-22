@@ -1,0 +1,11 @@
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\QuickSearchData.dll.config
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\QuickSearchData.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\QuickSearchData.pdb
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\EntityFramework.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\EntityFramework.SqlServer.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\EntityFramework.xml
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\bin\Debug\EntityFramework.SqlServer.xml
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\obj\Debug\QuickSearchData.csprojResolveAssemblyReference.cache
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\obj\Debug\QuickSearchData.csproj.CoreCompileInputs.cache
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\obj\Debug\QuickSearchData.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchData\obj\Debug\QuickSearchData.pdb

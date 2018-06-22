@@ -1,0 +1,293 @@
+﻿@model QuickSearchWeb.Models.SupportViewModel
+@{
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+<script>
+        function downloadImage(name, supportId) {
+        debugger;
+        $.ajax({
+            url: "@Url.Action("FileExists", "Support")",
+            data: { "imgname": name, "supportId": supportId },
+        DataType: 'json',
+        type: "POST",
+        success: function (result) {
+            
+            if (result.isFileExists == true) {
+                window.location = '/Support/GetImage?imgname=' + name + '&supportId=' + supportId;
+            } else {
+                alert('File does not exists');
+            }
+
+        },
+
+    });
+    }
+
+
+    $('#submitForm').submit(function () {
+
+        $(this).find(':submit').attr('disabled', 'disabled');
+    });
+
+    $('#submitForm').bind("invalid-form.validate", function () {
+
+        $(this).find(':submit').prop('disabled', false);
+    });
+</script>
+
+    }
+
+    <div class="content-wrap">
+        <div class="main">
+            <div class="container-fluid">
+
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+
+
+                <div class="row">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <div class="col-lg-4">
+                                <input type="button" value="Back to Service Requests" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("SupportAdminList", "Support")'" />
+
+                            </div>
+                            <div class="col-lg-4">
+                                <h4 class="text-center"><strong>Edit Service Request(Admin)</strong></h4>
+                            </div>
+                            <div class="col-lg-4">
+                                <ol class="breadcrumb text-right">
+                                    <li><a @*onclick="location.href='@Url.Action("SupportAdminList", "Support")'"*@>Employee Service Requests</a></li>
+                                    <li class="active">Edit Service Request</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="main-content">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="main-content">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="card alert">
+                                            @*<div class="card-header">
+                                                    <h4>Add a new inventory</h4>
+                                                    <hr />
+                                                </div>*@
+                                            <div class="card-body">
+                                                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "submitForm" }))
+    {
+
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(m => m.SupportId)
+
+                                            <div class="row">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                                <div class="col-md-8">
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.SupportCode)
+                                                        @Html.TextBoxFor(m => m.SupportCode, new { @class = "form-control", @readonly = true })
+                                                    </div>
+                                                    @*<div class="form-group col-md-4">
+                @Html.LabelFor(m => m.AssignToName)
+                @Html.TextBoxFor(m => m.AssignToName, new { @class = "form-control", @readonly = true })
+            </div>*@
+                                                    @*<div class="form-group col-md-4">
+                @Html.LabelFor(m => m.LookupIssueStatus)
+                @Html.TextBoxFor(m => m.LookupCodeMaster1.LookupCodeName, new { @class = "form-control", @readonly = true })
+            </div>*@
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.ReportedByName)
+                                                        @Html.TextBoxFor(m => m.ReportedByName, new { @class = "form-control", @readonly = true })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.AssignToName)
+                                                        @Html.DropDownListFor(model => model.AssignTo, new SelectList(Model.AssignToList, "IdString", "Name"), "Select a support engineer", new { @class = "form-control" })
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        @Html.LabelFor(m => m.Summary)
+                                                        @Html.TextBoxFor(m => m.Summary, new { @class = "form-control", @readonly = true })
+
+                                                    </div>
+                                                    <div class="form-group col-md-12">
+                                                        @Html.LabelFor(m => m.Description)
+                                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "10", @cols = "20", @readonly = true })
+
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.LookupIssueType)
+                                                        @Html.TextBoxFor(m => m.LookupCodeMaster2.LookupCodeName, new { @class = "form-control", @readonly = true })
+                                                        @*@Html.DropDownListFor(model => model.LookupIssueType, new SelectList(Model.IssueTypeList, "Id", "Name"), "Select IssueType", new { @class = "form-control", @disabled = true })*@
+
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.LookupIssuePriority)
+                                                        @Html.TextBoxFor(m => m.LookupCodeMaster.LookupCodeName, new { @class = "form-control", @readonly = true })
+                                                        @*@Html.DropDownListFor(model => model.LookupIssuePriority, new SelectList(Model.IssuePriorityList, "Id", "Name"), "Select Priority", new { @class = "form-control", @disabled = true })*@
+
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        @Html.LabelFor(m => m.LookupIssueStatus)
+                                                        @Html.DropDownListFor(model => model.LookupIssueStatus, new SelectList(Model.IssueStatusList, "Id", "Name"), "Select IssueType", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.LookupIssueStatus, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-group ">
+                                                        @Html.LabelFor(m => m.Notes)
+                                                        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", @rows = "15", @cols = "20", @readonly = true })
+
+                                                    </div>
+                                                    <div class="form-group ">
+                                                        @Html.LabelFor(m => m.Comments)
+                                                        @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", @rows = "5", @cols = "20", @readonly = true })
+                                                    </div>
+                                                </div>
+                                                <div class="form-group  col-md-12 ">
+                                                    <input type="button" value="Save" name="action" data-toggle="modal" data-target="#submitModal" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />
+
+                                                    @*   <input type="button" value="Hard Delete" class="btn btn-flat btn-danger m-b-10 m-l-5" onclick="location.href='@Url.Action("HardDeleteAdmin", "Support" , new { id = Model.SupportId})'" />*@
+                                                    @* <input type="button" value="Delete" class="btn btn-flat btn-danger m-b-10 m-l-5" onclick="location.href='@Url.Action("SoftDeleteAdmin", "Support" , new { id = Model.SupportId})'" />*@
+                                                    <button type="button" value="Delete" class="btn btn-flat btn-danger m-b-10 m-l-5" data-toggle="modal" data-target="#deleteTS" id="delete">Delete</button>
+
+                                                </div>
+                                            </div>
+                                            @*<div class="form-group  col-md-5">
+        <input type="submit" value="Update" class="pull-right btn btn-flat btn-info m-b-100 m-l-10" />
+
+        <input type="reset" value="Clear All" class=" btn btn-flat btn-danger m-b-29 m-l-29" />
+    </div>*@
+
+                                            <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModal" aria-hidden="true">
+                                                <div class="modal-dialog modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                            <h4 class="modal-title custom_align" id="Heading">Confirmation</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            @*<div class="alert alert-warning">*@
+                                                            <span class="fa fa-exclamation-triangle"></span> Are you sure you want to save changes in this Service Ticket?
+                                                            @*</div>*@
+
+                                                        </div>
+                                                        <div class="modal-footer ">
+                                                            @*<input type="submit" name="action" value="Submit" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />*@
+                                                            <button type="submit" name="action" value="Submit" class="btn btn-success"><span class="fa fa-check"></span> Yes</button>
+                                                            <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+
+}
+
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"> Support Documents</div>
+                                                    <div class="panel-body">
+
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="bootstrap-data-table-panel">
+                                                                    @if (Model.SupportFilesList != null && Model.SupportFilesList.Count > 0)
+                        {
+                            string FileName = string.Empty;
+                                            <table id="datatable-buttons" class="table table-striped table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Document Name</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.SupportFilesList)
+        {
+                                            <tr>
+                                                <td>@item.FileName</td>
+                                                <td>
+                                                    <button type="button" class="pull-left btn-warning btn-flat m-l-5" href="javascript:void(0)" onclick="downloadImage('@item.FileName','@item.SupportId');"> <i class="ti-download"></i></button>
+
+
+                                                    @*@using (Html.BeginForm("GetImage", "Support", FormMethod.Get, new { @class = "form-horizontal form-label-left" }))
+                    {
+                                                    <input type="hidden" name="imgname" value="@item.FileName" />
+                                                    <input type="hidden" name="supportId" value="@item.SupportId" />
+                                                    <button type="submit" class="pull-right btn-warning btn-flat "><i class="ti-download"></i></button>
+            }*@
+                                                    @*<button type="button" class="pull-left btn-warning btn-flat m-l-5" href="javascript:void(0)" onclick="downloadImage('@item.FileServerPath','@item.FileName','@item.SupportId');"> <i class="ti-download"></i></button>*@
+
+                                                </td>
+                                            </tr>
+}
+                                                </tbody>
+                                            </table>
+}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="modal fade" id="deleteTS" tabindex="-1" role="dialog" aria-labelledby="deleteTS" aria-hidden="true">
+                                                    <div class="modal-dialog modal-sm">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                                <h4 class="modal-title custom_align" id="Heading">Delete Service Request</h4>
+                                                            </div>
+                                                            <div class="modal-body">
+
+                                                                @*<div class="alert alert-warning">*@
+                                                                <span class="fa fa-exclamation-triangle"></span> Are you sure you want to delete this service request?
+                                                                @*</div>*@
+
+                                                            </div>
+                                                            <div class="modal-footer ">
+
+                                                                <button type="button" onclick="location.href= '@Url.Action("SoftDeleteAdmin", "Support" , new { id = Model.SupportId})'" name="submit" class="btn btn-success" id="btnSubmit"><span class="fa fa-check"></span> Yes</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.modal-content -->
+                                                    </div>
+                                                    <!-- /.modal-dialog -->
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,1161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdminPortalModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetRoles">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaims">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ClaimType" Type="nvarchar(max)" />
+    <Property Name="ClaimValue" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogins">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUserRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AspNetUsers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="256" />
+    <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+    <Property Name="PasswordHash" Type="nvarchar(max)" />
+    <Property Name="SecurityStamp" Type="nvarchar(max)" />
+    <Property Name="PhoneNumber" Type="nvarchar(max)" />
+    <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="datetime" />
+    <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LookupGender" Type="int" Nullable="false" />
+    <Property Name="JoiningDate" Type="datetime" Nullable="false" />
+    <Property Name="Code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="CreatedDate" Type="datetime" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ReportingManager" Type="nvarchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="ExpenseAttachments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseId" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
+    <Property Name="FileServerPath" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ExpenseMaster">
+    <Key>
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ExpenseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseCode" Type="nvarchar" MaxLength="128" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="SubTotal" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Advance" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="LookupStatus" Type="int" />
+    <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="ExpenseSummary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpenseId" Type="int" Nullable="false" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Miles" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="MilesMultiplicationFactor" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="MilesDriven" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Transport" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Lodging" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Meals" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Phone" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Other" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LOA">
+    <Key>
+      <PropertyRef Name="LoaId" />
+    </Key>
+    <Property Name="LoaId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LoaCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="LookupTimeOfDay" Type="int" Nullable="false" />
+    <Property Name="OtherTimeOfDay" Type="nvarchar" MaxLength="50" />
+    <Property Name="LookupTypeOfLeave" Type="int" Nullable="false" />
+    <Property Name="OtherTypeOfLeave" Type="nvarchar" MaxLength="50" />
+    <Property Name="ReasonForLeave" Type="nvarchar(max)" />
+    <Property Name="LookupLoaStatus" Type="int" Nullable="false" />
+    <Property Name="ApprovedBy" Type="nvarchar" MaxLength="200" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="LookupCodeMaster">
+    <Key>
+      <PropertyRef Name="LookupCodeId" />
+    </Key>
+    <Property Name="LookupCodeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="LookupTypeId" Type="int" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="LookupCodeName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="LookupTypeMaster">
+    <Key>
+      <PropertyRef Name="LookupTypeId" />
+    </Key>
+    <Property Name="LookupTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Code" Type="nvarchar" MaxLength="100" />
+    <Property Name="LookupTypeName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductCode" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="LookupCategory" Type="int" Nullable="false" />
+    <Property Name="LookupProductType" Type="int" Nullable="false" />
+    <Property Name="OtherProductType" Type="nvarchar" MaxLength="100" />
+    <Property Name="MakeModel" Type="varchar" MaxLength="50" />
+    <Property Name="PurchaseDate" Type="date" />
+    <Property Name="MembershipId" Type="nvarchar" MaxLength="250" />
+    <Property Name="GrantNumber" Type="nvarchar" MaxLength="250" />
+    <Property Name="Version" Type="varchar" MaxLength="50" />
+    <Property Name="AssignTo" Type="nvarchar" MaxLength="128" />
+    <Property Name="OtherAssignedUser" Type="nvarchar" MaxLength="128" />
+    <Property Name="AssignedDate" Type="date" />
+    <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+    <Property Name="LookupStatus" Type="int" />
+    <Property Name="LookupPlatform" Type="int" />
+    <Property Name="Location" Type="nvarchar" MaxLength="200" />
+    <Property Name="Url" Type="nvarchar" MaxLength="200" />
+    <Property Name="Username" Type="nvarchar" MaxLength="100" />
+    <Property Name="Password" Type="nvarchar" MaxLength="200" />
+    <Property Name="ActivationKey" Type="nvarchar" MaxLength="400" />
+    <Property Name="ProductCompany" Type="nvarchar" MaxLength="100" />
+    <Property Name="ExpirationDate" Type="date" />
+    <Property Name="AssignToHardware" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RecruitmentClientDocuments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecruitmentClientId" Type="int" Nullable="false" />
+    <Property Name="FilePath" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ClientDocumentName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="RecruitmentClients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecruitmentId" Type="int" Nullable="false" />
+    <Property Name="ClientName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SubmissionDate" Type="datetime" />
+    <Property Name="JobLocation" Type="nvarchar" MaxLength="200" />
+    <Property Name="JobTitle" Type="nvarchar" MaxLength="100" />
+    <Property Name="LookupCandidateStatus" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="ClientDocument1" Type="nvarchar" MaxLength="300" />
+    <Property Name="ClientDocument2" Type="nvarchar" MaxLength="300" />
+    <Property Name="DocumentName1" Type="nvarchar" MaxLength="300" />
+    <Property Name="DocumentName2" Type="nvarchar" MaxLength="300" />
+  </EntityType>
+  <EntityType Name="RecruitmentDocuments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecruitmentId" Type="int" Nullable="false" />
+    <Property Name="FileServerPath" Type="nvarchar(max)" />
+    <Property Name="RecruitmentDocumentName" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Recruitments">
+    <Key>
+      <PropertyRef Name="RecruitmentId" />
+    </Key>
+    <Property Name="RecruitmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RecruiterId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="PrimarySkillSet" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="SecondarySkillSet" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LookupVisaStatus" Type="int" Nullable="false" />
+    <Property Name="AvailableDate" Type="date" />
+    <Property Name="CurrentLocation" Type="nvarchar" MaxLength="100" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="LookupEmployementType" Type="int" Nullable="false" />
+    <Property Name="C2CContactPerson" Type="nvarchar" MaxLength="100" />
+    <Property Name="C2CEmail" Type="nvarchar" MaxLength="200" />
+    <Property Name="C2CCompanyName" Type="nvarchar" MaxLength="200" />
+    <Property Name="C2CContactNumber" Type="nvarchar" MaxLength="20" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SupportAttachments">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupportId" Type="int" Nullable="false" />
+    <Property Name="FileName" Type="nvarchar(max)" />
+    <Property Name="FileServerPath" Type="nvarchar(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="SupportMaster">
+    <Key>
+      <PropertyRef Name="SupportId" />
+    </Key>
+    <Property Name="SupportId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupportCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="Summary" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LookupIssuePriority" Type="int" Nullable="false" />
+    <Property Name="LookupIssueStatus" Type="int" Nullable="false" />
+    <Property Name="LookupIssueType" Type="int" Nullable="false" />
+    <Property Name="FixedTime" Type="datetime" />
+    <Property Name="IsFixed" Type="bit" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+    <Property Name="SubmittedDate" Type="datetime" Nullable="false" />
+    <Property Name="AssignTo" Type="nvarchar" MaxLength="128" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="UserComments" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TimeSheetsMaster">
+    <Key>
+      <PropertyRef Name="TimeSheetID" />
+    </Key>
+    <Property Name="TimeSheetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="StartDate" Type="datetime" Nullable="false" />
+    <Property Name="EndDate" Type="datetime" Nullable="false" />
+    <Property Name="RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="OverTimeHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="TotalHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day1RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day2RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day3RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day4RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day5RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day6RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day7RegularHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day1OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day2OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day3OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day4OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day5OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day6OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day7OverHours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay1" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay2" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay3" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay4" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay5" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay6" Type="int" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay7" Type="int" Nullable="false" />
+    <Property Name="AbsenceHoursDay1" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay2" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay3" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay4" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay5" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay6" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="AbsenceHoursDay7" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="LookupApprovedStatus" Type="int" Nullable="false" />
+    <Property Name="Comments" Type="nvarchar(max)" />
+    <Property Name="ApprovedBy" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="TimeSheetSummary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TimeSheetID" Type="int" Nullable="false" />
+    <Property Name="ProjectName" Type="nvarchar" MaxLength="100" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Day1Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day2Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day3Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day4Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day5Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day6Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+    <Property Name="Day7Hours" Type="decimal" Precision="6" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="ProfilePicBinary" Type="varbinary(max)" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedUserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedUserId" Type="nvarchar" MaxLength="128" />
+    <Property Name="ModifiedDate" Type="datetime" />
+  </EntityType>
+  <Association Name="FK_AspNetUsers_LookupCodeMaster">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="AspNetUsers">
+        <PropertyRef Name="LookupGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsersID_AspNetUsersReportingManager">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="AspNetUsers1" Type="Self.AspNetUsers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUsers1">
+        <PropertyRef Name="ReportingManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+    <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetRoles">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseAttachments_ExpenseMaster">
+    <End Role="ExpenseMaster" Type="Self.ExpenseMaster" Multiplicity="1" />
+    <End Role="ExpenseAttachments" Type="Self.ExpenseAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseMaster">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="ExpenseAttachments">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseMaster_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="ExpenseMaster" Type="Self.ExpenseMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExpenseMaster">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseMaster_LookupCodeMaster">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="0..1" />
+    <End Role="ExpenseMaster" Type="Self.ExpenseMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="ExpenseMaster">
+        <PropertyRef Name="LookupStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseSummary_ExpenseMaster">
+    <End Role="ExpenseMaster" Type="Self.ExpenseMaster" Multiplicity="1" />
+    <End Role="ExpenseSummary" Type="Self.ExpenseSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseMaster">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="ExpenseSummary">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="LOA" Type="Self.LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="LOA" Type="Self.LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupTimeOfDay" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster1">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="LOA" Type="Self.LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupTypeOfLeave" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster2">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="LOA" Type="Self.LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupLoaStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LookupCodeMaster_LookupTypeMaster">
+    <End Role="LookupTypeMaster" Type="Self.LookupTypeMaster" Multiplicity="1" />
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTypeMaster">
+        <PropertyRef Name="LookupTypeId" />
+      </Principal>
+      <Dependent Role="LookupCodeMaster">
+        <PropertyRef Name="LookupTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="AssignTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupCategory">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="LookupCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupPlatform">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="LookupPlatform" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupProductStatus">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="LookupStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupProductType">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="LookupProductType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecruitmentClientDocuments_RecruitmentClients">
+    <End Role="RecruitmentClients" Type="Self.RecruitmentClients" Multiplicity="1" />
+    <End Role="RecruitmentClientDocuments" Type="Self.RecruitmentClientDocuments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RecruitmentClients">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecruitmentClientDocuments">
+        <PropertyRef Name="RecruitmentClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecruitmentClients_LookupCodeMaster1">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="RecruitmentClients" Type="Self.RecruitmentClients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="RecruitmentClients">
+        <PropertyRef Name="LookupCandidateStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecruitmentClients_Recruitments">
+    <End Role="Recruitments" Type="Self.Recruitments" Multiplicity="1" />
+    <End Role="RecruitmentClients" Type="Self.RecruitmentClients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recruitments">
+        <PropertyRef Name="RecruitmentId" />
+      </Principal>
+      <Dependent Role="RecruitmentClients">
+        <PropertyRef Name="RecruitmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecruitmentDocuments_Recruitments">
+    <End Role="Recruitments" Type="Self.Recruitments" Multiplicity="1" />
+    <End Role="RecruitmentDocuments" Type="Self.RecruitmentDocuments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recruitments">
+        <PropertyRef Name="RecruitmentId" />
+      </Principal>
+      <Dependent Role="RecruitmentDocuments">
+        <PropertyRef Name="RecruitmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitments_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="Recruitments" Type="Self.Recruitments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recruitments">
+        <PropertyRef Name="RecruiterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitments_LookupCodeMaster1">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="Recruitments" Type="Self.Recruitments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Recruitments">
+        <PropertyRef Name="LookupEmployementType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitments_LookupCodeMaster2">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="Recruitments" Type="Self.Recruitments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Recruitments">
+        <PropertyRef Name="LookupVisaStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportAttachments_SupportMaster">
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="1" />
+    <End Role="SupportAttachments" Type="Self.SupportAttachments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupportMaster">
+        <PropertyRef Name="SupportId" />
+      </Principal>
+      <Dependent Role="SupportAttachments">
+        <PropertyRef Name="SupportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_AspNetUsers1">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="AssignTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster1">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssuePriority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster2">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssueStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster3">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="SupportMaster" Type="Self.SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssueType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster1">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster2">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster3">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay4" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster4">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay5" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster5">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster6">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay7" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster7">
+    <End Role="LookupCodeMaster" Type="Self.LookupCodeMaster" Multiplicity="1" />
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupApprovedStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetSummary_TimeSheetsMaster">
+    <End Role="TimeSheetsMaster" Type="Self.TimeSheetsMaster" Multiplicity="1" />
+    <End Role="TimeSheetSummary" Type="Self.TimeSheetSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimeSheetsMaster">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="TimeSheetSummary">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+    <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="AdminPortalModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseAttachments" EntityType="Self.ExpenseAttachments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseMaster" EntityType="Self.ExpenseMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpenseSummary" EntityType="Self.ExpenseSummary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LOA" EntityType="Self.LOA" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupCodeMaster" EntityType="Self.LookupCodeMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LookupTypeMaster" EntityType="Self.LookupTypeMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecruitmentClientDocuments" EntityType="Self.RecruitmentClientDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecruitmentClients" EntityType="Self.RecruitmentClients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="RecruitmentDocuments" EntityType="Self.RecruitmentDocuments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Recruitments" EntityType="Self.Recruitments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupportAttachments" EntityType="Self.SupportAttachments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SupportMaster" EntityType="Self.SupportMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimeSheetsMaster" EntityType="Self.TimeSheetsMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TimeSheetSummary" EntityType="Self.TimeSheetSummary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_AspNetUsers_LookupCodeMaster" Association="Self.FK_AspNetUsers_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsersID_AspNetUsersReportingManager" Association="Self.FK_AspNetUsersID_AspNetUsersReportingManager">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseAttachments_ExpenseMaster" Association="Self.FK_ExpenseAttachments_ExpenseMaster">
+      <End Role="ExpenseMaster" EntitySet="ExpenseMaster" />
+      <End Role="ExpenseAttachments" EntitySet="ExpenseAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseMaster_AspNetUsers" Association="Self.FK_ExpenseMaster_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="ExpenseMaster" EntitySet="ExpenseMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseMaster_LookupCodeMaster" Association="Self.FK_ExpenseMaster_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="ExpenseMaster" EntitySet="ExpenseMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseSummary_ExpenseMaster" Association="Self.FK_ExpenseSummary_ExpenseMaster">
+      <End Role="ExpenseMaster" EntitySet="ExpenseMaster" />
+      <End Role="ExpenseSummary" EntitySet="ExpenseSummary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_AspNetUsers" Association="Self.FK_LOA_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="LOA" EntitySet="LOA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster" Association="Self.FK_LOA_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="LOA" EntitySet="LOA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster1" Association="Self.FK_LOA_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="LOA" EntitySet="LOA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster2" Association="Self.FK_LOA_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="LOA" EntitySet="LOA" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LookupCodeMaster_LookupTypeMaster" Association="Self.FK_LookupCodeMaster_LookupTypeMaster">
+      <End Role="LookupTypeMaster" EntitySet="LookupTypeMaster" />
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_AspNetUsers" Association="Self.FK_Products_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupCategory" Association="Self.FK_Products_LookupCategory">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupPlatform" Association="Self.FK_Products_LookupPlatform">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupProductStatus" Association="Self.FK_Products_LookupProductStatus">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupProductType" Association="Self.FK_Products_LookupProductType">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecruitmentClientDocuments_RecruitmentClients" Association="Self.FK_RecruitmentClientDocuments_RecruitmentClients">
+      <End Role="RecruitmentClients" EntitySet="RecruitmentClients" />
+      <End Role="RecruitmentClientDocuments" EntitySet="RecruitmentClientDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecruitmentClients_LookupCodeMaster1" Association="Self.FK_RecruitmentClients_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="RecruitmentClients" EntitySet="RecruitmentClients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecruitmentClients_Recruitments" Association="Self.FK_RecruitmentClients_Recruitments">
+      <End Role="Recruitments" EntitySet="Recruitments" />
+      <End Role="RecruitmentClients" EntitySet="RecruitmentClients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecruitmentDocuments_Recruitments" Association="Self.FK_RecruitmentDocuments_Recruitments">
+      <End Role="Recruitments" EntitySet="Recruitments" />
+      <End Role="RecruitmentDocuments" EntitySet="RecruitmentDocuments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitments_AspNetUsers" Association="Self.FK_Recruitments_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Recruitments" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitments_LookupCodeMaster1" Association="Self.FK_Recruitments_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Recruitments" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitments_LookupCodeMaster2" Association="Self.FK_Recruitments_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="Recruitments" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportAttachments_SupportMaster" Association="Self.FK_SupportAttachments_SupportMaster">
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+      <End Role="SupportAttachments" EntitySet="SupportAttachments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_AspNetUsers" Association="Self.FK_SupportMaster_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_AspNetUsers1" Association="Self.FK_SupportMaster_AspNetUsers1">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster1" Association="Self.FK_SupportMaster_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster2" Association="Self.FK_SupportMaster_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster3" Association="Self.FK_SupportMaster_LookupCodeMaster3">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="SupportMaster" EntitySet="SupportMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_AspNetUsers" Association="Self.FK_TimeSheetsMaster_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster1" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster2" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster3" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster3">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster4" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster4">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster5" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster5">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster6" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster6">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster7" Association="Self.FK_TimeSheetsMaster_LookupCodeMaster7">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMaster" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetSummary_TimeSheetsMaster" Association="Self.FK_TimeSheetSummary_TimeSheetsMaster">
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMaster" />
+      <End Role="TimeSheetSummary" EntitySet="TimeSheetSummary" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_AspNetUsers" Association="Self.FK_UserInfo_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserInfo" EntitySet="UserInfo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

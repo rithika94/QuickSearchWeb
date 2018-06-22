@@ -1,0 +1,151 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.UserListViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+
+
+                            <input type="button" value="Add Employee" class="btn btn-flat btn-info m-b-10 m-l-5" onclick="location.href='@Url.Action("Create", "User")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong> Employees List </strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right"></ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+                <div class="row">
+
+
+
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a data-toggle="tab" href="#list" aria-expanded="false">Employee List</a></li>
+                                <li class=""><a data-toggle="tab" href="#roles" aria-expanded="false">Roles</a></li>
+
+                            </ul>
+                            <div class="tab-content">
+                                <div id="list" class="tab-pane active">
+                                    <div class="bootstrap-data-table-panel  table-responsive2">
+                                        <table class="display table table-borderd table-striped table-responsive row-select">
+                                            <thead>
+                                                <tr>
+                                                    <th>
+                                                        Last Modified
+                                                    </th>
+                                                    <th>
+                                                        Name
+                                                    </th>
+
+                                                    <th>
+                                                        Username
+                                                    </th>
+                                                    <th>
+                                                        Phone No
+                                                    </th>
+                                                    <th>
+                                                        Email
+                                                    </th>
+                                                    <th>
+                                                        Reporting Manager
+                                                    </th>
+                                                    <th>
+                                                        Employee Code
+                                                    </th>
+                                                    <th>
+                                                        Actions
+                                                    </th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @if (!(Model == null))
+        {
+            foreach (var item in Model)
+            {
+
+                                        <tr>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                            </td>
+                                            <td>
+                                                @item.FirstName @item.LastName
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.UserName)
+                                            </td>
+                                            <td>
+                                                @string.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Email)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ReportingManager)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EmployeeCode)
+                                            </td>
+                                            <td>
+
+                                                <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("Edit", "User", new { uId = item.Id })'"><i class="ti-pencil-alt"></i></button>
+
+                                            </td>
+
+                                        </tr>
+
+}
+}
+
+
+                                            </tbody>
+                                         
+                                        </table>
+                                    </div>
+
+                                </div>
+                                <div id="roles" class="tab-pane fade">
+                                    @{Html.RenderAction("RolesList"); }
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

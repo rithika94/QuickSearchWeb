@@ -1,0 +1,217 @@
+﻿@model QuickSearchWeb.Models.LoaViewModel
+@{
+    ViewBag.Title = "My LOA Details";
+
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+    $("#StartDate").datepicker();
+    $("#EndDate").datepicker();
+
+        window.onload = function () {
+            //debugger;
+            CheckTimeOfDay();
+            CheckTypeOfLeave();
+        };
+
+       
+
+        function CheckTimeOfDay() {
+            //debugger;
+            if ($('input[name=LookupTimeOfDay]:checked').val() == @Model.LookupOtherTimeOfDay) {
+                $('#OtherDayTime').show();
+            } else {
+                $('#OtherDayTime').hide();
+            }
+
+        }
+
+
+
+        function CheckTypeOfLeave() {
+            //debugger;
+            if ($('#LookupTypeOfLeave').val() == @Model.LookupOtherTypeOfLeave) {
+                $('#OtherLeaveType').show();
+            } else {
+                $('#OtherLeaveType').hide();
+            }
+
+        }
+
+    </script>
+
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to LOA's" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("MyLOAList", "LOA")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>My LOA Details</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MyLOAList", "LOA")'"*@>My LOA's</a></li>
+                                <li class="active">My LOA Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-body">
+                               
+                                    <div class="form-horizontal">
+                                        <div class="row">
+
+
+                                            @Html.HiddenFor(m => m.UserId)
+
+                                            @Html.HiddenFor(m => m.LoaId)
+
+                                                                                      
+                                            <div class="row">
+                                                <div class=" form-group col-md-2">
+                                                    @Html.LabelFor(m => m.LoaCode)
+                                                    @Html.TextBoxFor(m => m.LoaCode, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+                                                <div class=" form-group col-md-2">
+                                                    <label>Employee Code</label>
+                                                    @Html.TextBoxFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+                                                <div class=" form-group col-md-2">
+                                                    @Html.LabelFor(m => m.LookupCodeMaster2)
+                                                    @Html.TextBoxFor(m => m.LookupCodeMaster2.LookupCodeName, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+                                                <div class=" col-md-3">
+                                                    <label>Employee Name</label>
+                                                    <input class="form-control"
+                                                           id="FullName"
+                                                           readonly="readonly"
+                                                           type="text"
+                                                           value="@Model.AspNetUser.Firstname @Model.AspNetUser.LastName" />
+
+                                                </div>
+                                                <div class=" form-group col-md-3">
+                                                    @Html.LabelFor(m => m.ReportingManager)
+                                                    @Html.TextBoxFor(m => m.ReportingManager, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.StartDate)
+                                                    @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "StartDate", @disabled = "true" })
+                                                  
+                                                </div>
+
+
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.EndDate)
+                                                    @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "EndDate", @disabled = "true" })
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(m => m.LookupTimeOfDay)
+
+                                                    <div>
+                                                        @for (int i = 0; i < Model.TimeOfDayList.Count; i++)
+                                                        {
+                                                            <div class="col-md-3">
+                                                                @Html.RadioButtonFor(m => m.LookupTimeOfDay, Model.TimeOfDayList[i].Id, new { @disabled = "true" }) @Model.TimeOfDayList[i].Name
+                                                            </div>
+
+                                                        }
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="form-group col-md-6" id="OtherDayTime">
+
+                                                    @Html.LabelFor(m => m.OtherTimeOfDay)
+                                                    @Html.TextBoxFor(m => m.OtherTimeOfDay, new { @class = "form-control", @readonly = "true" })
+                                                  
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(m => m.LookupTypeOfLeave)
+                                                    @Html.DropDownListFor(model => model.LookupTypeOfLeave, new SelectList(Model.TypeOfLeaveList, "Id", "Name"), "Select Leave Type", new { @class = "form-control", @disabled = "true" })
+
+                                                </div>
+                                                <div class="form-group col-md-6" id="OtherLeaveType">
+
+                                                    @Html.LabelFor(m => m.OtherTypeOfLeave)
+                                                    @Html.TextBoxFor(m => m.OtherTypeOfLeave, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+
+                                                <div class="form-group col-md-12">
+                                                    @Html.LabelFor(m => m.ReasonForLeave)
+                                                    @Html.TextAreaFor(m => m.ReasonForLeave, new { @class = "form-control", @rows = 6, @readonly = "true" })
+
+                                                </div>
+                                            </div>
+                                          
+
+                                            <div class="form-group  col-md-12">
+                                                <div class="form-group col-md-6">
+                                                   
+
+                                                    <input type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="window.open('@Url.Action("MyLOADownload", "LOA", new { id = Model.LoaId, targe="_blank"})')" />
+                                                   
+                                                </div>
+                                                <div class="form-group col-md-6" style="border: 1px solid; padding:10px">
+                                                    @Html.LabelFor(m => m.Comments)
+                                                    <br />
+                                                    <span>@Html.Raw(Model.Comments)</span>
+                                                  
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

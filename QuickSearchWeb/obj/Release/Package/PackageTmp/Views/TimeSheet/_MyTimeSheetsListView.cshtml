@@ -1,0 +1,122 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.TimeSheetListViewModel>
+
+
+
+
+<script src="~/ContentTemplate/js/scripts2.js"></script>
+
+
+<div class="bootstrap-data-table-panel table-responsive2">
+    <table id="row-select1" class="display table table-borderd table-striped table-responsive row-select">
+
+        <thead>
+            <tr>
+                <th>
+                    Last Modified
+                </th>
+                <th>
+                    TimeSheet Id
+                </th>
+                <th>
+                    Week
+                </th>
+                <th>
+                    Total Hours
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!(Model == null))
+            {
+
+                foreach (var item in Model)
+                {
+                    if (!item.IsDeleted && item.IsActive)
+                    {
+                        <tr>
+                            <td>
+                                @item.ModifiedDate
+                            </td>
+                            <td>
+                                @item.TimeSheetCode
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate) -  @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @item.TotalHours
+                            </td>
+                            <td>
+                                @{
+                                    var status = item.LookupCodeMaster7.LookupCodeName;
+
+                                    if (status == "Approved")
+                                    {
+                                        <span class="badge badge-success">Approved</span>
+
+
+                                    }
+                                    else if (status == "Rejected")
+                                    {
+                                        <span class="badge badge-danger">Rejected</span>
+
+
+                                    }
+                                    else if (status == "Pending")
+                                    {
+                                        <span class="badge badge-warning">Pending</span>
+
+
+                                    }
+                                    else if (status == "Saved")
+                                    {
+                                        <span class="badge badge-default">Saved</span>
+
+
+                                    }
+
+                                }
+
+
+
+                            </td>
+
+                            <td>
+
+
+                                <button type="button" class="btn btn-default btn-flat   m-l-5" title="View" onclick="location.href='@Url.Action("MyTimeSheetDetails", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-eye"></i></button>
+
+                                @if (item.LookupCodeMaster7.LookupCodeName != "Approved" && item.LookupCodeMaster7.LookupCodeName != "Pending")
+                                {
+                                    <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("MyTimeSheetEdit", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-pencil-alt"></i></button>
+
+
+                                }
+                                <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("MyTimeSheetDownload", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-download"></i></button>
+
+                            </td>
+
+                        </tr>
+
+
+                                            }
+
+
+                                        }
+                                    }
+
+
+
+        </tbody>
+
+    </table>
+
+
+
+</div>

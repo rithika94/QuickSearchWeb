@@ -1,0 +1,176 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.LoaListViewModel>
+
+
+@*<script src="~/ContentTemplate/js/scripts2.js"></script>*@
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card alert">
+            <div class="card-header">
+                <h4>Remaining LOAs </h4>
+                <hr />
+            </div>
+            <div class="card-body">
+                <div class="bootstrap-data-table-panel table-responsive2">
+                    <table class="display table table-borderd table-striped table-responsive row-select">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Last Modified
+                                </th>
+                                <th>
+                                    LOA Id
+                                </th>
+                                <th>
+                                    Dates
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Employee
+                                </th>
+                                <th>
+                                    Reporting Manager
+                                </th>
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!(Model == null))
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    if (!item.IsDeleted && item.IsActive)
+                                    {
+                                        <tr>
+                                            <td>@item.ModifiedDate</td>
+                                            <td>@item.LoaCode</td>
+                                            <td>
+                                                @item.StartDate.ToString("MM/dd/yyyy") - @item.EndDate.ToString("MM/dd/yyyy")
+                                            </td>
+
+                                            <td>
+                                                @{
+                                                    var status = item.LookupCodeMaster2.LookupCodeName;
+
+                                                    if (status == "Approved")
+                                                    {
+                                                        <span class="badge badge-success">Approved</span>
+
+
+                                                    }
+                                                    else if (status == "Rejected")
+                                                    {
+                                                        <span class="badge badge-danger">Rejected</span>
+
+
+                                                    }
+                                                    @*else if (status == "Pending")
+                                                        {
+                                                            <span class="badge badge-warning">Pending</span>
+
+
+                                                        }
+                                                        else if (status == "Saved")
+                                                        {
+                                                            <span class="badge badge-default">Saved</span>
+
+
+                                                        }*@
+
+                                                }
+                                            </td>
+                                            <td>@item.AspNetUser.Firstname @item.AspNetUser.LastName</td>
+
+                                            <td>
+                                                @if (item.AspNetUser.AspNetUser1 != null)
+                                                {
+                                                    @item.AspNetUser.AspNetUser1.Firstname @item.AspNetUser.AspNetUser1.LastName
+                                                }
+                                            </td>
+
+                                            <td>
+
+                                                @{
+                                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeAdminLOADetails", "LOA" , new { id = item.LoaId})'"><i class="ti-eye"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeRepoManLOADetails", "LOA" , new { id = item.LoaId})'"><i class="ti-eye"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeManagerLOADetails", "LOA" , new { id = item.LoaId})'"><i class="ti-eye"></i></button>
+
+                                                    }
+                                                }
+
+                                                @if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                {
+                                                    <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("EmployeeAdminLOAEdit", "LOA" , new { id = item.LoaId})'"><i class="ti-pencil-alt"></i></button>
+
+                                                }
+
+                                                @{
+                                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="window.open('@Url.Action("EmployeeAdminLOADownload", "LOA" , new { id = item.LoaId, targe="_blank"})')"><i class="ti-download"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="window.open('@Url.Action("EmployeeRepoManLOADownload", "LOA" , new { id = item.LoaId, targe="_blank"})')"><i class="ti-download"></i></button>
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="window.open('@Url.Action("EmployeeManagerLOADownload", "LOA" , new { id = item.LoaId, targe="_blank"})')"><i class="ti-download"></i></button>
+
+                                                    }
+                                                }
+
+
+
+                                            </td>
+
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                            else
+                            {
+                                <tr>
+                                    No Timesheets Exists
+
+                                </tr>
+
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

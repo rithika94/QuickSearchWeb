@@ -1,0 +1,154 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.TimeSheetListViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  
+    <script type="text/javascript">
+
+
+       
+
+        window.onload = function ()  {
+            //debugger;
+            (function getCurrentDate() {
+                var date = new Date();
+                var fromDate = new Date();
+                fromDate.setDate(date.getDate() - 31);
+                var toDate = new Date();
+                toDate.setDate(date.getDate() + 30);
+                //debugger;
+                document.getElementById('from').value = fromDate.getMonth() + 1 + "/" + fromDate.getDate() + "/" + fromDate.getFullYear();
+                document.getElementById('to').value = toDate.getMonth() + 1 + "/" + toDate.getDate() + "/" + toDate.getFullYear();
+                //document.getElementById('from').valueAsDate = new Date(date.getFullYear(), date.getMonth(), 1);
+                //document.getElementById('to').valueAsDate = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+
+
+            }())
+
+
+            TimeSheetFilter();
+
+
+        };
+
+        $("#from").datepicker();
+        $("#to").datepicker();
+
+        function TimeSheetFilter() {
+
+            var fromdate = $("#from").val();
+            var todate = $("#to").val();
+            $.ajax({
+                type: "Get",
+                url: "/TimeSheet/GetMyTimeSheetListUserId?FromDate=" + fromdate + '&Todate=' + todate,
+                success: function (data) {
+
+                    $("#Timesheets").html(data);
+
+                },
+                error: function (err) {
+
+                    alert(err);
+                }
+            });
+
+
+
+        }
+
+
+
+
+    </script>
+}
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Add Timesheet" class="btn btn-flat btn-info m-l-5" onclick="location.href='@Url.Action("MyTimeSheetCreate", "TimeSheet" )'" />
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>My Timesheets</strong> </h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                @*<li class="active">/My TimeSheets</li>*@
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            @*<div class="card-header">
+                                    <h4>My Time Sheets</h4>
+                                </div>*@
+                            <div class="card-body">
+
+
+
+                                <div class="row">
+                                    <label for="from">Show timesheets between </label>
+
+                                    <input type="text" id="from" class="form-controldate">
+
+                                    <label for="to">-</label>
+                                    <input type="text" id="to" class="form-controldate">
+                                    <button class="btn btn-flat btn-default m-b-10 m-l-5" onclick="TimeSheetFilter();">Filter</button>
+
+
+
+                                </div>
+
+
+                                <div @*class="card alert"*@ id="Timesheets">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+

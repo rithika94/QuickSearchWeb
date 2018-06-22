@@ -1,0 +1,35 @@
+﻿@model QuickSearchWeb.Models.ForgotPasswordViewModel
+@{
+    ViewBag.Title = "_EmailNotConfirmed";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+    <h4>Email not verified</h4>
+
+    @using (Html.BeginForm("EmailNotConfirmed", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+       
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email)
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+
+            <button type="submit" class="btn btn-primary btn-flat m-b-15">Send Email Activation Link</button>
+
+        </div>
+    }
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+

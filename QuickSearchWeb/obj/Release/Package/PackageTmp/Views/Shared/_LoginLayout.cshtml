@@ -1,0 +1,63 @@
+﻿@{ 
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ePATHUSA : Quick Search</title>
+
+    @*@Styles.Render("~/Content/css")*@
+    @*@Styles.Render("~/ContentTemplate/css/")*@
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    <!-- Styles -->
+    <link href="~/ContentTemplate/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/unix.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/style.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/CustomStyle.css" rel="stylesheet" />
+
+</head>
+
+<body @*class="bg-primary"*@>
+    <div class="bg-primary" >
+        <div class="unix-login">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="login-content">
+                            
+                            <div class="login-form">
+                                <div class="login-logo">
+                                    <a href="@Url.Action("Login", "Account")"><img class="" style="max-width:200px ;height:auto;" src="~/ContentTemplate/images/epathlogo.png" /></a>
+                                </div>
+                                @RenderBody()
+                            </div>
+
+                            </div>
+
+                        @RenderSection("scripts", required: false)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="footer">
+            <p>&copy; @DateTime.Now.Year - ePATHUSA</p>
+        </div>
+    </div>
+</body>
+
+
+</html>

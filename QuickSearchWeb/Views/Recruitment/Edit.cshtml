@@ -1,0 +1,643 @@
+﻿@model QuickSearchWeb.Models.RecruitmentViewModel
+
+@{
+    ViewBag.Title = "Add Recruitment Record";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    @*<script src="assets/js/lib/jquery.min.js"></script>*@
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    @*<script src="//code.jquery.com/jquery-1.10.2.js"></script>*@
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <!-- jquery vendor -->
+    @*<script src="assets/js/lib/jquery.nanoscroller.min.js"></script>
+        <!-- nano scroller -->
+        <script src="assets/js/lib/sidebar.js"></script>
+        <!-- sidebar -->
+        <script src="assets/js/lib/bootstrap.min.js"></script>
+        <!-- bootstrap -->
+        <script src="assets/js/lib/mmc-common.js"></script>
+        <script src="assets/js/lib/mmc-chat.js"></script>
+        <script src="assets/js/scripts.js"></script>*@
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            //debugger;
+            EmploymentChanged();
+            //hideC2CFields();
+            //hideClientFields();
+            //addClientDetails();
+        };
+
+
+        $("#AvailableDate").datepicker();
+
+
+        function showC2Fields() {
+            //debugger;
+            $('#EmploymentTypeDetails').show();
+        }
+        function hideC2CFields() {
+            //debugger;
+
+            $('#EmploymentTypeDetails').hide();
+        }
+
+
+        function FillEmployementType() {
+            //debugger;
+            var value = jQuery("#EmployementType option:selected").text();
+            //var value = $(this).val();
+
+            if (value == 'C2C/1099') {
+                showC2Fields();
+            } else if (value == 'W2') {
+                hideC2CFields();
+            } else {
+                hideC2CFields();
+            }
+        }
+
+        function EmploymentChanged(){
+        //debugger;
+        var value = jQuery("#EmployementType option:selected").text();
+        if (value == 'C2C/1099'){
+        $('#EmploymentTypeDetails').show();
+        }
+        else{
+         $('#EmploymentTypeDetails').hide();
+        }
+        }
+
+
+        function removeRow(id) {
+            var controlToBeRemoved = "#trBook" + id;
+            $(controlToBeRemoved).remove();
+        }
+    $(document).ready(function () {
+         $('#datatable-buttons').DataTable();
+
+    });
+
+        //Remove uploaded Documents
+   function funImageRemove(id,path,name) {
+
+        $.ajax({
+            url: "@Url.Action("RemoveImg", "Recruitment")",
+            data: { "imgid": id, "imgpath": path, "imgname": name },
+        async: false,
+        DataType: 'json',
+        type: "POST",
+        success: function (data) {
+            var result = JSON.parse(JSON.stringify(data));
+            //alert('Table saved successfully.');
+            alert(data);
+            location.reload();
+        },
+        error: function () {
+            alert(data);
+        }
+    });//end ajax
+        alert(imgnameid);
+    }
+        //Set limit 5 to upload common documents
+function validate(numberofFile)
+    {
+       var fi = document.getElementById('FILEPhoto');
+        var initialFileSize=parseInt('@Model.RFileList.Count()');
+         var totalFileNo = initialFileSize;
+        var fSize = 0;
+        // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+        if (fi.files.length > 0) {
+            // RUN A LOOP TO CHECK EACH SELECTED FILE.
+            for (var i = 0; i <= fi.files.length - 1; i++) {
+                //fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                totalFileNo = totalFileNo + 1;
+            }
+           // totalFileSize = ((totalFileSize / 1024) / 1024);
+          // alert(totalFileNo);
+            if (totalFileNo <= numberofFile) {
+                return true;
+            }
+            else {
+                alert("Maximum number of 5 File documents Can be uploaded");
+                return false;
+            }
+        }
+        else {
+            //alert("Please Select File for Upload");
+            return false;
+        }
+    }
+    </script>
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to Recruitment List" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("Index", "Recruitment")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Add Recruitment Record</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("Index", "Recruitment")'"*@>Recruitment</a></li>
+                                <li class="active">Add Recruitment Record</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-body">
+                                <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                                    @Html.AntiForgeryToken()
+
+                                    <div class="row">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            @Html.HiddenFor(m => m.RecruiterId)
+                                        </div>
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        <div class="form-group">
+                                            @Html.HiddenFor(m => m.RecruitmentId)
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.HiddenFor(m => m.CreatedDate)
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.HiddenFor(m => m.CreatedUserId)
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"> Consultant Information</div>
+                                        <div class="panel-body">
+
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.FirstName)
+                                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.LastName)
+                                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.PhoneNumber)
+                                                    @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.Email)
+                                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.LookupVisaStatus)
+                                                    @Html.DropDownListFor(model => model.LookupVisaStatus, new SelectList(Model.VisaStatusList, "Id", "Name"), "Select a Visa Status", new { @class = "form-control", @id = "VisaStatus", @onchange = "FillVisaStatusType()" })
+                                                    @Html.ValidationMessageFor(m => m.LookupVisaStatus, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @*@Html.LabelFor(m => m.AvailableDate)
+                                                        @Html.TextBoxFor(m => m.AvailableDate, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.AvailableDate, "", new { @class = "text-danger" })*@
+
+                                                    @Html.LabelFor(m => m.AvailableDate)
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                        @Html.TextBoxFor(m => m.AvailableDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "AvailableDate" })
+                                                    </div>
+
+
+                                                    @Html.ValidationMessageFor(m => m.AvailableDate, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.CurrentLocation)
+                                                    @Html.TextBoxFor(m => m.CurrentLocation, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.CurrentLocation, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.Notes)
+                                                    @Html.TextAreaFor(m => m.Notes, new { @class = "form-control", @rows = 2 })
+                                                    @Html.ValidationMessageFor(m => m.Notes, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.PrimarySkillSet)
+                                                    @Html.TextAreaFor(m => m.PrimarySkillSet, new { @class = "form-control", @rows = 2 })
+                                                    @Html.ValidationMessageFor(m => m.PrimarySkillSet, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.SecondarySkillSet)
+                                                    @Html.TextAreaFor(m => m.SecondarySkillSet, new { @class = "form-control", @rows = 2 })
+                                                    @Html.ValidationMessageFor(m => m.SecondarySkillSet, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <div class="form-group col-md-3" id="EmployementType">
+                                                    @Html.LabelFor(m => m.LookupEmployementType)
+                                                    @Html.DropDownListFor(model => model.LookupEmployementType, new SelectList(Model.EmployementTypeList, "Id", "Name"), "Select Employement Type", new { @class = "form-control", @id = "EmployementType", @onchange = "FillEmployementType()" })
+                                                    @Html.ValidationMessageFor(m => m.EmployementTypeList, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div id="EmploymentTypeDetails" hidden>
+
+                                                <div class="row">
+                                                    <div class=" col-md-12 ">
+                                                        <div class="panel panel-default">
+                                                            <div class="panel-heading"> C2C/1099</div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="form-group col-md-3" id="C2CCompanyName">
+                                                                        @Html.LabelFor(m => m.C2CCompanyName)
+                                                                        @Html.TextBoxFor(m => m.C2CCompanyName, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.C2CCompanyName, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                    <div class="form-group col-md-3" id="C2CContactNumber">
+                                                                        @Html.LabelFor(m => m.C2CContactNumber)
+                                                                        @Html.TextBoxFor(m => m.C2CContactNumber, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.C2CContactNumber, "", new { @class = "text-danger" })
+                                                                    </div>
+
+                                                                    <div class="form-group col-md-3" id="C2CContactPerson">
+                                                                        @Html.LabelFor(m => m.C2CContactPerson)
+                                                                        @Html.TextBoxFor(m => m.C2CContactPerson, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.C2CContactPerson, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                    <div class="form-group col-md-3" id="C2CEmail">
+                                                                        @Html.LabelFor(m => m.C2CEmail)
+                                                                        @Html.TextBoxFor(m => m.C2CEmail, new { @class = "form-control" })
+                                                                        @Html.ValidationMessageFor(m => m.C2CEmail, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group  col-md-12">
+                                                    <input type="submit" value="Save" class="pull-right btn btn-flat btn-info m-b-10 m-l-5" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"> Common Documents</div>
+                                    <div class="panel-body">
+                                        <div class="col-md-4">
+                                            <!--Common Document Upload-->
+                                            @using (Html.BeginForm("EditDocumentUpload", "Recruitment", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                            {
+                                                @*<div class="row">
+                                                    <div class="panel panel-default">
+                                                        <div class="panel-heading">
+                                                            Upload common documents
+                                                        </div>
+                                                        <div class="panel-body">*@
+                                                <div>
+                                                    <label for="selectFile" class="hidden">Choose File</label>
+                                                    <input type="file" name="FILEPhoto" id="FILEPhoto" multiple="multiple">
+                                                    @Html.HiddenFor(m => m.RecruitmentId)
+                                                    <input type="submit" value="Upload" onclick="return validate(5);" />
+                                                </div>
+                                                @*</div>
+                                                        </div>
+                                                    </div>*@
+                                            }
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="bootstrap-data-table-panel">
+                                                    @if (Model.RFileList != null && Model.RFileList.Count > 0)
+                                                    {
+                                                        string FileName = string.Empty;
+                                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Document Name</th>
+                                                                    <th>Description</th>
+                                                                    @*<th>Upload New</th>*@
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                @foreach (var item in Model.RFileList)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@item.RecruitmentDocumentName</td>
+                                                                        <td></td>
+                                                                        @*<td>
+                                                                                @using (Html.BeginForm("SaveImge", "Recruitment", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                                                                                {
+                                                                                    FileName = "flDocument" + @item.Id;
+                                                                                    <input type="file" name="@FileName" id="@FileName" />
+                                                                                    <button type="submit">Update</button>
+                                                                                }
+                                                                            </td>*@
+                                                                        <td>
+                                                                            <button type="button" class="pull-left btn-danger btn-flat m-l-5" href="javascript:void(0)" onclick="funImageRemove('@item.Id','@item.FileServerPath','@item.RecruitmentDocumentName');"> <i class="ti-trash"></i></button>
+                                                                            @using (Html.BeginForm("GetImage", "Recruitment", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                                                                            {
+                                                                                <button type="submit" class="pull-right btn-warning btn-flat m-l-5"><i class="ti-download"></i></button>
+                                                                                <input type="hidden" name="imgname" value="@item.RecruitmentDocumentName" />
+                                                                            }
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            </tbody>
+                                                        </table>
+                                                    }
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                                @using (Html.BeginForm("UpdateClientInformation", "Recruitment", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                                {
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"> Client Information</div>
+                                        <div class="panel-body">
+                                            @Html.AntiForgeryToken()
+                                            @Html.HiddenFor(m => m.RecruitmentId)
+
+                                            <div class="row">
+                                                <table class="table table-hover small-text" id="tbClient">
+                                                    <thead>
+                                                        <tr class="tr-header">
+                                                            <th>Client Name</th>
+                                                            <th>Title</th>
+                                                            <th>Location</th>
+                                                            <th>Status</th>
+                                                            <th>Submission Date</th>
+                                                            <th>Choose File</th>
+                                                            <th>Attchment</th>
+                                                            <th><a href="javascript:void(0);" onclick="AddNewClientRow();" style="font-size:18px;" id="addMore" title="Add More Client"><span class="glyphicon glyphicon-plus"></span></a></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @if (Model.RecruitmentClientList != null && Model.RecruitmentClientList.Count() > 0)
+                                                        {
+                                                            <input type="hidden" value="@Model.RecruitmentClientList.Count()" id="hidClientId" name="hidClientId" />
+                                                            string currentRow = string.Empty;
+                                                            for (int i = 1; i <= Model.RecruitmentClientList.Count(); i++)
+                                                            {
+                                                                currentRow += i + ",";
+                                                                <tr id="@string.Format("{0}{1}", "trRow", i)">
+                                                                    <td>
+                                                                        @Html.Hidden("hidClientInfoId" + i, Model.RecruitmentClientList[(i - 1)].Id)
+                                                                        @Html.TextBox("txtClientName" + i, Model.RecruitmentClientList[(i - 1)].ClientName, new { @class = "form-control", maxlength = "150" })
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.TextBox("txtJobTitle" + i, Model.RecruitmentClientList[(i - 1)].JobTitle, new { @class = "form-control", maxlength = "150" })
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.TextBox("txtJobLocation" + i, Model.RecruitmentClientList[(i - 1)].JobLocation, new { @class = "form-control", maxlength = "150" })
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.DropDownList("txtCandidateStatus" + i, new SelectList(Model.CandidateStatusList, "Id", "Name", Model.RecruitmentClientList[(i - 1)].LookupCandidateStatus), "Select Candidate Status", new { @class = "form-control" })
+                                                                    </td>
+                                                                    <td>
+                                                                        @Html.TextBox("txtSubmitionDate" + i, Model.RecruitmentClientList[(i - 1)].SubmissionDate, "{0:MM/dd/yyyy}", new { @class = "form-control", maxlength = "150" })
+                                                                    </td>
+                                                                    <td>
+                                                                        <span>File 1 :</span> <input type="file" id="@string.Format("{0}{1}", "flClientDoc", i)" name="@string.Format("{0}{1}", "flClientDoc", i)" /><br />
+                                                                        <span>File 2 :</span> <input type="file" id="@string.Format("{0}{1}", "flClientDoctwo", i)" name="@string.Format("{0}{1}", "flClientDoctwo", i)" />
+                                                                    </td>
+                                                                    <td width="20%">
+                                                                        @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ClientDocuments"] + Model.RecruitmentClientList[(i - 1)].ClientDocument1)))
+                                                                        {
+                                                                            <a target="_blank" href="@Url.Content(("~" + System.Configuration.ConfigurationManager.AppSettings["ClientDocuments"] +  Model.RecruitmentClientList[(i - 1)].ClientDocument1))" title="Click to download">@Model.RecruitmentClientList[(i - 1)].DocumentName1</a>
+                                                                                    <a href='@Url.Action("RemoveClientDocument", "Recruitment", new { RecruitmentId = Model.RecruitmentId, FileId = 1, ClientId = Model.RecruitmentClientList[(i - 1)].Id  })' title="Remove File"><span class='glyphicon glyphicon-remove'></span></a>
+                                                                                    @Html.Hidden("ClientDocument1" + i, @Model.RecruitmentClientList[(i - 1)].ClientDocument1)
+                                                                                    <br />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @Html.Raw("No attachment")                                                                                    
+                                                                            <br />
+                                                                        }
+                                                                        @if (File.Exists(Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["ClientDocuments"] + Model.RecruitmentClientList[(i - 1)].ClientDocument2)))
+                                                                        {
+                                                                            <a target="_blank" href="@Url.Content(("~" + System.Configuration.ConfigurationManager.AppSettings["ClientDocuments"] +  Model.RecruitmentClientList[(i - 1)].ClientDocument2))" title="Click to download">@Model.RecruitmentClientList[(i - 1)].DocumentName2</a>
+                                                                                    <a href='@Url.Action("RemoveClientDocument", "Recruitment", new { RecruitmentId = Model.RecruitmentId, FileId = 2, ClientId = Model.RecruitmentClientList[(i - 1)].Id })' title="Remove File"><span class='glyphicon glyphicon-remove'></span></a>
+                                                                                    @Html.Hidden("ClientDocument2" + i, @Model.RecruitmentClientList[(i - 1)].ClientDocument2)
+                                                                                    <br />
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            @Html.Raw("No attachment")                                                                                   
+                                                                            <br />
+                                                                        }
+                                                                    </td>
+                                                                    <td>
+                                                                        <a href='javascript:void(0);' onclick="javascript:RemoveClient('@i','@Model.RecruitmentClientList[(i - 1)].Id');"><span class='glyphicon glyphicon-remove'></span></a>
+                                                                    </td>
+                                                                </tr>
+                                                            }
+                                                            <input type="hidden" value="@currentRow" id="hidClientCurrentId" name="hidClientCurrentId" />
+                                                                    <script type="text/javascript">
+                                                         $(function(){
+                                                            for(var i = 1;i <= parseInt($('#hidClientId').val());i++){
+                                                                BindFileDocument(i);
+                                                                $('#txtSubmitionDate'+i).datepicker();
+                                                            }
+                                                        });
+                                                                    </script>
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="hidden" value="1" id="hidClientId" name="hidClientId" />
+                                                                    <input type="hidden" value="1," id="hidClientCurrentId" name="hidClientCurrentId" />
+                                                                    <tr id="trRow1">
+                                                                        <td>
+                                                                            @Html.Hidden("hidClientInfoId1", "0")
+                                                                            @Html.TextBox("txtClientName1", "", new { @class = "form-control", maxlength = "150" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.TextBox("txtJobTitle1", "", new { @class = "form-control", maxlength = "150" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.TextBox("txtJobLocation1", "", new { @class = "form-control", maxlength = "150" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.DropDownList("txtCandidateStatus1", new SelectList(Model.CandidateStatusList, "Id", "Name"), "Select Candidate Status", new { @class = "form-control", maxlength = "150" })
+                                                                        </td>
+                                                                        <td>
+                                                                            @Html.TextBox("txtSubmitionDate1", "", new { @class = "form-control", maxlength = "150" })
+                                                                        </td>
+                                                                        <td>
+                                                                            <span>File 1:</span><input type="file" id="flClientDoc1" name="flClientDoc1" /><br />
+                                                                            <span>File 2:</span><input type="file" id="flClientDoctwo1" name="flClientDoctwo1" /><br />
+                                                                        </td>
+                                                                        <td width="20%">
+                                                                            @Html.Raw("No attachment")
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href='javascript:void(0);' onclick="javascript:RemoveClient('1');"><span class='glyphicon glyphicon-remove'></span></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <script type="text/javascript">
+                                                        $(function(){
+                                                             BindFileDocument(1);
+                                                            $("#txtSubmitionDate1").datepicker();
+                                                        });
+                                                                    </script>
+                                                        }
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group  col-md-12">
+                                                    <input type="submit" value="Save" class="pull-right btn btn-flat btn-info m-b-10 m-l-5" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                }
+
+                            </div>
+                            <div class="row">
+                                <form action="@Url.Action("SoftDelete", "Recruitment",  new { id = Model.RecruitmentId})" method="POST">
+                                    <input type="submit" value=" Delete" class="pull-right btn btn-flat btn-warning m-b-10 m-l-5" />
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function AddNewClientRow() {
+        var rowNo = parseInt($('#hidClientId').val());
+        rowNo++;
+        var Row = ("<tr id='trRow"+rowNo+"'>")+
+                  ("<td>")+
+                  ("<input type='hidden' id='hidClientInfoId"+rowNo+"' name='hidClientInfoId"+rowNo+"' value='0' /><input type='text' name='txtClientName"+rowNo+"' id='txtClientName"+rowNo+"' class = 'form-control' maxlength = '150' />")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<input type='text' name='txtJobTitle"+rowNo+"' id='txtJobTitle"+rowNo+"' class = 'form-control' maxlength = '150' />")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<input type='text' name='txtJobLocation"+rowNo+"' id='txtJobLocation"+rowNo+"' class = 'form-control' maxlength = '150' />")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<select name='txtCandidateStatus"+rowNo+"' id='txtCandidateStatus"+rowNo+"' class = 'form-control'></select>")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<input type='text' name='txtSubmitionDate"+rowNo+"' id='txtSubmitionDate"+rowNo+"' class = 'form-control' maxlength = '150' />")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<span>File 1:</span><input type='file' id='flClientDoc"+rowNo+"' name='flClientDoc"+rowNo+"'/>")+
+                  ("<span>File 2:</span><input type='file' id='flClientDoctwo"+rowNo+"' name='flClientDoctwo"+rowNo+"'/>")+
+                  ("</td>")+
+                  ("<td>")+
+                  ("<a href='javascript:void(0);' onclick='javascript:RemoveClient("+rowNo+");'><span class='glyphicon glyphicon-remove'></span></a>")+
+                  ("</td>")+
+                  ("</tr>");
+
+        $('#tbClient > tbody').append(Row);
+        $('#hidClientCurrentId').val($('#hidClientCurrentId').val() + rowNo + ",");
+        $('#hidClientId').val(rowNo);
+        GetVisaStatus(rowNo);
+        $("#txtSubmitionDate"+rowNo+"").datepicker();
+        BindFileDocument(rowNo);
+    }
+
+    function RemoveClient(rowNo,rid) {
+    // alert(rowNo,rid);
+    if(rid>0)
+    {
+
+        //remove recruitment Client from DB
+        $.ajax({
+            url: "@Url.Action("RemoveRecruitmentClient", "Recruitment")",
+            data: { "clientId": rid},
+        async: false,
+        DataType: 'json',
+        type: "POST",
+        success: function (data) {
+            var result = JSON.parse(JSON.stringify(data));
+            //alert('Table saved successfully.');
+            alert(data);
+            location.reload();
+        },
+        error: function () {
+            alert(data);
+        }
+    });//end ajax
+    }
+        $('#trRow' + rowNo).remove();
+        var str = $('#hidClientCurrentId').val();
+        $('#hidClientCurrentId').val(str.replace(rowNo + ",", ""));
+    }
+
+    function GetVisaStatus(rowNo) {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("BindVisaStatusList","Recruitment")',
+            async: false,
+            success: function (data) {
+                // alert(data);
+                $("#txtCandidateStatus"+rowNo).empty();
+                $("#txtCandidateStatus"+rowNo).append('<option value="">Select Candidate Status</option>');
+                $.each(data, function (i, listItem) {
+                    $("#txtCandidateStatus"+rowNo).append('<option value="' + listItem.Id + '">' + listItem.Name + '</option>')
+                });
+            }
+        });
+    }
+
+    function BindFileDocument(row){
+        $('input#flClientDoc'+row).change(function(){
+            var files = $(this)[0].files;
+            if(files.length > 2){
+                $('input#flClientDoc'+row).val('');
+                alert("you can select max 2 files.");
+            }
+        });
+    }
+</script>

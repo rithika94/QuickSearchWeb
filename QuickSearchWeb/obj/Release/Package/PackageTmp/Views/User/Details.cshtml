@@ -1,0 +1,106 @@
+﻿@model QuickSearchWeb.Models.EmployeeDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            @if (ViewBag.error != null)
+    {
+        <div class="alert alert-danger">
+            @ViewBag.error
+        </div>
+
+}
+            @if (ViewBag.status != null)
+    {
+        <div class="alert alert-success">
+            @ViewBag.status
+        </div>
+}
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                           
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong> Details</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a>Employees list</a></li>
+                                <li class="active">Employee Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-header">
+                                <h4>Employee Details</h4>
+                                <hr />
+                            </div>
+                            <div class="card-body">
+                                <dl class="dl-horizontal">
+                                    <dt>
+                                        Employee Code :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.EmployeeCode)
+                                    </dd>
+
+                                    <dt>
+                                        Full Name :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.FirstName)  @Html.DisplayFor(model => model.LastName)
+                                    </dd>
+                                    <dt>
+                                        Email :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Email)
+                                    </dd>
+                                    <dt>
+                                        Username :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.UserName)
+                                    </dd>
+
+                                    <dt>
+                                        Password :
+                                    </dt>
+
+                                    <dd>
+                                        @Html.DisplayFor(model => model.Password)
+                                    </dd>
+
+                                </dl>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <input type="button" value="Back to Employees List" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("Index", "User")'" />
+                <input type="button" value="Edit" class="btn btn-flat btn-info m-b-10 m-l-5" onclick="location.href='@Url.Action("Edit", "User",new { uId = Model.Id})'" />
+
+            </div>
+        </div>
+        </div>
+    </div>

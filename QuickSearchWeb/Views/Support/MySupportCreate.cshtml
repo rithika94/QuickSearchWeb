@@ -1,0 +1,264 @@
+﻿@model QuickSearchWeb.Models.SupportViewModel
+@{
+    ViewBag.Title = "MySupportCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@section Scripts{
+  
+    <script>
+
+
+
+        //$(document).ready(function () {
+        //    $("#checkfields").click(function () {
+
+        //    });
+        //});
+
+        function validate(fileCount) {
+            debugger;
+            for (var i = 0; i < $("#FILEPhoto").get(0).files.length; ++i) {
+                var file1 = $("#FILEPhoto").get(0).files[i].name;
+
+                if (file1) {
+                    var file_size = $("#FILEPhoto").get(0).files[i].size;
+                    if (file_size < 5242880) {
+                    var ext = file1.split('.').pop().toLowerCase();
+                    if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'txt', 'pdf', 'docx', 'doc', 'xlsx']) === -1) {
+                        alert("Please upload only jpg, png, txt files, pdf, docx, doc,excel ");
+                        return false;
+
+                        }
+                    } else {
+                        alert("File size should be below 5MB.");
+                        return false;
+                    }
+                }
+            }
+
+            var fi = document.getElementById('FILEPhoto');
+            var totalFileNo = 0;
+            var fSize = 0;
+
+
+
+            // VALIDATE OR CHECK IF ANY FILE IS SELECTED.
+            if (fi.files.length > 0) {
+                // RUN A LOOP TO CHECK EACH SELECTED FILE.
+                for (var i = 0; i <= fi.files.length - 1; i++) {
+                    //fsize = fi.files.item(i).size;      // THE SIZE OF THE FILE.
+                    totalFileNo = totalFileNo + 1;
+                }
+                // totalFileSize = ((totalFileSize / 1024) / 1024);
+                if (totalFileNo <= fileCount) {
+                    return true;
+                }
+                else {
+                    alert("Maximum 5 documents Can be uploaded");
+
+                    return false;
+
+                }
+            }
+            //else {
+            //    //alert("Please Select File for Upload");
+            //    return false;
+            //}
+
+
+        }
+        function SubmitButton() {
+            debugger;
+            if (validate(5) == false) {
+                return;
+            }
+            DisableAllSubmitButtons();
+            $("#submithidden").prop('disabled', false);
+            $("#submitForm").submit();
+        }
+        function SaveButton() {
+            debugger;
+            if (validate(5) == false) {
+                return;
+            }
+            DisableAllSubmitButtons();
+            $("#submithidden").attr('disabled', 'disabled');
+            $("#submitForm").submit();
+        }
+
+        function EnableAllSubmitButtons() {
+            debugger;
+            $("#btnSubmit").prop('disabled', false);
+            $("#btnSave").prop('disabled', false);
+            btnSave
+        }
+        function DisableAllSubmitButtons() {
+            debugger;
+            $("#btnSubmit").attr('disabled', 'disabled');
+            $("#btnSave").attr('disabled', 'disabled');
+
+        }
+
+        $('#submitForm').bind("invalid-form.validate", function () {
+            EnableAllSubmitButtons();
+        });
+
+    </script>
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="My Service Requests" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("MySupportList","Support")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Add Service Request</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MySupportList", "Support")'"*@>My Service Requests</a></li>
+                                <li class="active">Add Service Request</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="main-content">
+                <div class="row">
+
+
+                    <div class="container-fluid">
+                        <div class="main-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card alert">
+                                        @*<div class="card-header">
+                                                <h4>Add a new inventory</h4>
+                                                <hr />
+                                            </div>*@
+                                        <div class="card-body">
+                                            @using (Html.BeginForm("MySupportCreate", "Support", FormMethod.Post, new { enctype = "multipart/form-data" , id= "submitForm" }))
+                                            {
+
+                                        @Html.AntiForgeryToken()
+
+                                            <div class="row">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+
+                                                <div class="form-group col-md-12">
+                                                    @Html.LabelFor(m => m.Summary)
+                                                    @Html.TextBoxFor(m => m.Summary, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.Summary, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    @Html.LabelFor(m => m.Description)
+                                                    @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "10", @cols = "20" })
+                                                    @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    @Html.LabelFor(m => m.LookupIssueType)
+                                                    @Html.DropDownListFor(model => model.LookupIssueType, new SelectList(Model.IssueTypeList, "Id", "Name"), "Select Issue Type", new { @class = "form-control", @id = "IssueType" })
+                                                    @Html.ValidationMessageFor(m => m.LookupIssueType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    @Html.LabelFor(m => m.LookupIssuePriority)
+                                                    @Html.DropDownListFor(model => model.LookupIssuePriority, new SelectList(Model.IssuePriorityList, "Id", "Name"), "Select Priority", new { @class = "form-control", @id = "Issue Priority" })
+                                                    @Html.ValidationMessageFor(m => m.LookupIssuePriority, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <input id="submithidden" type="hidden" name="action" value="Submit" />
+
+                                                <div class="form-group col-md-12">
+
+
+                                                    <h4>Upload support files(screenshots,log files, etc...)</h4>
+
+                                                    <input type="file" class="multiple" id="FILEPhoto" name="files" multiple />
+
+
+
+                                                </div>
+
+
+                                                <div class="form-group col-md-12">
+
+                                                    <button type="button" value="button" class="btn btn-flat btn-info m-b-10 m-l-5  pull-right" onclick="return validate(5);" data-toggle="modal" data-target="#submitModal">Submit</button>
+
+                                                    @*<input type="submit" value="Submit" name="action" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" onclick="return validate(5);" />*@
+                                                    <input id="btnSave" type="button" value="Save" name="action" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" onclick="SaveButton();" />
+
+                                                    <input type="reset" value="Clear All" class=" btn btn-flat btn-danger  m-b-10 m-l-5" />
+                                                </div>
+                                            </div>
+
+                                        <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModal" aria-hidden="true">
+                                            <div class="modal-dialog modal-sm">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                        <h4 class="modal-title custom_align" id="Heading">Confirmation</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        @*<div class="alert alert-warning">*@
+                                                        <span class="fa fa-exclamation-triangle"></span> Are you sure you want to submit service request?
+                                                        @*</div>*@
+
+                                                    </div>
+                                                    <div class="modal-footer ">
+                                                        @*<input type="submit" name="action" value="Submit" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />*@
+                                                        <button type="button" name="action" value="Submit" class="btn btn-success" id="btnSubmit" onclick="SubmitButton(); "><span class="fa fa-check"></span> Yes</button>
+                                                        <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                                                    </div>
+                                                </div>
+                                                <!-- /.modal-content -->
+                                            </div>
+                                            <!-- /.modal-dialog -->
+                                        </div>
+
+}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

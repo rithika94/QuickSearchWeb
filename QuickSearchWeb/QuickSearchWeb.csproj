@@ -1,0 +1,999 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DE9E49D8-427D-43D3-9E72-5D8A890F1A8F}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>QuickSearchWeb</RootNamespace>
+    <AssemblyName>QuickSearchWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.90.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.90.0\lib\net452\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
+      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\MappingConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EPALController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventoryController.cs" />
+    <Compile Include="Controllers\LOAController.cs" />
+    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MyProfileController.cs" />
+    <Compile Include="Controllers\RecruitmentController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
+    <Compile Include="Controllers\TimeSheetController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AllowCrossSiteAttribute.cs" />
+    <Compile Include="Models\DateTimeExtensions.cs" />
+    <Compile Include="Models\DropDownListViewModel.cs" />
+    <Compile Include="Models\EmployeeDetailsViewModel.cs" />
+    <Compile Include="Models\ExpenseSummaryViewModel.cs" />
+    <Compile Include="Models\ExpenseViewModel.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\DashboardViewModel.cs" />
+    <Compile Include="Models\LoaViewModel.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MyProfileViewModel.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\RecruitmentViewModel.cs" />
+    <Compile Include="Models\RolesViewModel.cs" />
+    <Compile Include="Models\SupportViewModel.cs" />
+    <Compile Include="Models\TimeSheetSummaryViewModel.cs" />
+    <Compile Include="Models\TimeSheetViewModel.cs" />
+    <Compile Include="Models\UsersRolesViewModel.cs" />
+    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\WordDocumentAttribute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ContentTemplate\css\badge.css" />
+    <Content Include="ContentTemplate\css\booking-system.css" />
+    <Content Include="ContentTemplate\css\button.css" />
+    <Content Include="ContentTemplate\css\calendar.css" />
+    <Content Include="ContentTemplate\css\card.css" />
+    <Content Include="ContentTemplate\css\carousel.css" />
+    <Content Include="ContentTemplate\css\chart.css" />
+    <Content Include="ContentTemplate\css\chat.css" />
+    <Content Include="ContentTemplate\css\compose-email.css" />
+    <Content Include="ContentTemplate\css\CustomStyle.css" />
+    <Content Include="ContentTemplate\css\data-table.css" />
+    <Content Include="ContentTemplate\css\datamap.css" />
+    <Content Include="ContentTemplate\css\favourite_menu.css" />
+    <Content Include="ContentTemplate\css\flot-chart.css" />
+    <Content Include="ContentTemplate\css\fonts.css" />
+    <Content Include="ContentTemplate\css\form.css" />
+    <Content Include="ContentTemplate\css\forms.css" />
+    <Content Include="ContentTemplate\css\global.css" />
+    <Content Include="ContentTemplate\css\gmap.css" />
+    <Content Include="ContentTemplate\css\header.css" />
+    <Content Include="ContentTemplate\css\home.css" />
+    <Content Include="ContentTemplate\css\invoice-edit.css" />
+    <Content Include="ContentTemplate\css\invoice.css" />
+    <Content Include="ContentTemplate\css\lib\barRating\barRating.css" />
+    <Content Include="ContentTemplate\css\lib\bootstrap.css" />
+    <Content Include="ContentTemplate\css\lib\bootstrap.min.css" />
+    <Content Include="ContentTemplate\css\lib\calendar2\pignose.calendar.min.css" />
+    <Content Include="ContentTemplate\css\lib\calendar2\semantic.ui.min.css" />
+    <Content Include="ContentTemplate\css\lib\calendar\fullcalendar.css" />
+    <Content Include="ContentTemplate\css\lib\data-table\buttons.bootstrap.min.css" />
+    <Content Include="ContentTemplate\css\lib\data-table\buttons.dataTables.min.css" />
+    <Content Include="ContentTemplate\css\lib\data-table\dataTables.bootstrap.min.css" />
+    <Content Include="ContentTemplate\css\lib\font-awesome.min.css" />
+    <Content Include="ContentTemplate\css\lib\jquery-ui.min.css" />
+    <Content Include="ContentTemplate\css\lib\jsgrid\jsgrid-theme.min.css" />
+    <Content Include="ContentTemplate\css\lib\jsgrid\jsgrid.min.css" />
+    <Content Include="ContentTemplate\css\lib\lobi-panel\lobipanel.min.css" />
+    <Content Include="ContentTemplate\css\lib\mmc-chat.css" />
+    <Content Include="ContentTemplate\css\lib\nestable\nestable.css" />
+    <Content Include="ContentTemplate\css\lib\owl.carousel.min.css" />
+    <Content Include="ContentTemplate\css\lib\owl.theme.default.min.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.skinFlat.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.skinHTML5.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.skinModern.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.skinNice.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\ion.rangeSlider.skinSimple.css" />
+    <Content Include="ContentTemplate\css\lib\rangSlider\normalize.css" />
+    <Content Include="ContentTemplate\css\lib\scrollable\scrollable.min.css" />
+    <Content Include="ContentTemplate\css\lib\sidebar.css" />
+    <Content Include="ContentTemplate\css\lib\sweetalert\sweetalert.css" />
+    <Content Include="ContentTemplate\css\lib\themify-icons.css" />
+    <Content Include="ContentTemplate\css\lib\toastr\toastr.min.css" />
+    <Content Include="ContentTemplate\css\lib\unix.css" />
+    <Content Include="ContentTemplate\css\lib\vector-map\jqvmap.min.css" />
+    <Content Include="ContentTemplate\css\lib\weather-icons.css" />
+    <Content Include="ContentTemplate\css\LOADownload.css" />
+    <Content Include="ContentTemplate\css\login.css" />
+    <Content Include="ContentTemplate\css\menu-upload.css" />
+    <Content Include="ContentTemplate\css\modal.css" />
+    <Content Include="ContentTemplate\css\morris-chart.css" />
+    <Content Include="ContentTemplate\css\nestable.css" />
+    <Content Include="ContentTemplate\css\order-list.css" />
+    <Content Include="ContentTemplate\css\order-progress.css" />
+    <Content Include="ContentTemplate\css\panel.css" />
+    <Content Include="ContentTemplate\css\products_1.css" />
+    <Content Include="ContentTemplate\css\products_2.css" />
+    <Content Include="ContentTemplate\css\products_3.css" />
+    <Content Include="ContentTemplate\css\profile.css" />
+    <Content Include="ContentTemplate\css\progress-bar.css" />
+    <Content Include="ContentTemplate\css\recent-comments.css" />
+    <Content Include="ContentTemplate\css\recent-message.css" />
+    <Content Include="ContentTemplate\css\scrollable.css" />
+    <Content Include="ContentTemplate\css\style.css" />
+    <Content Include="ContentTemplate\css\tab.css" />
+    <Content Include="ContentTemplate\css\table.css" />
+    <Content Include="ContentTemplate\css\timeline.css" />
+    <Content Include="ContentTemplate\css\todo-list.css" />
+    <Content Include="ContentTemplate\css\ui-element-basic.css" />
+    <Content Include="ContentTemplate\css\variable.css" />
+    <Content Include="ContentTemplate\css\vector-map.css" />
+    <Content Include="ContentTemplate\css\weather.css" />
+    <Content Include="ContentTemplate\css\widget-stat.css" />
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont.svg" />
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont_files\viewsource.css" />
+    <Content Include="ContentTemplate\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="ContentTemplate\fonts\MontserratLight.svg" />
+    <Content Include="ContentTemplate\fonts\themify.svg" />
+    <Content Include="ContentTemplate\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="ContentTemplate\images\1.png" />
+    <Content Include="ContentTemplate\images\ajax-loader.gif" />
+    <Content Include="ContentTemplate\images\avatar.png" />
+    <Content Include="ContentTemplate\images\avatar\1.jpg" />
+    <Content Include="ContentTemplate\images\avatar\2.jpg" />
+    <Content Include="ContentTemplate\images\avatar\3.jpg" />
+    <Content Include="ContentTemplate\images\avatar\usa-flag.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\1.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\2.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\3.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\4.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\5.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\6.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\7.png" />
+    <Content Include="ContentTemplate\images\bookingSystem\8.png" />
+    <Content Include="ContentTemplate\images\calendar.png" />
+    <Content Include="ContentTemplate\images\chat-person-add.png" />
+    <Content Include="ContentTemplate\images\close.png" />
+    <Content Include="ContentTemplate\images\comodo_secure_seal_100x85_transp.png" />
+    <Content Include="ContentTemplate\images\epathlogo.png" />
+    <Content Include="ContentTemplate\images\fjords.jpg" />
+    <Content Include="ContentTemplate\images\hand.jpg" />
+    <Content Include="ContentTemplate\images\lights.jpg" />
+    <Content Include="ContentTemplate\images\LoginBackground.jpg" />
+    <Content Include="ContentTemplate\images\logo.png" />
+    <Content Include="ContentTemplate\images\maximize.png" />
+    <Content Include="ContentTemplate\images\minimize.png" />
+    <Content Include="ContentTemplate\images\nature.jpg" />
+    <Content Include="ContentTemplate\images\newyork.jpg" />
+    <Content Include="ContentTemplate\images\paris.jpg" />
+    <Content Include="ContentTemplate\images\paypal.png" />
+    <Content Include="ContentTemplate\images\picture.png" />
+    <Content Include="ContentTemplate\images\preview1.png" />
+    <Content Include="ContentTemplate\images\product_1\1.jpg" />
+    <Content Include="ContentTemplate\images\product_1\2.jpg" />
+    <Content Include="ContentTemplate\images\product_1\3.jpg" />
+    <Content Include="ContentTemplate\images\product_1\burger.jpg" />
+    <Content Include="ContentTemplate\images\product_1\download.jpg" />
+    <Content Include="ContentTemplate\images\product_1\image-10.jpg" />
+    <Content Include="ContentTemplate\images\product_1\image-8-226x223.jpg" />
+    <Content Include="ContentTemplate\images\product_1\image-9.jpg" />
+    <Content Include="ContentTemplate\images\product_1\images.jpg" />
+    <Content Include="ContentTemplate\images\product_1\pizza2.jpg" />
+    <Content Include="ContentTemplate\images\rangeSliderimg\sprite-skin-flat.png" />
+    <Content Include="ContentTemplate\images\rangeSliderimg\sprite-skin-modern.png" />
+    <Content Include="ContentTemplate\images\rangeSliderimg\sprite-skin-nice.png" />
+    <Content Include="ContentTemplate\images\rangeSliderimg\sprite-skin-simple.png" />
+    <Content Include="ContentTemplate\images\sanfran.jpg" />
+    <Content Include="ContentTemplate\images\scrollable\view-1-1200x800.jpg" />
+    <Content Include="ContentTemplate\images\smile.png" />
+    <Content Include="ContentTemplate\images\user-1.png" />
+    <Content Include="ContentTemplate\images\user-profile.jpg" />
+    <Content Include="ContentTemplate\images\user.jpg" />
+    <Content Include="ContentTemplate\images\video-cam.png" />
+    <Content Include="ContentTemplate\js\lib\barRating\barRating.init.js" />
+    <Content Include="ContentTemplate\js\lib\barRating\jquery.barrating.js" />
+    <Content Include="ContentTemplate\js\lib\bootstrap.min.js" />
+    <Content Include="ContentTemplate\js\lib\calendar-2\moment.latest.min.js" />
+    <Content Include="ContentTemplate\js\lib\calendar-2\pignose.calendar.min.js" />
+    <Content Include="ContentTemplate\js\lib\calendar-2\pignose.init.js" />
+    <Content Include="ContentTemplate\js\lib\calendar-2\prism.min.js" />
+    <Content Include="ContentTemplate\js\lib\calendar-2\semantic.ui.min.js" />
+    <Content Include="ContentTemplate\js\lib\calendar\fullcalendar-init.js" />
+    <Content Include="ContentTemplate\js\lib\calendar\fullcalendar.min.js" />
+    <Content Include="ContentTemplate\js\lib\chart-js\Chart.bundle.js" />
+    <Content Include="ContentTemplate\js\lib\chart-js\chartjs-init.js" />
+    <Content Include="ContentTemplate\js\lib\chat-widget\chat-widget-init.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\buttons.colVis.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\buttons.flash.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\buttons.html5.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\buttons.print.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\datatables-init.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\dataTables.buttons.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\datatables.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\jquery-1.12.4.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\jquery.dataTables.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\jszip.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\pdfmake.min.js" />
+    <Content Include="ContentTemplate\js\lib\data-table\vfs_fonts.js" />
+    <Content Include="ContentTemplate\js\lib\datamap\d3.min.js" />
+    <Content Include="ContentTemplate\js\lib\datamap\datamap-init.js" />
+    <Content Include="ContentTemplate\js\lib\datamap\datamaps.world.min.js" />
+    <Content Include="ContentTemplate\js\lib\datamap\topojson.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\curvedLines.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\excanvas.min.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\flot-chart-init.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\flot-tooltip\jquery.flot.tooltip.min.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.categories.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.crosshair.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.pie.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.resize.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.stack.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.threshold.js" />
+    <Content Include="ContentTemplate\js\lib\flot-chart\jquery.flot.time.js" />
+    <Content Include="ContentTemplate\js\lib\flowtype.js" />
+    <Content Include="ContentTemplate\js\lib\gmap\gmap.init.js" />
+    <Content Include="ContentTemplate\js\lib\gmap\gmapApi.js" />
+    <Content Include="ContentTemplate\js\lib\gmap\gmaps.js" />
+    <Content Include="ContentTemplate\js\lib\invoice-edit.js" />
+    <Content Include="ContentTemplate\js\lib\jquery-ui\jquery-ui.min.js" />
+    <Content Include="ContentTemplate\js\lib\jquery-ui\jquery.ui.touch-punch.min.js" />
+    <Content Include="ContentTemplate\js\lib\jquery.min.js" />
+    <Content Include="ContentTemplate\js\lib\jquery.nanoscroller.min.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\db.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.checkbox.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.control.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.number.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.select.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.text.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\fields\jsgrid.field.textarea.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid-init.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.core.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.field.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.load-indicator.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.load-strategies.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.sort-strategies.js" />
+    <Content Include="ContentTemplate\js\lib\jsgrid\jsgrid.validation.js" />
+    <Content Include="ContentTemplate\js\lib\knob\jquery.knob.min.js" />
+    <Content Include="ContentTemplate\js\lib\knob\knob.init.js" />
+    <Content Include="ContentTemplate\js\lib\lobi-panel\lobipanel.js" />
+    <Content Include="ContentTemplate\js\lib\mmc-chat.js" />
+    <Content Include="ContentTemplate\js\lib\mmc-common.js" />
+    <Content Include="ContentTemplate\js\lib\moment\moment.js" />
+    <Content Include="ContentTemplate\js\lib\morris-chart\morris-init.js" />
+    <Content Include="ContentTemplate\js\lib\morris-chart\morris.js" />
+    <Content Include="ContentTemplate\js\lib\nestable\jquery.nestable.js" />
+    <Content Include="ContentTemplate\js\lib\nestable\nestable.init.js" />
+    <Content Include="ContentTemplate\js\lib\owl-carousel\owl.carousel-init.js" />
+    <Content Include="ContentTemplate\js\lib\owl-carousel\owl.carousel.min.js" />
+    <Content Include="ContentTemplate\js\lib\peitychart\jquery.peity.min.js" />
+    <Content Include="ContentTemplate\js\lib\peitychart\peitychart.init.js" />
+    <Content Include="ContentTemplate\js\lib\rangeSlider\ion.rangeSlider.min.js" />
+    <Content Include="ContentTemplate\js\lib\rangeSlider\moment-with-locales.js" />
+    <Content Include="ContentTemplate\js\lib\rangeSlider\moment.js" />
+    <Content Include="ContentTemplate\js\lib\rangeSlider\rangeslider.init.js" />
+    <Content Include="ContentTemplate\js\lib\rating1\jRate.init.js" />
+    <Content Include="ContentTemplate\js\lib\rating1\jRate.min.js" />
+    <Content Include="ContentTemplate\js\lib\scrollable\holder.js" />
+    <Content Include="ContentTemplate\js\lib\scrollable\jquery-asScrollable.min.js" />
+    <Content Include="ContentTemplate\js\lib\scrollable\jquery-asScrollbar.js" />
+    <Content Include="ContentTemplate\js\lib\scrollable\scrollable.init.js" />
+    <Content Include="ContentTemplate\js\lib\sidebar.js" />
+    <Content Include="ContentTemplate\js\lib\sparklinechart\jquery.sparkline.min.js" />
+    <Content Include="ContentTemplate\js\lib\sparklinechart\sparkline.init.js" />
+    <Content Include="ContentTemplate\js\lib\sweetalert\sweetalert.init.js" />
+    <Content Include="ContentTemplate\js\lib\sweetalert\sweetalert.min.js" />
+    <Content Include="ContentTemplate\js\lib\toastr\toastr.init.js" />
+    <Content Include="ContentTemplate\js\lib\toastr\toastr.min.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.algeria.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.argentina.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.brazil.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.europe.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.france.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.germany.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.greece.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.iran.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.iraq.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.russia.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.tunisia.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.turkey.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.usa.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\country\jquery.vmap.world.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\jquery.vmap.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\jquery.vmap.min.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\jquery.vmap.sampledata.js" />
+    <Content Include="ContentTemplate\js\lib\vector-map\vector.init.js" />
+    <Content Include="ContentTemplate\js\lib\weather\jquery.simpleWeather.min.js" />
+    <Content Include="ContentTemplate\js\lib\weather\weather-init.js" />
+    <Content Include="ContentTemplate\js\scripts.js" />
+    <Content Include="ContentTemplate\js\scripts2.js" />
+    <Content Include="Content\nanoscroller.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
+    <Content Include="Rotativa\wkhtmltoimage.exe" />
+    <Content Include="Rotativa\wkhtmltopdf.exe" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont.eot" />
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont.ttf" />
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont.woff" />
+    <Content Include="ContentTemplate\fonts\fontawesome-webfont.woff2" />
+    <Content Include="ContentTemplate\fonts\FontAwesome.otf" />
+    <Content Include="ContentTemplate\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="ContentTemplate\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="ContentTemplate\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="ContentTemplate\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="ContentTemplate\fonts\MontserratLight.eot" />
+    <Content Include="ContentTemplate\fonts\MontserratLight.ttf" />
+    <Content Include="ContentTemplate\fonts\MontserratLight.woff" />
+    <Content Include="ContentTemplate\fonts\MontserratLight.woff2" />
+    <Content Include="ContentTemplate\fonts\themify.eot" />
+    <Content Include="ContentTemplate\fonts\themify.ttf" />
+    <Content Include="ContentTemplate\fonts\themify.woff" />
+    <Content Include="ContentTemplate\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="ContentTemplate\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="ContentTemplate\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="ContentTemplate\fonts\weathericons-regular-webfont.woff2" />
+    <Content Include="ContentTemplate\less\badge.less" />
+    <Content Include="ContentTemplate\less\booking-system.less" />
+    <Content Include="ContentTemplate\less\button.less" />
+    <Content Include="ContentTemplate\less\calendar.less" />
+    <Content Include="ContentTemplate\less\card.less" />
+    <Content Include="ContentTemplate\less\carousel.less" />
+    <Content Include="ContentTemplate\less\chart.less" />
+    <Content Include="ContentTemplate\less\chat.less" />
+    <Content Include="ContentTemplate\less\compose-email.less" />
+    <Content Include="ContentTemplate\less\data-table.less" />
+    <Content Include="ContentTemplate\less\datamap.less" />
+    <Content Include="ContentTemplate\less\favourite_menu.less" />
+    <Content Include="ContentTemplate\less\flot-chart.less" />
+    <Content Include="ContentTemplate\less\fonts.less" />
+    <Content Include="ContentTemplate\less\forms.less" />
+    <Content Include="ContentTemplate\less\global.less" />
+    <Content Include="ContentTemplate\less\gmap.less" />
+    <Content Include="ContentTemplate\less\header.less" />
+    <Content Include="ContentTemplate\less\invoice-edit.less" />
+    <Content Include="ContentTemplate\less\invoice.less" />
+    <Content Include="ContentTemplate\less\login.less" />
+    <Content Include="ContentTemplate\less\menu-upload.less" />
+    <Content Include="ContentTemplate\less\modal.less" />
+    <Content Include="ContentTemplate\less\morris-chart.less" />
+    <Content Include="ContentTemplate\less\nestable.less" />
+    <Content Include="ContentTemplate\less\order-list.less" />
+    <Content Include="ContentTemplate\less\order-progress.less" />
+    <Content Include="ContentTemplate\less\panel.less" />
+    <Content Include="ContentTemplate\less\products_1.less" />
+    <Content Include="ContentTemplate\less\products_2.less" />
+    <Content Include="ContentTemplate\less\products_3.less" />
+    <Content Include="ContentTemplate\less\profile.less" />
+    <Content Include="ContentTemplate\less\progress-bar.less" />
+    <Content Include="ContentTemplate\less\recent-comments.less" />
+    <Content Include="ContentTemplate\less\recent-message.less" />
+    <Content Include="ContentTemplate\less\scrollable.less" />
+    <Content Include="ContentTemplate\less\style.less" />
+    <Content Include="ContentTemplate\less\tab.less" />
+    <Content Include="ContentTemplate\less\table.less" />
+    <Content Include="ContentTemplate\less\timeline.less" />
+    <Content Include="ContentTemplate\less\todo-list.less" />
+    <Content Include="ContentTemplate\less\ui-element-basic.less" />
+    <Content Include="ContentTemplate\less\variable.less" />
+    <Content Include="ContentTemplate\less\vector-map.less" />
+    <Content Include="ContentTemplate\less\weather.less" />
+    <Content Include="ContentTemplate\less\widget-stat.less" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Estimation_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Planning_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Risk_Management_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Sprint_Development_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Monitoring_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Sprint_Management_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Metrics_Framework.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Configuration_Management_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Internal_Audit_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_SAM_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Agile_Methodology_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Estimation_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Planning_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Risk_Management_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Roles_and_Responsibilities_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Monitoring_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Metrics_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Internal_Audit_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Agile_Suitability_Checklist.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_PMPReview_Checklist.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Management_Plan.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Risk_Tracker.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Minutes_Of_Meeting.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Project_Workbook.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Review_And_Testing.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Sprint_Workbook.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Weekly_Status_Report.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Change_Request_Form.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_CM_AuditReport.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Metrics_Analysis_Report.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Audit_Planner_And_Tracker.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Internal_Audit_Analysis.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Internal_Audit_Checklist.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Internal_Audit_Report.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Vendor Management.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Vendor_Process_Audit_Report.xlsx" />
+    <Content Include="Content\ePALDocuments1\Quality Policy.pdf" />
+    <Content Include="Content\ePALDocuments1\secuirty.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO_9001_2015.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO 27001_2013-Standard.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO 20000-1_2011 Standard.pdf" />
+    <Content Include="Content\ePALDocuments1\CMMI® for Services, Version 1.3 .pdf" />
+    <Content Include="Content\ePALDocuments1\CMMI® for Development, Version 1.3 .pdf" />
+    <Content Include="Content\ePALDocuments1\CMMI_Ver 1.0.pptx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_CMMI_Detailed.pptx" />
+    <Content Include="Content\ePALDocuments1\Internal Quality Auditor Course.pptx" />
+    <Content Include="Content\ePALDocuments1\ISO 9001-2015.pptx" />
+    <Content Include="Content\ePALDocuments1\ISO 27001-2011.pptx" />
+    <Content Include="Content\ePALDocuments1\epathUSA_CMMI_Service Detailed.pptx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Process Policy.pdf" />
+    <Content Include="Content\ePALDocuments1\QUALITY SYSTEM MANUAL.doc" />
+    <Content Include="Content\ePALDocuments1\Information Security Management System %28ISMS%29 Manual.doc" />
+    <Content Include="Content\ePALDocuments1\PROCESS MANUAL- projects.doc" />
+    <Content Include="Content\ePALDocuments1\Process Manual-BD.doc" />
+    <Content Include="Content\ePALDocuments1\Process Manual-HR.doc" />
+    <Content Include="Content\ePALDocuments1\Process Manual-MR.doc" />
+    <Content Include="Content\ePALDocuments1\Process Manual-Networking.doc" />
+    <Content Include="Content\ePALDocuments1\Process Manual-Purchase.doc" />
+    <Content Include="Content\ePALDocuments1\Approved Supplierlist.doc" />
+    <Content Include="Content\ePALDocuments1\Material Receipt Note.doc" />
+    <Content Include="Content\ePALDocuments1\New Supplier Registration Form.doc" />
+    <Content Include="Content\ePALDocuments1\Purchase Order.doc" />
+    <Content Include="Content\ePALDocuments1\Purchase Requisition Form.doc" />
+    <Content Include="Content\ePALDocuments1\Supplier Performance Rating Form.doc" />
+    <Content Include="Content\ePALDocuments1\CONTRACT REVIEW CHECK LIST %28QFFIOSBD02%29.doc" />
+    <Content Include="Content\ePALDocuments1\CUSTOMER SATISFACTION QUESTIONNAIRE %28QFFIOSBD04%29.xls" />
+    <Content Include="Content\ePALDocuments1\PROJECT INITIATION FORM.doc" />
+    <Content Include="Content\ePALDocuments1\COMPETENCY REQUIREMENT FORM.doc" />
+    <Content Include="Content\ePALDocuments1\Antivirus_Reassesment_form.doc" />
+    <Content Include="Content\ePALDocuments1\Computer-Media Removable Disposal Form.doc" />
+    <Content Include="Content\ePALDocuments1\Facility Requisition Form.doc" />
+    <Content Include="Content\ePALDocuments1\Hiring Process Checklist.doc" />
+    <Content Include="Content\ePALDocuments1\ISMS Audit Checklist.doc" />
+    <Content Include="Content\ePALDocuments1\Separation Checklist.doc" />
+    <Content Include="Content\ePALDocuments1\ISO 27001 Controls and Objectives .pdf" />
+    <Content Include="Content\ePALDocuments1\ISO 27001_2013-Standard -Indian version - review agian.pdf" />
+    <Content Include="Content\ePALDocuments1\Information Security Management System %28ISMS%29 Manual.pdf" />
+    <Content Include="Content\ePALDocuments1\QUALITY SYSTEM MANUAL.pdf" />
+    <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Content\ePALDocuments1\PROCESS MANUAL- projects.pdf" />
+    <Content Include="Content\ePALDocuments1\Process Manual-BD.pdf" />
+    <Content Include="Content\ePALDocuments1\Process Manual-HR.pdf" />
+    <Content Include="Content\ePALDocuments1\Process Manual-MR.pdf" />
+    <Content Include="Content\ePALDocuments1\Process Manual-Networking.pdf" />
+    <Content Include="Content\ePALDocuments1\Process Manual-Purchase.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO_9001 to 20000 comparison.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO 27001.pdf" />
+    <Content Include="Content\ePALDocuments1\ISO 270012013 vs. ISO 20000-12011 matrix.pdf" />
+    <Content Include="Content\ePALDocuments1\Mapping NIST 800-53Vs ISO 27001.pdf" />
+    <Content Include="Content\ePALDocuments1\Attendance Sheet.doc" />
+    <Content Include="Content\ePALDocuments1\Check list for New Employee.doc" />
+    <Content Include="Content\ePALDocuments1\Employee Record.doc" />
+    <Content Include="Content\ePALDocuments1\Exit Interview Form.doc" />
+    <Content Include="Content\ePALDocuments1\Interview Assessment_HR Questionnaire.doc" />
+    <Content Include="Content\ePALDocuments1\Interview Assessment_Management review form.doc" />
+    <Content Include="Content\ePALDocuments1\Interview Assessment_Tech Review.xls" />
+    <Content Include="Content\ePALDocuments1\Performance Appraisal.xls" />
+    <Content Include="Content\ePALDocuments1\Skill Set Review Matrix.xls" />
+    <Content Include="Content\ePALDocuments1\Training Calender.doc" />
+    <Content Include="Content\ePALDocuments1\Training Effectiveness Form.doc" />
+    <Content Include="Content\ePALDocuments1\Training Identification Form.doc" />
+    <Content Include="Content\ePALDocuments1\Training programme for new joinees.doc" />
+    <Content Include="Content\ePALDocuments1\Master List Of Documents-External.doc" />
+    <Content Include="Content\ePALDocuments1\Master List Of Documents-Internal.doc" />
+    <Content Include="Content\ePALDocuments1\Master List Of Records.doc" />
+    <Content Include="Content\ePALDocuments1\AUDIT NON-CONFORMITY REPORT.doc" />
+    <Content Include="Content\ePALDocuments1\CORRECTIVE AND PREVENTIVE ACTION REPORT.doc" />
+    <Content Include="Content\ePALDocuments1\DOCUMENT CHANGE REQUEST.doc" />
+    <Content Include="Content\ePALDocuments1\DOCUMENT ISSUE REGISTER .doc" />
+    <Content Include="Content\ePALDocuments1\FILE LABEL.doc" />
+    <Content Include="Content\ePALDocuments1\FILE LIST REGISTER.doc" />
+    <Content Include="Content\ePALDocuments1\INTERNAL AUDIT CHECK LIST.doc" />
+    <Content Include="Content\ePALDocuments1\INTERNAL AUDIT PLAN.doc" />
+    <Content Include="Content\ePALDocuments1\INTERNAL AUDIT SCHEDULE.doc" />
+    <Content Include="Content\ePALDocuments1\INTERNAL AUDIT SUMMARY REPORT.doc" />
+    <Content Include="Content\ePALDocuments1\MANAGEMENT REVIEW MEETING MINUTES.doc" />
+    <Content Include="Content\ePALDocuments1\LIST OF HARDWARE.doc" />
+    <Content Include="Content\ePALDocuments1\LIST OF SOFTWARE.doc" />
+    <Content Include="Content\ePALDocuments1\BACKUP REGISTER.doc" />
+    <Content Include="Content\ePALDocuments1\SERVICE CALLREGISTER.doc" />
+    <Content Include="Content\ePALDocuments1\Requirements Traceability Matrix.xls" />
+    <Content Include="Content\ePALDocuments1\Project Closure Check List.doc" />
+    <Content Include="Content\ePALDocuments1\Project Closure Report.doc" />
+    <Content Include="Content\ePALDocuments1\Bug Report.xls" />
+    <Content Include="Content\ePALDocuments1\Code Review Checklist.doc" />
+    <Content Include="Content\ePALDocuments1\Design Document.doc" />
+    <Content Include="Content\ePALDocuments1\Design Review Template.doc" />
+    <Content Include="Content\ePALDocuments1\Meeting_MINUTES.doc" />
+    <Content Include="Content\ePALDocuments1\SRS Review Template.doc" />
+    <Content Include="Content\ePALDocuments1\Test Case Document.xls" />
+    <Content Include="Content\ePALDocuments1\Test Case Review Template.doc" />
+    <Content Include="Content\ePALDocuments1\Test Plan.doc" />
+    <Content Include="Content\ePALDocuments1\Test Report.xls" />
+    <Content Include="Content\ePALDocuments1\Time _ Task Sheet.xls" />
+    <Content Include="Content\ePALDocuments1\Use Case.doc" />
+    <Content Include="Content\ePALDocuments1\Configuration Management Plan.xls" />
+    <Content Include="Content\ePALDocuments1\Project Kick off Meeting Report.doc" />
+    <Content Include="Content\ePALDocuments1\Project Management Plan.doc" />
+    <Content Include="Content\ePALDocuments1\Project Schedule.xls" />
+    <Content Include="Content\ePALDocuments1\Risk Prioritization Form.xls" />
+    <Content Include="Content\ePALDocuments1\System Requirement Specification.doc" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Metrics_Framework %28Manual%29.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Metrics_Framework %28Manual%29.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Management_Review_Meeting.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Root_Cause_Analysis.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_DAR_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_OrganizationalProcessManagement %28Procedure%29.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Organizational_Training_Procedure.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_DAR_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Tailoring_Guidelines.pdf" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_DAR_Template.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Tailoring_Request_Form.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_OPG_Plan_Template.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_PIP_Form.xls" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_PIPLoggerandTracker_Template.xls" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_QMSRelease_Template.xls" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_TrainingFeedback_Form%28OT%29.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_TrainingPlan_Template%28OT%29.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_TrainingTracker_Template %28OT%29.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA__Release Note.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Design_Template.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Review_ Report.xlsx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_SRS_Template.docx" />
+    <Content Include="Content\ePALDocuments1\ePathUSA_Test_Report.xlsx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <None Include="Scripts\jquery-1.12.4.intellisense.js" />
+    <Content Include="Scripts\jquery-1.12.4.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.js" />
+    <Content Include="Scripts\jquery-1.12.4.min.map" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.nanoscroller.js" />
+    <Content Include="Scripts\jquery.nanoscroller.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ResetPassword.cshtml" />
+    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Views\Account\SendCode.cshtml" />
+    <Content Include="Views\Account\VerifyCode.cshtml" />
+    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Views\Manage\SetPassword.cshtml" />
+    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Inventory\Create.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\Inventory\Index.cshtml" />
+    <Content Include="Views\Inventory\Edit.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\TimeSheet\MyTimeSheetCreate.cshtml" />
+    <Content Include="Views\TimeSheet\MyTimeSheetsList.cshtml" />
+    <Content Include="Views\TimeSheet\_MyTimeSheetsListView.cshtml" />
+    <Content Include="Views\TimeSheet\MyTimeSheetEdit.cshtml" />
+    <Content Include="Views\TimeSheet\EmployeeTimeSheetDetails.cshtml" />
+    <Content Include="Views\Recruitment\Create.cshtml" />
+    <Content Include="Views\TimeSheet\_EmployeePendingTimeSheetsList.cshtml" />
+    <Content Include="Views\TimeSheet\EmployeeTimeSheetsList.cshtml" />
+    <Content Include="Views\Inventory\ManagerEdit.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\TimeSheet\MyTimeSheetDetails.cshtml" />
+    <Content Include="Views\TimeSheet\_EmployeeRemainingTimeSheetsList.cshtml" />
+    <Content Include="Views\Recruitment\Index.cshtml" />
+    <Content Include="Views\Recruitment\Edit.cshtml" />
+    <Content Include="Views\TimeSheet\EmployeeTimeSheetEdit.cshtml" />
+    <Content Include="Views\LOA\MyLOAList.cshtml" />
+    <Content Include="Views\Account\EmailNotConfirmed.cshtml" />
+    <Content Include="Views\Recruitment\test.cshtml" />
+    <Content Include="Views\LOA\MyLOACreate.cshtml" />
+    <Content Include="Views\LOA\MyLOAEdit.cshtml" />
+    <Content Include="Views\MyProfile\Index.cshtml" />
+    <Content Include="Views\LOA\_EmployeeRemainingLOAList.cshtml" />
+    <Content Include="Views\LOA\_EmployeePendingLOAList.cshtml" />
+    <Content Include="Views\LOA\EmployeeLOAList.cshtml" />
+    <Content Include="Views\LOA\EmployeeLOADetails.cshtml" />
+    <Content Include="Views\LOA\EmployeeLOAEdit.cshtml" />
+    <Content Include="Views\LOA\MyLOADetails.cshtml" />
+    <Content Include="Views\LOA\_DownloadLOAView.cshtml" />
+    <Content Include="Views\Expense\MyExpenseList.cshtml" />
+    <Content Include="Views\Expense\MyExpenseCreate.cshtml" />
+    <Content Include="Views\Support\MySupportList.cshtml" />
+    <Content Include="Views\Support\MySupportCreate.cshtml" />
+    <Content Include="Views\Support\MySupportEdit.cshtml" />
+    <Content Include="Views\Support\SupportManagerList.cshtml" />
+    <Content Include="Views\Support\SupportEngineerEdit.cshtml" />
+    <Content Include="Views\Support\SupportManagerEdit.cshtml" />
+    <Content Include="Views\Support\SupportEngineerList.cshtml" />
+    <Content Include="Views\Support\MySupportDetails.cshtml" />
+    <Content Include="Views\Support\SupportEngineerDetails.cshtml" />
+    <Content Include="Views\Support\SupportManagerDetails.cshtml" />
+    <Content Include="Views\Support\SupportAdminList.cshtml" />
+    <Content Include="Views\Support\SupportAdminEdit.cshtml" />
+    <Content Include="Views\Expense\MyExpenseEdit.cshtml" />
+    <Content Include="Views\Expense\_ExpenseSummaryListView.cshtml" />
+    <Content Include="Views\Expense\MyExpenseDetails.cshtml" />
+    <Content Include="Views\Expense\_ExpenseSummaryListViewReadOnly.cshtml" />
+    <Content Include="Views\Expense\EmployeeExpenseSheetList.cshtml" />
+    <Content Include="Views\Expense\_EmployeeRemainingExpensesList.cshtml" />
+    <Content Include="Views\Expense\_EmployeePendingExpensesList.cshtml" />
+    <Content Include="Views\Expense\EmployeeExpenseDetails.cshtml" />
+    <Content Include="Views\Expense\EmployeeExpenseEdit.cshtml" />
+    <Content Include="Views\Expense\_EditExpenseSummaryView.cshtml" />
+    <Content Include="Views\EPAL\Index.cshtml" />
+    <Content Include="Views\User\_EmployeeRolesList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AllUploads\ClientDocuments\" />
+    <Folder Include="AllUploads\SupportAttachments\" />
+    <Folder Include="App_Data\AllFiles\RecruitmentFiles\" />
+    <Folder Include="App_Data\ePalDocuments\" />
+    <Folder Include="App_Data\Images\" />
+    <Folder Include="Views\Dashboard\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\QuickSearchBusiness\QuickSearchBusiness.csproj">
+      <Project>{8a75d98a-15f5-44fe-9a07-982b204725dc}</Project>
+      <Name>QuickSearchBusiness</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\QuickSearchData\QuickSearchData.csproj">
+      <Project>{CC6D8453-07CF-4D61-8A5A-B402DDA92C9F}</Project>
+      <Name>QuickSearchData</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>53534</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:53534/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.1.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

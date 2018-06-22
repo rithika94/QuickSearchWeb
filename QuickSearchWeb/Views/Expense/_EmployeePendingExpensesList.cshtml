@@ -1,0 +1,168 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.ExpenseListViewModel>
+
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card alert">
+            <div class="card-header">
+                <h4>Approval Pending Expense Sheets</h4>
+                <hr />
+            </div>
+            <div class="card-body">
+
+                @*<div class="bootstrap-data-table-panel table-responsive2">
+                    <table id="row-select" class="display table table-borderd table-hover table-responsive row-select">*@
+
+                <div class="bootstrap-data-table-panel table-responsive2">
+                    <table id=" bootstrap-data-table" class="display table table-borderd table-striped table-responsive row-select">
+
+                        <thead>
+                            <tr>
+                                <th>
+                                    Last Modified
+                                </th>
+                                <th>
+                                    Expense Sheet Id
+                                </th>
+                                <th>
+                                    Week
+                                </th>
+                                <th>
+                                    Total Expenses
+                                </th>
+                                @*<th>
+                                        Status
+                                    </th>*@
+                                <th>
+                                    Employee Name
+                                </th>
+
+                                <th>
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (!(Model == null))
+                            {
+
+                                foreach (var item in Model)
+                                {
+                                    if (!item.IsDeleted && item.IsActive)
+                                    {
+                                        <tr>
+                                            <td>@item.ModifiedDate</td>
+                                            <td>@item.ExpenseCode</td>
+
+                                            <td>@Html.DisplayFor(modelItem => item.StartDate) -  @Html.DisplayFor(modelItem => item.EndDate) </td>
+
+                                            <td>
+                                                @string.Format("{0:c}", item.Total)
+                                            </td>
+                                            @*<td>
+                                                                                    @{
+                                                            var status = item.LookupCodeMaster.LookupCodeName;
+
+                                                            if (status == "Approved")
+                                                            {
+                                                                            <span class="badge badge-success">Approved</span>
+
+
+                                                }
+                                                else if (status == "Rejected")
+                                                {
+                                                                            <span class="badge badge-danger">Rejected</span>
+
+
+                                                }
+                                                else if (status == "Pending")
+                                                {
+                                                                            <span class="badge badge-warning">Pending</span>
+
+
+                                                }
+                                                else if (status == "Saved")
+                                                {
+                                                                            <span class="badge badge-default">Saved</span>
+
+
+                                                }
+
+                                                                                    }
+                                                                                </td>*@
+
+                                            <td>@item.AspNetUser.Firstname&nbsp;@item.AspNetUser.LastName  </td>
+
+                                            <td>
+
+
+                                                @{
+                                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeAdminExpenseDetails", "Expense" , new { id = item.ExpenseId})'"><i class="ti-eye"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeRepoManExpenseDetails", "Expense" , new { id = item.ExpenseId})'"><i class="ti-eye"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeManagerExpenseDetails", "Expense" , new { id = item.ExpenseId})'"><i class="ti-eye"></i></button>
+
+                                                    }
+                                                }
+
+                                                @if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                {
+                                                    <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("EmployeeAdminExpenseEdit", "Expense" , new { id = item.ExpenseId})'"><i class="ti-pencil-alt"></i></button>
+
+                                                }
+
+                                                @{
+                                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeAdminExpenseDownload", "Expense" , new { id = item.ExpenseId})'"><i class="ti-download"></i></button>
+
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeRepoManExpenseDownload", "Expense" , new { id = item.ExpenseId})'"><i class="ti-download"></i></button>
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                                    {
+                                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeManagerExpenseDownload", "Expense" , new { id = item.ExpenseId})'"><i class="ti-download"></i></button>
+
+                                                    }
+                                                }
+
+
+
+
+                                            </td>
+
+
+                                        </tr>
+                                                            }
+                                                        }
+                                                    }
+
+
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div></div>
+            </div>
+        </div>
+    </div>
+</div>

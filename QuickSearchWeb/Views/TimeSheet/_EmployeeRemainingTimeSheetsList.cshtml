@@ -1,0 +1,165 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.TimeSheetListViewModel>
+
+<script src="~/ContentTemplate/js/scripts2.js"></script>
+
+<div class="bootstrap-data-table-panel table-responsive2">
+    <table id ="row-select1" class="display table table-borderd table-striped table-responsive">
+
+        <thead>
+            <tr>
+                <th>
+                    Last Modified
+                </th>
+                <th>
+                    TimeSheet Id
+                </th>
+                <th>
+                    Week
+                </th>
+                <th>
+                    Total Hours
+                </th>
+                <th>
+                    Status
+                </th>
+                <th>
+                    Employee
+                </th>
+                <th>
+                    Reporting Manager
+                </th>
+                <th>
+                    Approved By
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!(Model == null))
+            {
+
+                foreach (var item in Model)
+                {
+                    if (!item.IsDeleted && item.IsActive)
+                    {
+                        <tr>
+                            <td>@item.ModifiedDate</td>
+                            <td>@item.TimeSheetCode</td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.StartDate) -  @Html.DisplayFor(modelItem => item.EndDate)
+                            </td>
+                            <td>
+                                @item.TotalHours
+                            </td>
+                            <td>
+                                @{
+                                    var status = item.LookupCodeMaster7.LookupCodeName;
+
+                                    if (status == "Approved")
+                                    {
+                                        <span class="badge badge-success">Approved</span>
+
+
+                                    }
+                                    else if (status == "Rejected")
+                                    {
+                                        <span class="badge badge-danger">Rejected</span>
+
+
+                                    }
+                                    
+
+                                }
+                            </td>
+                            <td>@item.AspNetUser.Firstname @item.AspNetUser.LastName</td>
+
+                            <td>
+                                @if (item.AspNetUser.AspNetUser1 != null)
+                                {
+                                    @item.AspNetUser.AspNetUser1.Firstname @:&nbsp; @item.AspNetUser.AspNetUser1.LastName
+                                }
+                            </td>
+
+                            <td>
+                                @if (item.ApprovedBy != null)
+                                {
+                                    @item.ApprovedBy
+
+                                }
+                            </td>
+
+
+                            <td>
+
+
+                                @{
+                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                    {
+                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeAdminTimeSheetDetails", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-eye"></i></button>
+
+
+
+                                    }
+                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                    {
+                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeRepoManTimeSheetDetails", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-eye"></i></button>
+
+
+                                    }
+                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                    {
+                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("EmployeeManagerTimeSheetDetails", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-eye"></i></button>
+
+
+                                    }
+                                }
+
+                                
+                                @if (ViewBag.TSRole == "TimeSheetAdmin")
+                                {
+                                    <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("EmployeeAdminTimeSheetEdit", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-pencil-alt"></i></button>
+                                    
+                                }
+
+                                @{
+                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                    {
+                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeAdminTimeSheetDownload", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-download"></i></button>
+
+                                    }
+                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                    {
+                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeRepoManTimeSheetDownload", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-download"></i></button>
+
+                                    }
+                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                    {
+                                        <button type="button" class="btn btn-warning btn-flat m-l-5" title="Download" onclick="location.href='@Url.Action("EmployeeManagerTimeSheetDownload", "TimeSheet" , new { id = item.TimeSheetID})'"><i class="ti-download"></i></button>
+
+                                    }
+                                }
+
+
+                                
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+            }
+
+
+
+        </tbody>
+
+    </table>
+
+</div>
+
+
+
+
+

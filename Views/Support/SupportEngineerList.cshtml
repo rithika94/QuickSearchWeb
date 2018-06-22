@@ -1,0 +1,184 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.SupportListViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Service Requests(Engineer)</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li class="active">Service Requests(Engineer)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card alert">
+
+                            <div class="bootstrap-data-table-panel table-responsive2">
+                                <table class="display table table-borderd table-hover table-responsive row-select">
+
+                                    <thead>
+                                        <tr>
+                                            <th>Modified Date</th>
+                                            <th>Support Id</th>
+                                            <th>Summary</th>
+                                            <th>Priority</th>
+                                            <th>Type</th>
+                                            <th>Status</th>
+                                            <th>Reported by</th>
+                                            <th>Submitted On</th>
+                                            <th>Last Modified</th>
+                                            <th>Is Fixed</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+
+
+                                            <tr @*onclick="location.href ='  @(Url.Action("MySupportEdit", "Support", new { id = @item.SupportId })) '"*@>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SupportCode)
+                                                </td>
+                                                <td style=" white-space: nowrap; overflow: hidden; text-overflow:ellipsis; max-width:15vw;">
+                                                    @Html.DisplayFor(modelItem => item.Summary)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LookupCodeMaster.LookupCodeName)
+                                                    @*@string.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))*@
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.LookupCodeMaster2.LookupCodeName)
+                                                </td>
+                                                <td>
+                                                    @{
+                                                        var status = item.LookupCodeMaster1.LookupCodeName;
+
+                                                        if (status == "Closed")
+                                                        {
+                                                            <span class="badge badge-success">Closed</span>
+
+
+                                                        }
+                                                        else if (status == "Open")
+                                                        {
+                                                            <span class="badge badge-danger">Open</span>
+
+
+                                                        }
+                                                        else if (status == "InProgress")
+                                                        {
+                                                            <span class="badge badge-warning">InProgress</span>
+
+
+                                                        }
+                                                        else if (status == "Saved")
+                                                        {
+                                                            <span class="badge badge-default">Saved</span>
+
+
+                                                        }
+                                                        else if (status == "Done")
+                                                        {
+                                                            <span class="badge badge-pink">Done</span>
+
+
+                                                        }
+
+                                                        else if (status == "Assigned")
+                                                        {
+                                                            <span class="badge badge-info">Assigned</span>
+
+
+                                                        }
+
+                                                    }
+                                                </td>
+
+                                                <td>
+                                                    @item.AspNetUser.Firstname @item.AspNetUser.LastName
+
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.SubmittedDate)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ModifiedDate)
+                                                </td>
+                                                <td class="text-center">
+                                                    @if (item.IsFixed == false)
+                                                    {
+                                                        <span class="fa fa-exclamation-triangle fa-lg" style="color:red;"></span>
+                                                    }
+                                                    else if (item.IsFixed == true)
+                                                    {
+                                                        <span class="fa fa-check fa-lg" style="color:green;"></span>
+                                                    }
+                                                </td>
+                                                <td>
+
+                                                    @if (item.LookupCodeMaster1.LookupCodeName == "Assigned" || item.LookupCodeMaster1.LookupCodeName == "InProgress" || item.LookupCodeMaster1.LookupCodeName == "Done" || item.LookupCodeMaster1.LookupCodeName == "Open")
+                                                    {
+                                                        <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("SupportEngineerEdit", "Support" , new { id = item.SupportId})'"><i class="ti-pencil-alt"></i></button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button type="button" class="btn btn-default btn-flat m-l-5" title="View" onclick="location.href='@Url.Action("SupportEngineerDetails", "Support" , new { id = item.SupportId})'"><i class="ti-eye"></i></button>
+                                                    }
+                                                </td>
+
+                                            </tr>
+
+                                        }
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

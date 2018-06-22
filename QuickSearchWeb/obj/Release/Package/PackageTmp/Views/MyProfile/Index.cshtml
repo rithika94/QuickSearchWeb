@@ -1,0 +1,375 @@
+﻿
+
+
+@model QuickSearchWeb.Models.MyProfileViewModel
+
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@section Scripts
+{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    @*<script src="//code.jquery.com/jquery-1.10.2.js"></script>*@
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            //debugger;
+            $("#ChangePassword").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#NewPassword").removeAttr("disabled");
+                    $("#NewPassword").focus();
+                } else {
+                    $("#NewPassword").attr("disabled", "disabled");
+                }
+            });
+            AssignTextBox();
+            NotAssignedCheckBox();
+        };
+
+
+      function NotAssignedCheckBox() {
+            //debugger;
+            $("#NotAssigned").click(function () {
+                if ($(this).is(":checked")) {
+                    $("#ReportingManager").attr("readonly", "true");
+                    $('#ReportingManager').val('');
+                    $('#ReportingManagerId').val('');
+                } else {
+                    $("#ReportingManager").removeAttr("readonly");
+                    $("#ReportingManager").focus();
+
+                }
+            });
+
+        }
+
+
+
+    function AssignTextBox() {
+        //debugger;
+        $("#ReportingManager").autocomplete({
+
+            source: function (request, response) {
+                $.ajax({
+
+                    url: '@Url.Action("GetSearchValue","User")',
+                    dataType: "json",
+                    data: { search: $("#ReportingManager").val() },
+
+                    success: function (data) {
+                        //debugger;
+                        response($.map(data, function (item) {
+                           // $("#ReportingManager").val(item.Value);
+                            return { id: item.Value, value: item.Name }
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        //debugger;
+                        alert("Something went wrong");
+                    }
+                });
+            },
+            select: function (event, ui) {
+                //debugger;
+                $("#ReportingManagerId").val(ui.item.id);
+               // alert(ui.item ? ("You picked '" + ui.item.label + "' with an ID of " + ui.item.id)
+                //    : "Nothing selected, input was " + this.value);
+            }
+
+        });
+    }
+    </script>
+}
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            @*<input type="button" value="Back to employees" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("Index", "User")'" />*@
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong> My Profile</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            @*<ol class="breadcrumb text-right">
+                                <li><a onclick="location.href='@Url.Action("Index", "User")'">Inventory List</a></li>
+                                <li class="active">Edit Employee Details</li>
+                            </ol>*@
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+
+
+
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-header">
+                                <h4> My Profile</h4>
+                                <hr />
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm(FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <form asp-action="Create">
+                                            <div class="row">
+                                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                                <div class="col-md-6">
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.EmployeeCode)
+                                                        @Html.TextBoxFor(m => m.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(m => m.EmployeeCode, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.FirstName)
+                                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.LastName)
+                                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.UserName)
+                                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                                        <span class="text-danger">@ViewBag.UniqueUserName</span>
+                                                    </div>
+
+
+                                                    @*<div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.NewPassword) @Html.CheckBoxFor(m => m.ChangePassword, new { @id = "ChangePassword" })
+
+                                                        @Html.TextBoxFor(m => m.NewPassword, new { @class = "form-control", @id = "NewPassword", @disabled = "disabled" })
+                                                       
+
+                                                        @Html.ValidationMessageFor(m => m.NewPassword, "", new { @class = "text-danger" })
+
+                                                    </div>*@
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.Email)
+                                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "true" })
+                                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                                        <span class="text-danger">@ViewBag.UniqueEmail</span>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.PhoneNumber)
+                                                        @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.LookupGender)
+                                                        @Html.DropDownListFor(model => model.LookupGender, new SelectList(Model.GenderList, "Id", "Name"), "Select your gender", new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(m => m.LookupGender, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.JoiningDate)
+                                                        @Html.EditorFor(m => m.JoiningDate, new { htmlAttributes = new { @class = "form-control", @readonly = "true" } })
+                                                        @Html.ValidationMessageFor(m => m.JoiningDate, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                    <div class="form-group col-md-6">
+                                                        @*@Html.EditorFor(m => m.IsActive)*@
+                                                        @Html.CheckBoxFor(m => m.IsActive, new { onclick = "return false" })
+                                                        @Html.LabelFor(m => m.IsActive)
+                                                        @Html.ValidationMessageFor(m => m.IsActive, "", new { @class = "text-danger"})
+                                                    </div>
+
+                                                    
+
+                                                    <div class="form-group col-md-6">
+                                                        @Html.LabelFor(m => m.ReportingManagerUsername)
+                                                        @Html.TextBoxFor(m => m.ReportingManagerUsername, new { @class = "form-control", @id = "ReportingManager", @placeholder = "Enter First Name to assign", @readonly = "true" })
+                                                        @*<input type="text" value="@Model.NewPassword" />*@
+                                                        @Html.ValidationMessageFor(m => m.ReportingManagerUsername, "", new { @class = "text-danger" })
+                                                       
+
+                                                    </div>
+                                                    @Html.HiddenFor(m => m.ReportingManagerId, new { @id = "ReportingManagerId" })
+
+                                                    <div class="form-group">
+                                                        @Html.HiddenFor(m => m.Id)
+                                                    </div>
+
+                                                    @*<div class="form-group">
+                                                            @Html.HiddenFor(m => m.Password)
+                                                        </div>*@
+                                                </div>
+
+                                                @*<div class="col-md-6">
+                                                    <div class="card alert">
+                                                        <div class="card-header">
+                                                            <h4>Roles</h4>
+                                                            <hr />
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="basic-form">
+
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.HrRole)
+                                                                    <div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.HrRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.HrRole, "Manager")Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.HrRole, "None")None
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.HrRole, "", new { @class = "text-danger" })
+
+                                                                </div>
+                                                                <hr />
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.InventoryRole)
+                                                                    <div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.InventoryRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.InventoryRole, "Manager")Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.InventoryRole, "None")None
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.InventoryRole, "", new { @class = "text-danger" })
+                                                                </div>
+                                                                <hr />
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.RecruitmentRole)
+                                                                    <div >
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.RecruitmentRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.RecruitmentRole, "User")Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.RecruitmentRole, "None")None
+                                                                        </div>
+
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.RecruitmentRole, "", new { @class = "text-danger" })
+                                                                </div>
+                                                                <hr />
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.TimeSheetRole)
+                                                                    <div >
+                                                                        <div class="col-md-2">
+                                                                            @Html.RadioButtonFor(m => m.TimeSheetRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            @Html.RadioButtonFor(m => m.TimeSheetRole, "Manager")Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.TimeSheetRole, "ReportingManager")Reporting Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.TimeSheetRole, "User")User
+                                                                        </div>
+                                                                        <div class="col-md-2">
+                                                                            @Html.RadioButtonFor(m => m.TimeSheetRole, "None")None
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.TimeSheetRole, "", new { @class = "text-danger" })
+                                                                </div>
+                                                                <hr />
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.ContractRole)
+                                                                    <div >
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.ContractRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.ContractRole, "Manager")Manager
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.ContractRole, "None")None
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.ContractRole, "", new { @class = "text-danger" })
+                                                                </div>
+                                                                <hr />
+                                                                <div class="form-group">
+                                                                    @Html.LabelFor(m => m.EmployeeRole)
+                                                                    <div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.EmployeeRole, "Admin")Admin
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            @Html.RadioButtonFor(m => m.EmployeeRole, "None")None
+                                                                        </div>
+                                                                    </div>
+                                                                    @Html.ValidationMessageFor(m => m.EmployeeRole, "", new { @class = "text-danger" })
+                                                                </div>
+
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>*@<!-- /# column -->
+
+
+
+                                                <div class="form-group col-md-12">
+                                                    <input type="button" value="Change Password" class="btn btn-flat btn-warning m-b-10 m-l-5" onclick="location.href='@Url.Action("ChangePassword", "Manage")'" />
+                                                    <input type="submit" value="Update" class="pull-right btn btn-flat btn-info m-b-10 m-l-5" />
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+
+            </div>
+        </div>
+    </div>
+</div>
+
+

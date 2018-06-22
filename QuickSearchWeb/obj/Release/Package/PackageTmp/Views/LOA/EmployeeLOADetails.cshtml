@@ -1,0 +1,391 @@
+﻿@model QuickSearchWeb.Models.LoaViewModel
+
+@{
+    ViewBag.Title = "Edit LOA";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script>
+
+        window.onload = function () {
+            //debugger;
+
+            CheckTimeOfDay();
+            CheckTypeOfLeave();
+        };
+
+
+        function CheckTimeOfDay() {
+            //debugger;
+            if ($('input[name=LookupTimeOfDay]:checked').val() == @Model.LookupOtherTimeOfDay) {
+                $('#OtherDayTime').show();
+            } else {
+                $('#OtherDayTime').hide();
+            }
+
+        }
+
+
+        function CheckTypeOfLeave() {
+            //debugger;
+            if ($('#LookupTypeOfLeave').val() == @Model.LookupOtherTypeOfLeave) {
+                $('#OtherLeaveType').show();
+            } else {
+                $('#OtherLeaveType').hide();
+            }
+
+        }
+
+        function rejectComment() {
+            //debugger;
+            var comments = document.getElementById("comments");
+            if (comments.value == "") {
+                document.getElementById("error").innerHTML = "Comments are required";
+                $("#btnApprove").prop('disabled', false);
+                $("#btnReject").prop('disabled', false);
+                //comments.setCustomValidity("Please Enter Comments");
+            } else {
+                document.getElementById("error").innerHTML = "";
+                // comments.setCustomValidity(""); // be sure to leave this empty!
+                //alert("Correct!");
+
+                $("#reject").modal("hide");
+                $('.modal-backdrop').remove();
+                $(".loader").show();
+                var formdata = $("#rejectForm").serialize();
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    url: "/LOA/Reject",
+                    data: formdata,
+                    success: function () {
+                        debugger;
+
+                        //debugger;
+                        $(".loader").hide();
+                        window.location.href = "/LOA/EmployeeRepoManLOAList";
+                        //debugger;
+
+                    }
+
+
+
+                })
+
+            }
+        }
+
+        function ApproveButton() {
+            debugger;
+            $("#btnApprove").prop('disabled', true);
+            $("#btnReject").prop('disabled', true);
+
+        }
+
+        function RejectButton() {
+            debugger;
+            $("#btnApprove").prop('disabled', true);
+            $("#btnReject").prop('disabled', true);
+
+        }
+
+
+
+
+    </script>
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            @{
+                                if (ViewBag.TSRole == "TimeSheetAdmin")
+                                {
+
+                                    <input type="button" value="Back to LOA's" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeAdminLOAList", "LOA")'" />
+
+
+                                }
+                                else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                {
+                                    <input type="button" value="Back to LOA's" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeRepoManLOAList", "LOA")'" />
+
+                                }
+                                else if (ViewBag.TSRole == "TimeSheetManager")
+                                {
+                                    <input type="button" value="Back to LOA's" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("EmployeeManagerLOAList", "LOA")'" />
+
+                                }
+                                else
+                                {
+                                    <input type="button" value="Back to LOA's" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("MyLOAList", "LOA")'" />
+
+                                }
+
+                            }
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Employee LOA Details @ViewBag.RoleName</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a>Employee LOAs</a></li>
+                                <li class="active">Employee LOA Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-body">
+
+                                <div class="form-horizontal">
+                                    <div class="row">
+
+
+                                        @Html.HiddenFor(m => m.UserId)
+
+                                        @Html.HiddenFor(m => m.LoaId)
+
+
+                                        @Html.HiddenFor(m => m.AspNetUser.Firstname)
+
+                                        @Html.HiddenFor(m => m.AspNetUser.LastName)
+
+
+
+                                        <div class="row">
+                                            <div class=" form-group col-md-2">
+                                                @Html.LabelFor(m => m.LoaCode)
+                                                @Html.TextBoxFor(m => m.LoaCode, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+                                            <div class=" form-group col-md-2">
+                                                @Html.LabelFor(m => m.AspNetUser.EmployeeCode)
+                                                @Html.TextBoxFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+                                            <div class=" form-group col-md-2">
+                                                @Html.LabelFor(m => m.LookupCodeMaster2)
+                                                @Html.TextBoxFor(m => m.LookupCodeMaster2.LookupCodeName, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+                                            <div class=" col-md-3">
+                                                <label>Employee Name</label>
+
+                                                <input class="form-control"
+                                                       id="FullName"
+                                                       readonly="readonly"
+                                                       type="text"
+                                                       value="@Model.AspNetUser.Firstname @Model.AspNetUser.LastName" />
+
+                                            </div>
+                                            <div class=" form-group col-md-3">
+                                                @Html.LabelFor(m => m.ReportingManager)
+                                                @Html.TextBoxFor(m => m.ReportingManager, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-3">
+                                                @Html.LabelFor(m => m.StartDate)
+                                                @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = true })
+
+                                            </div>
+
+
+                                            <div class="form-group col-md-3">
+                                                @Html.LabelFor(m => m.EndDate)
+                                                @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = true })
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LookupTimeOfDay)
+
+                                                <div>
+                                                    @for (int i = 0; i < Model.TimeOfDayList.Count; i++)
+                                                    {
+                                                        <div class="col-md-3">
+                                                            @Html.RadioButtonFor(m => m.LookupTimeOfDay, Model.TimeOfDayList[i].Id, new { @disabled = true }) @Model.TimeOfDayList[i].Name
+                                                        </div>
+
+                                                    }
+                                                </div>
+
+
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="OtherDayTime">
+
+                                                @Html.LabelFor(m => m.OtherTimeOfDay)
+                                                @Html.TextBoxFor(m => m.OtherTimeOfDay, new { @class = "form-control", @readonly = true })
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LookupTypeOfLeave)
+                                                @Html.DropDownListFor(model => model.LookupTypeOfLeave, new SelectList(Model.TypeOfLeaveList, "Id", "Name"), "Select Leave Type", new { @class = "form-control", @disabled = true })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="OtherLeaveType">
+
+                                                @Html.LabelFor(m => m.OtherTypeOfLeave)
+                                                @Html.TextBoxFor(m => m.OtherTypeOfLeave, new { @class = "form-control", @readonly = true })
+
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                @Html.LabelFor(m => m.ReasonForLeave)
+                                                @Html.TextAreaFor(m => m.ReasonForLeave, new { @class = "form-control", @rows = 6, @readonly = true })
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class=" col-md-12">
+
+                                                @if (ViewBag.TSRole == "TimeSheetReportingManager" && Model.LookupCodeMaster2.LookupCodeName != "Approved" && Model.LookupCodeMaster2.LookupCodeName != "Rejected")
+                                                {
+
+
+                                                    <button type="button" value="Reject" class=" btn btn-flat btn-warning m-b-10 m-l-5" data-toggle="modal" data-target="#reject" id="Save"> Reject</button>
+
+                                                    <button type="button" value="Approve" class=" btn btn-flat btn-success m-b-10 m-l-5" data-toggle="modal" data-target="#approve" id="Save">Approve </button>
+
+                                                }
+
+
+                                                @{
+                                                    if (ViewBag.TSRole == "TimeSheetAdmin")
+                                                    {
+                                                        <button type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="window.open('@Url.Action("EmployeeAdminLOADownload", "LOA", new { id = Model.LoaId , targe="_blank"})')">Download </button>
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetReportingManager")
+                                                    {
+                                                        <button type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="window.open('@Url.Action("EmployeeRepoManLOADownload", "LOA", new { id = Model.LoaId , targe="_blank"})')">Download </button>
+
+                                                    }
+                                                    else if (ViewBag.TSRole == "TimeSheetManager")
+                                                    {
+                                                        <button type="button" value="Download" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="window.open('@Url.Action("EmployeeManagerLOADownload", "LOA", new { id = Model.LoaId , targe="_blank"})')">Download </button>
+
+                                                    }
+                                                }
+                                            </div>
+                                            <div class=" col-md-12" style="border: 1px solid; padding:10px">
+                                                @Html.LabelFor(m => m.Comments)
+                                                <br />
+                                                <span>@Html.Raw(Model.Comments)</span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="approve" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Approve Time Sheet</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                @*<div class="alert alert-warning">*@
+                                <span class="fa fa-exclamation-triangle"></span> Are you sure you want to Approve this LOA?
+                                @*</div>*@
+
+                            </div>
+                            <div class="modal-footer ">
+
+                                <button type="button" onclick="ApproveButton();location.href= '@Url.Action("Approve", "LOA", new {id = Model.LoaId})'" name="submit" class="btn btn-success" id="btnApprove"><span class="fa fa-check"></span> Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+                <div class="modal fade" id="reject" tabindex="-1" role="dialog" aria-labelledby="reject" aria-hidden="true">
+                    <div class="modal-dialog modal-sm">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                <h4 class="modal-title custom_align" id="Heading">Reject LOA</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="alert">
+                                    <span class="fa fa-exclamation-triangle"></span> Are you sure you want to Reject this LOA? If Yes,  Please enter the reason for rejection.
+                                </div>
+
+
+                                <form id="rejectForm">
+                                    <div class=" row">
+                                        <div class="form-group col-md-6">
+                                            @Html.HiddenFor(m => m.LoaId)
+                                            @Html.LabelFor(m => m.TempComments)
+                                            @Html.TextAreaFor(m => m.TempComments, new { @class = "form-control", @id = "comments" })
+                                            <p class="text-danger" id="error"></p>
+                                            @*@Html.ValidationMessageFor(m => m.TempComments, "", new { @class = "text-danger" })*@
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer ">
+
+                                <button type="button" class="btn btn-success" id="btnReject" onclick="RejectButton();rejectComment();"><span class="fa fa-check"></span> Yes</button>
+                                <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+
+              
+
+            </div>
+        </div>
+    </div>
+</div>

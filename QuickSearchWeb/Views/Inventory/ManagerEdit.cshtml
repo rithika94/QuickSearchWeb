@@ -1,0 +1,469 @@
+﻿@model QuickSearchWeb.Models.ProductViewModel
+
+@{
+    ViewBag.Title = "Edit Inventory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+    window.onload = function () {
+        //debugger;
+        CategoryChanged();
+        ProductTypeChanged();
+        CheckOtherBox();
+        NotAssignedCheckBox();
+        AssignOtherUser();
+        AssignTextBox();
+
+    };
+
+        $("#OtherAssigned").click(function () {
+            AssignOtherUser();
+        });
+
+        $("#NotAssigned").click(function () {
+            NotAssignedCheckBox();
+        });
+      
+    function FillProductType() {
+        //debugger;
+        var category = $("#Category").val();
+		CategoryChanged();
+
+        $.ajax
+            ({
+                url: '/Inventory/GetProductTypeList',
+                type: 'POST',
+                datatype: 'application/json',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    categoryId: +category
+                }),
+                success: function (result) {
+                    $("#ProductType").html("");
+                    $(ProductType).append('<option value="">Select Product Type</option>')
+                    $.each($.parseJSON(result), function (i, producttype) {
+                        $("#ProductType").append
+                            ($('<option></option>').val(producttype.Id).html(producttype.Name))
+                    })
+                },
+                error: function () {
+                    alert("Whooaaa! Something went wrong..")
+                },
+            });
+    }
+
+        function hideSoftwareFields() {
+            //debugger;
+            $('#Platform').hide();
+            $('#Url').hide();
+            $('#Username').hide();
+            $('#Password').hide();
+            $('#ActivationKey').hide();
+            $('#ExpirationDate').hide();
+            $('#GrantNumber').hide();
+            $('#MembershipId').hide();
+
+        }
+
+        function showActivationFields() {
+            //debugger;
+            $('#Url').hide();
+            $('#Username').hide();
+            $('#Password').hide();
+            $('#ActivationKey').show();
+        }
+        function showCloudFields() {
+            //debugger;
+            $('#Url').show();
+            $('#Username').show();
+            $('#Password').show();
+            $('#ActivationKey').hide();
+        }
+        function hideActivationCloudFields() {
+            //debugger;
+
+            $('#Url').hide();
+            $('#Username').hide();
+            $('#Password').hide();
+            $('#ActivationKey').hide();
+        }
+
+        function ShowOtherBox() {
+            //debugger;
+            $('#OtherProductType').show();
+        }
+        function HideOtherBox() {
+            //debugger;
+            $('#OtherProductType').hide();
+        }
+        function CheckOtherBox() {
+            //debugger;
+            var value = jQuery("#ProductType option:selected").text();
+            //var value = $(this).val();
+            if (value == 'Other') {
+                ShowOtherBox();
+            }
+            else {
+                HideOtherBox();
+            }
+
+        }
+
+        function CategoryChanged() {
+            //debugger;
+            var value = jQuery("#Category option:selected").text();
+            //var value = $(this).val();
+            if (value == 'Software') {
+                $('#Platform').show();
+                $('#ExpirationDate').show();
+                $('#AssignToHardware').show();
+                $('#GrantNumber').show();
+                $('#MembershipId').show();
+            }
+            else {
+                $('#AssignToHardware').hide();
+                hideSoftwareFields();
+            }
+
+        }
+
+
+    function ProductTypeChanged() {
+        //debugger;
+        var value = jQuery("#ProductType option:selected").text();
+        //var value = $(this).val();
+        if (value == 'Other') {
+            ShowOtherBox();
+        } else {
+            HideOtherBox();
+        }
+    }
+
+    function PlatformChanged() {
+        //debugger;
+        var value = jQuery("#Platform option:selected").text();
+        //var value = $(this).val();
+        if (value == 'Cloud') {
+            showCloudFields();
+        } else if (value == 'OnSite') {
+            showActivationFields();
+        } else {
+            hideActivationCloudFields();
+        }
+    }
+
+       
+
+    function NotAssignedCheckBox() {
+        //debugger;
+       
+        if ($("#NotAssigned").is(":checked")) {
+                $("#AssignTo").attr("readonly", "true");
+                $('#AssignTo').val('');
+                $('#AssignToId').val('');
+                
+            } else {
+                $("#AssignTo").removeAttr("readonly");
+                $("#AssignTo").focus();
+            }
+       
+
+        }
+        function AssignOtherUser() {
+            //debugger;
+            if ($("#OtherAssigned").is(":checked")) {
+                $('#AssignToOther').show();
+                document.getElementById("NotAssigned").checked = true;
+                NotAssignedCheckBox();
+
+            } else {
+                $('#AssignToOther').hide();
+               
+               
+            }
+
+
+        }
+
+    function AssignTextBox() {
+        //debugger;
+        $("#AssignTo").autocomplete({
+
+            source: function (request, response) {
+                $.ajax({
+
+                    url: '@Url.Action("GetSearchValue","Inventory")',
+                    dataType: "json",
+                    data: { search: $("#AssignTo").val() },
+
+                    success: function (data) {
+                        //debugger;
+                        response($.map(data, function (item) {
+                            //$("#AssignToId").val(item.Value);
+                            return { id: item.Value, value: item.Name }
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+                        //debugger;
+                        alert("Something went wrong");
+                    }
+                });
+            },
+            select: function (event, ui) {
+                //debugger;
+                $("#AssignToId").val(ui.item.id);
+                document.getElementById("OtherAssigned").checked = false;
+                AssignOtherUser();
+                //alert(ui.item ? ("You picked '" + ui.item.label + "' with an ID of " + ui.item.id)
+                //    : "Nothing selected, input was " + this.value);
+            }
+
+        });
+    }
+
+
+    </script>
+}
+
+
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to inventory list" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("Index", "Inventory")'" />
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Edit Inventory</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a>Inventory List</a></li>
+                                <li class="active">Edit inventory</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+                <div class="row">
+
+
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-header">
+                                @*<h4>Edit inventory</h4>*@
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm(FormMethod.Post))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="row">
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                        @Html.HiddenFor(m => m.ProductId)
+
+                                        <div class="col-md-6">
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.ProductCode)
+                                                @Html.TextBoxFor(m => m.ProductCode, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.ProductName)
+                                                @Html.TextBoxFor(m => m.ProductName, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LookupCategory)
+                                                @Html.DropDownListFor(model => model.LookupCategory, new SelectList(Model.CategoryList, "Id", "Name"), "Select a Category", new
+                                   {
+                                       @class = "form-control",
+                                       @id = "Category",
+                                       @disabled = "true"
+                                   })
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LookupProductType)
+                                                @Html.DropDownListFor(model => model.LookupProductType, new SelectList(Model.ProductTypeList, "Id", "Name"), "Select Product Type", new
+                                   {
+                                       @class = "form-control",
+                                       @id = "ProductType",
+                                       @disabled = "true"
+                                   })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="OtherProductType">
+                                                @Html.LabelFor(m => m.OtherProductType)
+                                                @Html.TextBoxFor(m => m.OtherProductType, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="Platform">
+                                                @Html.LabelFor(m => m.LookupPlatform)
+                                                @Html.DropDownListFor(model => model.LookupPlatform, new SelectList(Model.PlatformList, "Id", "Name"), "Select Platform", new
+                                   {
+                                       @class = "form-control",
+                                       @disabled = "true"
+                                   })
+
+                                            </div>
+                                            <div class="form-group col-md-12" id="Url">
+                                                @Html.LabelFor(m => m.Url)
+                                                @Html.TextBoxFor(m => m.Url, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="Username">
+                                                @Html.LabelFor(m => m.Username)
+                                                @Html.TextBoxFor(m => m.Username, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="Password">
+                                                @Html.LabelFor(m => m.Password)
+                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-12" id="ActivationKey">
+                                                @Html.LabelFor(m => m.ActivationKey)
+                                                @Html.TextBoxFor(m => m.ActivationKey, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-12" id="GrantNumber">
+                                                @Html.LabelFor(m => m.GrantNumber)
+                                                @Html.TextBoxFor(m => m.GrantNumber, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.GrantNumber, "", new { @class = "text-danger", @readonly = "readonly" })
+                                            </div>
+                                            <div class="form-group col-md-12" id="MembershipId">
+                                                @Html.LabelFor(m => m.MembershipId)
+                                                @Html.TextBoxFor(m => m.MembershipId, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.MembershipId, "", new { @class = "text-danger", @readonly = "readonly" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.ProductCompany)
+                                                @Html.TextBoxFor(m => m.ProductCompany, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                @Html.LabelFor(m => m.Version)
+                                                @Html.TextBoxFor(m => m.Version, new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                                @Html.LabelFor(m => m.MakeModel)
+                                                @Html.TextBoxFor(m => m.MakeModel, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(m => m.AssignToUserName)
+                                                    @Html.TextBoxFor(m => m.AssignToUserName, new { @class = "form-control", @id = "AssignTo", @placeholder = "Enter username to assign" })
+                                                    @Html.ValidationMessageFor(m => m.AssignToUserName, "", new { @class = "text-danger" })
+                                                    <div class=" col-md-12">
+                                                        @Html.CheckBoxFor(m => m.DontAssign, new { @id = "NotAssigned" })  @Html.LabelFor(m => m.DontAssign)
+                                                    </div>
+                                                    <div class=" col-md-12">
+                                                        @Html.CheckBoxFor(m => m.OtherAssign, new { @id = "OtherAssigned" })  @Html.LabelFor(m => m.OtherAssign)
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6" id="AssignToOther">
+                                                    @Html.LabelFor(m => m.OtherAssignedUser)
+                                                    @Html.EditorFor(m => m.OtherAssignedUser, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Full Name" } })
+                                                    @Html.ValidationMessageFor(m => m.OtherAssignedUser, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(m => m.AssignTo, new { @id = "AssignToId" })
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-6">
+
+                                                    @Html.LabelFor(m => m.AssignedDate)
+
+                                                    @Html.TextBoxFor(m => m.AssignedDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly" })
+
+                                                </div>
+                                                <div class="form-group col-md-6" id="AssignToHardware">
+                                                    @Html.LabelFor(m => m.AssignToHardware)
+                                                    @Html.EditorFor(m => m.AssignToHardware, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.Location)
+                                                @Html.EditorFor(m => m.Location, new { htmlAttributes = new { @class = "form-control", @placeholder = "eg: Conference room,Greeting desk..", @readonly = "readonly" } })
+
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                @Html.LabelFor(m => m.Description)
+                                                @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = 6, @readonly = "readonly" })
+
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+
+                                                @Html.LabelFor(m => m.PurchaseDate)
+                                                @Html.TextBoxFor(m => m.PurchaseDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6" id="ExpirationDate">
+
+                                                @Html.LabelFor(m => m.ExpirationDate)
+                                                @Html.TextBoxFor(m => m.ExpirationDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @readonly = "readonly" })
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LookupStatus)
+                                                @Html.DropDownListFor(model => model.LookupStatus, new SelectList(Model.StatusList, "Id", "Name"), null, new { @class = "form-control", @disabled = "true" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group  col-md-12">
+                                            <input type="submit" value="Update" class=" pull-right btn btn-flat btn-info m-b-10 m-l-5" />
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

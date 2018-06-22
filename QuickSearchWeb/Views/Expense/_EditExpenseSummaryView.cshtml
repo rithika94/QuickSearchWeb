@@ -1,0 +1,158 @@
+﻿@model QuickSearchWeb.Models.ExpenseSummaryViewModel
+
+
+<script>
+
+
+
+    $("#ExpenseDate1").datepicker({ minDate: $("#StartDate").val(), maxDate: $("#EndDate").val() });
+
+    $("#Transport1,#Lodging1 ,#Meals1 ,#Phone1,#Other1").on("keyup", function () {
+
+        
+        UpdateTotalExpense1();
+    });
+
+    $("#Miles1,#Multiply1").on("keyup", function () {
+        
+        UpdateTotalMileExpense1();
+    });
+
+
+    function UpdateTotalExpense1() {
+       
+        var val0 = $("#MilesDriven1").val();
+        var val1 = $("#Transport1").val();
+        var val2 = $("#Lodging1").val();
+        var val3 = $("#Meals1").val();
+        var val4 = $("#Phone1").val();
+        var val5 = $("#Other1").val();
+        var total = +val0 + +val1 + +val2 + +val3 + +val4 + +val5;
+        total = Math.round(total * 1000) / 1000;
+        $("#Total1").val(total);
+
+    }
+
+    function UpdateTotalMileExpense1() {
+       
+        var miles = $("#Miles1").val();
+        var multiply = $("#Multiply1").val();
+        var milesExpense = miles * multiply;
+        milesExpense = Math.round(milesExpense * 1000) / 1000;
+        $("#MilesDriven1").val(milesExpense);
+        UpdateTotalExpense1();
+    }
+
+
+
+</script>
+
+<div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Edit expense</div>
+        <div class="panel-body">
+            <div class="row">
+
+                <form id="myForm">
+                    <div class="table-responsive2">
+                        <table class="table table-striped table-bordered">
+
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Description</th>
+                                    <th colspan="3">Miles Driven</th>
+                                    <th>Transport($)</th>
+                                    <th>Lodging($)</th>
+                                    <th>Meals($)</th>
+                                    <th>Phone/Fax($)</th>
+                                    <th>Other($)</th>
+                                    <th>Total($)</th>
+
+                                </tr>
+                                <tr>
+                                    <th colspan="2"></th>
+                                    <th>Miles(Mi)</th>
+                                    <th>Standard Rate($)</th>
+                                    <th>Total($)</th>
+                                    <th colspan="7"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    @Html.HiddenFor(m => m.Id)
+                                    @Html.HiddenFor(m => m.ExpenseId)
+                                    <td>
+
+                                        @Html.TextBoxFor(m => m.Date, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "ExpenseDate1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                                    </td>
+                                    <td>
+
+                                        @Html.TextBoxFor(m => m.Miles, new { @class = "form-control", @id = "Miles1" })
+                                    </td>
+                                    <td>
+
+                                        @Html.TextBoxFor(m => m.MilesMultiplicationFactor, new { @class = "form-control", @id = "Multiply1" })
+                                    </td>
+                                    <td>
+
+                                        @Html.TextBoxFor(m => m.MilesDriven, new { @class = "form-control", @readonly = "True", @id = "MilesDriven1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Transport, new { @class = "form-control", @id = "Transport1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Lodging, new { @class = "form-control", @id = "Lodging1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Meals, new { @class = "form-control", @id = "Meals1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @id = "Phone1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Other, new { @class = "form-control", @id = "Other1" })
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Total, new { @class = "form-control", @id = "Total1", @readonly = "true" })
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="11">
+
+                                        <button type="button" id="btnUpdate" href="javascript:void(0)" onclick="SubmitForm();" class="btn btn-flat btn-info m-b-10 m-l-5">Update</button>
+
+
+                                    </td>
+
+
+                                    @*<input type="button" id="btnSubmit" name="action" value="Update" class="btn btn-flat btn-info m-b-10 m-l-5" />*@
+                                </tr>
+                            </tbody>
+                        </table>
+                        @Html.ValidationSummary(true);
+                        @Html.ValidationMessageFor(m => m.Date, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Miles, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.MilesMultiplicationFactor, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.MilesDriven, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Transport, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Lodging, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Meals, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Other, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(m => m.Total, "", new { @class = "text-danger" })
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+

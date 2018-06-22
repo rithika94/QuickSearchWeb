@@ -1,0 +1,333 @@
+﻿@model QuickSearchWeb.Models.LoaViewModel
+@{
+    ViewBag.Title = "MyLOACreate";
+}
+
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.18.0/daterangepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-date-range-picker/0.18.0/jquery.daterangepicker.min.js"></script>
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+
+
+    <script>
+
+        $("#StartDate").dateRangePicker(
+            {
+               
+                format: 'MM/DD/YYYY',               
+            separator: ' to ',
+            getValue: function () {
+                if ($('#StartDate').val() && $('#EndDate').val())
+                    return $('StartDate').val() + ' to ' + $('#EndDate').val();
+                else
+                    return '';
+            },
+            setValue: function (s, s1, s2) {
+                $('#StartDate').val(s1);
+                $('#EndDate').val(s2);
+            }
+        });
+
+
+    //$("#StartDate").datepicker();
+    //    $("#EndDate").datepicker();
+
+        //$(function () {
+        //    $("#StartDate").datepicker({
+        //        numberOfMonths: 2,
+        //        onSelect: function (selected) {
+        //            var dt = new Date(selected);
+        //            dt.setDate(dt.getDate() + 1);
+        //            $("#EndDate").datepicker("option", "minDate", dt);
+        //        }
+        //    });
+        //    $("#EndDate").datepicker({
+        //        numberOfMonths: 2,
+        //        onSelect: function (selected) {
+        //            var dt = new Date(selected);
+        //            dt.setDate(dt.getDate() - 1);
+        //            $("#StartDate").datepicker("option", "maxDate", dt);
+        //        }
+        //    });
+        //});
+
+        window.onload = function () {
+            //debugger;
+
+            CheckTimeOfDay();
+            CheckTypeOfLeave();
+        };
+
+        $('input[name=LookupTimeOfDay]').click(function () {
+            //debugger;
+            CheckTimeOfDay();
+        });
+
+        function CheckTimeOfDay() {
+            //debugger;
+            if ($('input[name=LookupTimeOfDay]:checked').val() == @Model.LookupOtherTimeOfDay) {
+                $('#OtherDayTime').show();
+                $('#OtherTimeOfDay').prop('required', 'required');
+            } else {
+                $('#OtherDayTime').hide();
+                $('#OtherTimeOfDay').prop('required', 'required');
+            }
+
+        }
+
+
+        $('#LookupTypeOfLeave').change(function () {
+            //debugger;
+            CheckTypeOfLeave();
+        });
+
+        function CheckTypeOfLeave() {
+            //debugger;
+            if ($('#LookupTypeOfLeave').val() == @Model.LookupOtherTypeOfLeave) {
+                $('#OtherLeaveType').show();
+                $('#OtherTypeOfLeave').prop('required', 'required');
+            } else {
+                $('#OtherLeaveType').hide();
+                $('#OtherTypeOfLeave').prop('required', 'required');
+            }
+
+        }
+
+        function SubmitButton() {
+            $("#submithidden").prop('disabled', false);          
+        }
+
+       
+        function SaveButton() {
+            $("#submithidden").attr('disabled', 'disabled');
+        }
+
+        $('#submitForm').bind("invalid-form.validate", function () {
+            debugger;
+            $("#btnSubmit").prop('disabled', false);        
+            $("#btnSave").prop('disabled', false);
+           
+        });
+
+        $('#submitForm').submit(function () {
+            debugger;
+            $("#btnSubmit").prop("disabled", true);          
+            $("#btnSave").prop("disabled", true);           
+        });
+
+    </script>
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to My LOAs" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("MyLOAList", "LOA")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Add LOA</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MyLOAList", "LOA")'"*@>My LOAs</a></li>
+                                <li class="active">Add LOA</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-body">
+                                @using (Html.BeginForm(null,null,FormMethod.Post,new { id= "submitForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <div class="form-horizontal">
+                                        <div class="row">
+
+
+                                            @Html.HiddenFor(m => m.UserId)
+
+                                            <input id="submithidden" type="hidden" name="action" value="Submit" />
+
+                                            @Html.HiddenFor(m => m.AspNetUser.Firstname)
+
+                                            @Html.HiddenFor(m => m.AspNetUser.LastName)
+
+                                            <div class="row">
+
+                                                <div class=" form-group col-md-3">
+                                                    <label>Employee Code</label>
+                                                    @Html.TextBoxFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+
+                                                <div class=" col-md-3">
+                                                    <label>Employee Name</label>
+                                                    @*@Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @readonly = "true" })*@
+                                                    <input class="form-control"
+                                                           id="FullName"
+                                                           readonly="readonly"
+                                                           type="text"
+                                                           value="@Model.AspNetUser.Firstname @Model.AspNetUser.LastName" />
+
+                                                </div>
+                                                <div class=" form-group col-md-3">
+                                                    @Html.LabelFor(m => m.ReportingManager)
+                                                    @Html.TextBoxFor(m => m.ReportingManager, new { @class = "form-control", @readonly = "true" })
+
+                                                </div>
+
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.StartDate)
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                        @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "StartDate" })
+                                                    </div>
+
+                                                    @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+                                                </div>
+
+
+                                                <div class="form-group col-md-3">
+                                                    @Html.LabelFor(m => m.EndDate)
+                                                    <div class="input-group date">
+                                                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                        @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "EndDate", @readonly = "true" })
+                                                    </div>
+
+                                                    @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(m => m.LookupTimeOfDay)
+
+                                                    <div>
+                                                        @for (int i = 0; i < Model.TimeOfDayList.Count; i++)
+                {
+                                        <div class="col-md-3">
+                                            @Html.RadioButtonFor(m => m.LookupTimeOfDay, Model.TimeOfDayList[i].Id, new { @id = "LookupTimeOfDay" + i.ToString() }) @Model.TimeOfDayList[i].Name
+                                        </div>
+
+}
+                                                    </div>
+
+                                                    @*<div class="col-md-3">
+                    @Html.RadioButtonFor(m => m.HrRole, "Admin")Admin
+                </div>
+                <div class="col-md-3">
+                    @Html.RadioButtonFor(m => m.HrRole, "Manager")Manager
+                </div>
+                <div class="col-md-3">
+                    @Html.RadioButtonFor(m => m.HrRole, "None")None
+                </div>*@
+
+                                                    @Html.ValidationMessageFor(m => m.LookupTimeOfDay, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group col-md-6" id="OtherDayTime">
+
+                                                    @Html.LabelFor(m => m.OtherTimeOfDay)
+                                                    @Html.TextBoxFor(m => m.OtherTimeOfDay, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.OtherTimeOfDay, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-group col-md-6">
+                                                    @Html.LabelFor(m => m.LookupTypeOfLeave)
+                                                    @Html.DropDownListFor(model => model.LookupTypeOfLeave, new SelectList(Model.TypeOfLeaveList, "Id", "Name"), "Select Leave Type", new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.LookupTypeOfLeave, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group col-md-6" id="OtherLeaveType">
+
+                                                    @Html.LabelFor(m => m.OtherTypeOfLeave)
+                                                    @Html.TextBoxFor(m => m.OtherTypeOfLeave, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(m => m.OtherTypeOfLeave, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group col-md-12">
+                                                @Html.LabelFor(m => m.ReasonForLeave)
+                                                @Html.TextAreaFor(m => m.ReasonForLeave, new { @class = "form-control", @rows = 6 })
+                                                @Html.ValidationMessageFor(m => m.ReasonForLeave, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="form-group  col-md-12">
+
+                                                <button type="button" value="Submit" class="btn btn-flat btn-info m-b-10 m-l-5  pull-right" data-toggle="modal" data-target="#submitModal">Submit</button>
+
+                                                @* <input type="submit" name="action" value="Submit" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />*@
+
+                                                <input id="btnSave" type="submit" name="action" value="Save" onclick="SaveButton();" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />
+
+                                                <input type="reset" value="Clear" class="btn btn-flat btn-danger m-b-10 m-l-5" />
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="submitModal" tabindex="-1" role="dialog" aria-labelledby="submitModal" aria-hidden="true">
+                                        <div class="modal-dialog modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                    <h4 class="modal-title custom_align" id="Heading">Confirmation</h4>
+                                                </div>
+                                                <div class="modal-body">
+
+                                                    @*<div class="alert alert-warning">*@
+                                                    <span class="fa fa-exclamation-triangle"></span> Are you sure you want to submit LOA?
+                                                    @*</div>*@
+
+                                                </div>
+                                                <div class="modal-footer ">
+                                                    @*<input type="submit" name="action" value="Submit" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />*@
+                                                    <button id="btnSubmit" type="submit"  onclick="SubmitButton();" class="btn btn-success" ><span class="fa fa-check"></span> Yes</button>
+                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,11 @@
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\QuickSearchBusiness.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\QuickSearchBusiness.pdb
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\AutoMapper.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\QuickSearchData.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\QuickSearchData.pdb
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\QuickSearchData.dll.config
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\bin\Debug\AutoMapper.xml
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\obj\Debug\QuickSearchBusiness.csprojResolveAssemblyReference.cache
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\obj\Debug\QuickSearchBusiness.csproj.CoreCompileInputs.cache
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\obj\Debug\QuickSearchBusiness.dll
+C:\Work\Quicksearch3\QuickSearchWeb\QuickSearchBusiness\obj\Debug\QuickSearchBusiness.pdb

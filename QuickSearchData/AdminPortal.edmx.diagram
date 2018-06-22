@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="20fffd538fd34345a7237550856f8952" Name="Diagram1" ZoomLevel="95">
+        <EntityTypeShape EntityType="AdminPortalModel.C__MigrationHistory" Width="1.625" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="AdminPortalModel.AspNetRole" Width="1.5" PointX="3" PointY="3.5" />
+        <EntityTypeShape EntityType="AdminPortalModel.AspNetUserClaim" Width="1.5" PointX="7.5" PointY="6" />
+        <EntityTypeShape EntityType="AdminPortalModel.AspNetUserLogin" Width="1.5" PointX="7.5" PointY="8.75" />
+        <EntityTypeShape EntityType="AdminPortalModel.LookupCodeMaster" Width="2.25" PointX="2.625" PointY="6.25" />
+        <EntityTypeShape EntityType="AdminPortalModel.LookupTypeMaster" Width="1.5" PointX="0.75" PointY="7.25" />
+        <EntityTypeShape EntityType="AdminPortalModel.Product" Width="1.5" PointX="5.375" PointY="13.375" />
+        <EntityTypeShape EntityType="AdminPortalModel.UserInfo" Width="1.5" PointX="7.75" PointY="0.75" />
+        <AssociationConnector Association="AdminPortalModel.FK_LookupCodeMaster_LookupTypeMaster" />
+        <AssociationConnector Association="AdminPortalModel.FK_Products_LookupCategory" />
+        <AssociationConnector Association="AdminPortalModel.FK_Products_LookupPlatform" />
+        <AssociationConnector Association="AdminPortalModel.FK_Products_LookupProductStatus" />
+        <AssociationConnector Association="AdminPortalModel.FK_Products_LookupProductType" />
+        <EntityTypeShape EntityType="AdminPortalModel.RecruitmentClient" Width="1.5" PointX="10.5" PointY="20.625" />
+        <AssociationConnector Association="AdminPortalModel.FK_RecruitmentClients_LookupCodeMaster1" />
+        <EntityTypeShape EntityType="AdminPortalModel.TimeSheetSummary" Width="1.5" PointX="12.75" PointY="7.375" />
+        <EntityTypeShape EntityType="AdminPortalModel.AspNetUser" Width="1.5" PointX="7.625" PointY="11.75" />
+        <AssociationConnector Association="AdminPortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AdminPortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="AdminPortalModel.FK_AspNetUsers_LookupCodeMaster" />
+        <AssociationConnector Association="AdminPortalModel.FK_AspNetUsersID_AspNetUsersReportingManager" />
+        <AssociationConnector Association="AdminPortalModel.FK_Products_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_UserInfo_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="AdminPortalModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="AdminPortalModel.LOA" Width="2.75" PointX="12.375" PointY="11.625" />
+        <AssociationConnector Association="AdminPortalModel.FK_LOA_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_LOA_AspNetUsers1" />
+        <AssociationConnector Association="AdminPortalModel.FK_LOA_LookupCodeMaster" />
+        <AssociationConnector Association="AdminPortalModel.FK_LOA_LookupCodeMaster1" />
+        <AssociationConnector Association="AdminPortalModel.FK_LOA_LookupCodeMaster2" />
+        <EntityTypeShape EntityType="AdminPortalModel.Recruitment" Width="1.5" PointX="15.875" PointY="10" />
+        <AssociationConnector Association="AdminPortalModel.FK_Recruitments_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_Recruitments_LookupCodeMaster1" />
+        <AssociationConnector Association="AdminPortalModel.FK_Recruitments_LookupCodeMaster2" />
+        <AssociationConnector Association="AdminPortalModel.FK_RecruitmentClients_Recruitments" />
+        <EntityTypeShape EntityType="AdminPortalModel.RecruitmentDocument" Width="1.5" PointX="18.125" PointY="11.625" />
+        <AssociationConnector Association="AdminPortalModel.FK_RecruitmentDocuments_Recruitments" />
+        <EntityTypeShape EntityType="AdminPortalModel.RecruitmentClientDocument" Width="1.5" PointX="12.75" PointY="22" />
+        <AssociationConnector Association="AdminPortalModel.FK_RecruitmentClientDocuments_RecruitmentClients" />
+        <EntityTypeShape EntityType="AdminPortalModel.SupportMaster" Width="2.25" PointX="17" PointY="18.5" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportMaster_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportMaster_AspNetUsers1" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster1" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster2" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster3" />
+        <EntityTypeShape EntityType="AdminPortalModel.SupportAttachment" Width="1.5" PointX="20" PointY="19.75" />
+        <AssociationConnector Association="AdminPortalModel.FK_SupportAttachments_SupportMaster" />
+        <EntityTypeShape EntityType="AdminPortalModel.ExpenseMaster" Width="2.375" PointX="15.125" PointY="4.125" />
+        <AssociationConnector Association="AdminPortalModel.FK_ExpenseMaster_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_ExpenseMaster_LookupCodeMaster" />
+        <EntityTypeShape EntityType="AdminPortalModel.ExpenseAttachment" Width="1.5" PointX="18.125" PointY="0.75" />
+        <AssociationConnector Association="AdminPortalModel.FK_ExpenseAttachments_ExpenseMaster" />
+        <EntityTypeShape EntityType="AdminPortalModel.ExpenseSummary" Width="1.5" PointX="18.125" PointY="4.75" />
+        <AssociationConnector Association="AdminPortalModel.FK_ExpenseSummary_ExpenseMaster" />
+        <EntityTypeShape EntityType="AdminPortalModel.TimeSheetsMaster" Width="1.5" PointX="10" PointY="7.5" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_AspNetUsers" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster1" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster2" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster3" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster4" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster5" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster6" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster7" />
+        <AssociationConnector Association="AdminPortalModel.FK_TimeSheetSummary_TimeSheetsMaster" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

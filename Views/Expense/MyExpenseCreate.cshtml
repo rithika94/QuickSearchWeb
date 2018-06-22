@@ -1,0 +1,172 @@
+﻿@model QuickSearchWeb.Models.ExpenseViewModel
+
+@{
+    ViewBag.Title = "Add Expense Sheet";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/start/jquery-ui.css">
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script>
+        $("#StartDate").datepicker();
+        $("#EndDate").datepicker();
+    </script>
+
+
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="Back to Expense Sheets" class="btn btn-flat btn-default m-l-5" form="post" onclick="location.href='@Url.Action("MyExpenseList", "Expense")'" />
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Add Expense Sheet</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MyExpenseList", "Expense")'"*@>My Expense Sheets</a></li>
+                                <li class="active">Add Expense Sheet</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+            <div class="main-content">
+
+                <div class="row">
+                    @Html.ValidationMessage("error", "", new { @class = "text-danger" })
+
+                    @*<input type="button" value="Back to TimeSheets" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("MyTimeSheetsList", "TimeSheet")'" />*@
+
+                    <div class="container-fluid">
+                        <div class="main-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card alert">
+                                        @*<div class="card-header">
+                                    <h4>Create Time Sheet </h4>
+                                </div>*@
+                                        <div class="card-body">
+                                            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form" }))
+                                {
+                                    @Html.AntiForgeryToken()
+
+
+                                    <div class="row">
+
+                                        <div class="row">
+
+                                            @Html.HiddenFor(m => m.UserId)
+
+                                            @Html.HiddenFor(m => m.AspNetUser.Firstname)
+
+                                            @Html.HiddenFor(m => m.AspNetUser.LastName)
+
+
+                                            <div class="col-md-2">
+                                                <label>Employee Code</label>
+                                                @Html.TextBoxFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control", @readonly = "true" })
+                                                @*<input class="form-control"
+                                        id="EmployeeCode"
+                                        name="StudentName"
+                                        readonly="readonly"
+                                        type="text"
+                                        value="@Model.User.EmployeeCode" />*@
+                                            </div>
+
+
+                                            <div class=" col-md-3">
+                                                <label>Employee Name</label>
+                                                @*@Html.TextBoxFor(m => m.FullName, new { @class = "form-control", @readonly = "true" })*@
+                                                <input class="form-control"
+                                                       id="FullName"
+                                                       readonly="readonly"
+                                                       type="text"
+                                                       value="@Model.AspNetUser.Firstname @Model.AspNetUser.LastName" />
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                @Html.LabelFor(m => m.ReportingManager)
+                                                @Html.TextBoxFor(m => m.ReportingManager, new { @class = "form-control", @readonly = "true" })
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                @Html.LabelFor(m => m.StartDate)
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                    @Html.TextBoxFor(m => m.StartDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "StartDate" })
+                                                </div>
+
+                                                @Html.ValidationMessageFor(m => m.StartDate, "", new { @class = "text-danger" })
+                                            </div>
+
+
+                                            <div class="col-md-2">
+                                                @Html.LabelFor(m => m.EndDate)
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span> </span>
+                                                    @Html.TextBoxFor(m => m.EndDate, "{0:MM/dd/yyyy}", new { @class = "form-control", @id = "EndDate" })
+                                                </div>
+
+                                                @Html.ValidationMessageFor(m => m.EndDate, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <br />
+
+
+
+                                        <div class="form-group">
+                                            <input type="submit" name="action" value="Save & Add More Expenses" class="btn btn-flat btn-info m-b-10 m-l-5 pull-right" />
+                                        </div>
+                                        @*<div class="form-group">
+                                    <input type="submit" name="action" value="Save And Submit" class="btn btn-flat btn-info m-b-10 m-l-5" @*onclick="location.href='@Url.Action("MyTimeSheetCreate", "TimeSheet", new { submit = true })" />
+                                </div>*@
+                                        @*<div class="form-group">
+                                    <input type="reset" value="Clear" class="btn btn-flat btn-danger m-b-10 m-l-5" />
+                                </div>*@
+
+                                    </div>
+                    }
+
+
+                                        </div>
+                                    </div>
+                                </div><!-- /# column -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

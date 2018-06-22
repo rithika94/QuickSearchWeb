@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>*@
+
+
+        <li class="header-icon dib">
+            @*<img class="avatar-img" src="~/ContentTemplate/images/avatar/1.jpg" alt="" />*@ <span class="user-avatar"> @User.Identity.GetUserName() <i class="ti-angle-down f-s-10"></i></span>
+            <div class="drop-down dropdown-profile">
+                @*<div class="dropdown-content-heading">
+                        <span class="text-left">Upgrade Now</span>
+                        <p class="trial-day">30 Days Trail</p>
+                    </div>*@
+                <div class="dropdown-content-body">
+                    <ul>
+                        @*<li><a href="#"><i class="ti-user"></i> <span>Profile</span></a></li>
+                            <li><a href="#"><i class="ti-wallet"></i> <span>My Balance</span></a></li>
+                            <li><a href="#"><i class="ti-write"></i> <span>My Task</span></a></li>
+                            <li><a href="#"><i class="ti-calendar"></i> <span>My Calender</span></a></li>
+                            <li><a href="#"><i class="ti-email"></i> <span>Inbox</span></a></li>
+                            <li><a href="#"><i class="ti-settings"></i> <span>Setting</span></a></li>
+                            <li><a href="#"><i class="ti-help-alt"></i> <span>Help</span></a></li>
+                            <li><a href="#"><i class="ti-lock"></i> <span>Lock Screen</span></a></li>*@
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="ti-power-off"></i>Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </li>
+
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

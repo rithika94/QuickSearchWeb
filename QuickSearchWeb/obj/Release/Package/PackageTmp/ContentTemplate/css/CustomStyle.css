@@ -1,0 +1,30 @@
+﻿body, html {
+    height: 100%;
+    color: black !important;
+}
+
+
+
+.bg-primary {
+    background-image: url("../../ContentTemplate/images/LoginBackground.jpg");
+    
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+}
+
+/*.thead tr th {
+    text-transform: capitalize !important;
+}*/
+
+
+
+

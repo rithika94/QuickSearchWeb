@@ -1,0 +1,183 @@
+﻿@model IEnumerable<QuickSearchWeb.Models.ProductListViewModel>
+@{
+    ViewBag.Title = "Inventory List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*@section Scripts{
+
+    <script>
+        window.onload = function () {
+
+        };
+
+
+    </script>
+
+
+
+    }*@
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            @if (User.IsInRole("InventoryAdmin"))
+                            {
+
+                                <input type="button" value="Add Inventory" class="btn btn-flat btn-info m-b-10 m-l-5" onclick="location.href='@Url.Action("Create", "Inventory")'" />
+                            }
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Inventory List</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                @*<li class="active">/Inventory List</li>*@
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /# row -->
+
+            <div class="main-content">
+
+                @if (ViewBag.error != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.error
+                    </div>
+
+                }
+                @if (ViewBag.status != null)
+                {
+                    <div class="alert alert-success">
+                        @ViewBag.status
+                    </div>
+
+                }
+
+                <div class="row">
+
+
+                    <div class="col-lg-12">
+                        <div class="card alert">
+                            @*<div class="card-header">
+                                    <h4>Inventory List</h4>
+                                    <hr />
+                                </div>*@
+                            <div class="bootstrap-data-table-panel table-responsive2">
+                                <table class="display table table-borderd table-striped table-responsive row-select">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                Last Modified
+                                            </th>
+                                            <th>
+                                                Product Code
+                                            </th>
+                                            <th>
+                                                Product Name
+                                            </th>
+                                            <th>
+                                                Category
+                                            </th>
+                                            <th>
+                                                Description
+                                            </th>
+                                            <th>
+                                                Location
+                                            </th>
+                                            <th>
+                                                Status
+                                            </th>
+                                            <th>
+                                                Assigned to
+                                            </th>
+                                            <th>
+                                                Actions
+                                            </th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (!(Model == null))
+                                        {
+
+                                            foreach (var item in Model)
+                                            {
+                                                if (!item.IsDeleted && item.IsActive)
+                                                {
+
+                                                    <tr @*onclick="location.href ='@if (User.IsInRole("InventoryAdmin"))
+                                                        {
+                                                            @(Url.Action("Edit", "Inventory", new { id = @item.ProductId }))
+                                                        }
+                                                        else if (User.IsInRole("InventoryManager"))
+                                                        {
+                                                             @(Url.Action("ManagerEdit", "Inventory", new { id = @item.ProductId }))}'"*@>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+
+                                                        </td>
+
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ProductCode)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.ProductName)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.SelectedCategory)
+                                                            @*@string.Format("{0: (###) ###-####}", Convert.ToInt64(item.PhoneNumber))*@
+                                                        </td>
+                                                        <td style=" white-space: nowrap; overflow: hidden; text-overflow:ellipsis; max-width:15vw;">
+                                                            @Html.DisplayFor(modelItem => item.Description)
+
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Location)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.Status)
+                                                        </td>
+                                                        <td>
+                                                            @Html.DisplayFor(modelItem => item.AssignTo)
+
+                                                        </td>
+                                                        <td>
+                                                            @if (User.IsInRole("InventoryAdmin"))
+                                                            {
+                                                                <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("Edit", "Inventory", new { id = item.ProductId })'"><i class="ti-pencil-alt"></i></button>
+
+
+                                                            }
+                                                            else if (User.IsInRole("InventoryManager"))
+                                                            {
+                                                                <button type="button" class="btn btn-info btn-flat m-l-5" title="Edit" onclick="location.href='@Url.Action("ManagerEdit", "Inventory", new { id = item.ProductId })'"><i class="ti-pencil-alt"></i></button>
+
+                                                            }
+                                                        </td>
+
+
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

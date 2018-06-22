@@ -1,0 +1,341 @@
+﻿@model QuickSearchWeb.Models.LoaViewModel
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+  
+    <link href="~/ContentTemplate/css/lib/bootstrap.min.css" rel="stylesheet" />
+        @*<link href="~/ContentTemplate/css/LOADownload.css" rel="stylesheet" />*@
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />*@
+    <style>
+       
+
+            body {
+                /* to centre page on screen*/
+                margin-left: auto;
+                margin-right: auto;
+                /*margin-bottom: 50px;*/
+                padding: 10px;
+                height: 842px;
+                width:595px;
+            }
+
+        .MainText {
+            color: darkblue !important;
+        }
+
+        .header-banner {
+            background-color: #585858 !important;
+            color: white !important;
+        }
+
+            .underline {
+                border-bottom: 1px dotted black;
+            }
+
+
+            .footer {
+                /*position: fixed;
+        bottom:50px;
+        height: 50px;*/
+            }
+
+            hr.style1 {
+                border-top: 1px solid black;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+
+            .ReasonForLeave {
+                height: 150px;
+            }
+
+            .Comments {
+                height: 150px;
+            }
+
+            .footer-text {
+                padding-left: 100px;
+                padding-right: 100px;
+            }
+
+        p {
+            font-size: 12px;
+            color: darkblue !important;
+        }
+
+            label {
+                font-size: 14px;
+                font-weight: normal;
+            }
+
+            .Data-Text {
+                font-size: 14px;
+            }
+        label {
+            font-size: 12px;
+            font-weight:700;
+        }
+        .epathlogo {
+            /*max-width: 200px;*/
+            height: 35px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <img class="epathlogo" style="" src="~/ContentTemplate/images/epathlogo.png" />
+
+   
+    @*<input  id="backbutton" type="button" value="Go back" href="javascript:void(0);" onclick="history.go(-1);" />*@
+    <input style="background-color:yellow" id="printpagebutton" type="button" value="Print this page" onclick="printpage()" />
+
+
+    <div class="row">
+
+
+        <div class="text-center">
+            <h3 class="MainText"><strong>LEAVE OF ABSENCE [LOA] REQUEST FORM</strong></h3>
+        </div>
+        <div class=" form-group text-center">
+            <h4 class="header-banner"><strong>LOA Information</strong></h4>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6  col-xs-6 ">
+                <div class="text-left col-md-6 col-sm-6 col-xs-6 col-xs-6">
+                    @Html.LabelFor(m => m.LoaCode):
+                </div>
+                <div class="text-center underline col-md-6 col-sm-6 col-xs-6 col-xs-6 Data-Text ">
+                    @Html.DisplayFor(m => m.LoaCode)
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="text-right col-md-6 col-sm-6 col-xs-6">
+                    <label>Employee Code:</label>
+                </div>
+                <div class="text-center underline col-md-6 col-sm-6 col-xs-6 Data-Text">
+                    @Html.DisplayFor(m => m.AspNetUser.EmployeeCode, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="text-left col-md-6 col-sm-6 col-xs-6">
+                    <label>Employee Name:</label>
+                </div>
+                <div class="text-center underline col-md-6 col-sm-6 col-xs-6 Data-Text">
+                    @Model.AspNetUser.Firstname @Model.AspNetUser.LastName
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="text-right col-md-6 col-sm-6 col-xs-6">
+                    <label>Job Title:</label>
+                </div>
+                <div class="text-center underline col-md-6 col-sm-6 col-xs-6 Data-Text">
+                    <text>&nbsp;</text>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="text-left col-md-6 col-sm-6 col-xs-6">
+                    @Html.LabelFor(m => m.ReportingManager):
+                </div>
+                <div class="text-center underline col-md-6 col-sm-6 col-xs-6 Data-Text">
+                    @Html.DisplayFor(m => m.ReportingManager, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class=" col-md-12 col-sm-12 col-xs-12">
+                <div class="text-left col-md-3 col-sm-3 col-xs-3 ">
+                    <label>Type of Leave:</label>
+                </div>
+                <div class=" text-center underline col-md-9 col-sm-9 col-xs-9 Data-Text">
+                    @Html.DisplayFor(m => m.OtherTypeOfLeave, "None", new { @class = "form-control" })
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group text-left col-md-2 col-sm-2 col-xs-2">
+                    <label>Leave dates</label>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="text-right col-md-4 col-sm-4 col-xs-4">
+                        <label>From:</label>
+                    </div>
+                    <div class="text-center underline col-md-8 col-sm-8 col-xs-8 Data-Text">
+                        @Html.DisplayFor(m => m.StartDate, "{0:MM/dd/yyyy}")
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-3">
+                    <div class="text-right col-md-4 col-sm-4 col-xs-4">
+                        <label>To:</label>
+                    </div>
+                    <div class="text-center underline col-md-8 col-sm-8 col-xs-8 Data-Text">
+                        @Html.DisplayFor(m => m.EndDate, "{0:MM/dd/yyyy}")
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-4">
+                    <div class="text-right col-md-4 col-sm-4 col-xs-4 ">
+                        <label>Time</label>
+                    </div>
+                    <div class="text-center underline col-md-8 col-sm-8 col-xs-8 Data-Text">
+                        @Html.DisplayFor(m => m.OtherTimeOfDay)
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row ReasonForLeave">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="form-group  col-md-3 col-sm-3 col-xs-3">
+                    @Html.LabelFor(m => m.ReasonForLeave):
+                </div>
+                <div class="form-group  col-md-9 col-sm-3 col-xs-9 Data-Text">
+                    @Html.DisplayFor(m => m.ReasonForLeave)
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <p>You must submit requests for absences, other than sick leave, two days prior to the first day you will be absent. </p>
+            <br />
+            <br />
+            <hr class="style1" />
+            <div class="row">
+                <div class="form-group col-md-8 col-sm-8 col-xs-8">
+                    <label>Employee Signature </label>
+                </div>
+                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                    <label>Date </label>
+                </div>
+            </div>
+            @*<div class="form-group col-md-6">
+                                                                            @Html.LabelFor(m => m.LookupTimeOfDay)
+
+                                                                            <div>
+                                                                                @for (int i = 0; i < Model.TimeOfDayList.Count; i++)
+                                    {
+                                                            <div class="col-md-3">
+                                                                @Html.RadioButtonFor(m => m.LookupTimeOfDay, Model.TimeOfDayList[i].Id, new { @disabled = "true" }) @Model.TimeOfDayList[i].Name
+                                                            </div>
+
+                }
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        <div class="form-group col-md-6" id="OtherDayTime">
+
+                                                                            @Html.LabelFor(m => m.OtherTimeOfDay)
+                                                                            @Html.TextBoxFor(m => m.OtherTimeOfDay, new { @class = "form-control", @readonly = "true" })
+
+                                                                        </div>*@
+        </div>
+
+
+        <div class=" form-group text-center">
+            <h4 class="header-banner"><strong>Internal use only - Authorized Approval </strong></h4>
+        </div>
+        <div class="row">
+
+            <div class="col-md-6 col-sm-6 col-xs-6">
+                <div class="text-left col-md-4 col-sm-4 col-xs-4">
+                    @Html.LabelFor(m => m.LookupCodeMaster2):
+                </div>
+                <div class="text-center underline col-md-8 col-sm-8 col-xs-8 Data-Text">
+                    @Html.DisplayFor(m => m.LookupCodeMaster2.LookupCodeName)
+                </div>
+            </div>
+
+        </div>
+        <br />
+        <div class="row Comments">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="text-left col-md-4 col-sm-4 col-xs-4">
+                    <label> Comments:</label>
+                </div>
+                <div class="text-center col-md-8 col-sm-8 col-xs-8 Data-Text">
+
+                </div>
+            </div>
+        </div>
+
+        @*<div class=" form-group col-md-2">
+                @Html.LabelFor(m => m.LookupCodeMaster2)
+                @Html.TextBoxFor(m => m.LookupCodeMaster2.LookupCodeName, new { @class = "form-control", @readonly = "true" })
+
+            </div>*@
+
+        <div class="row">
+            <hr class="style1" />
+            <div class="row text-center">
+                <div class="form-group col-md-8 col-sm-8 col-xs-8">
+                    <label>Manager Name & Signature </label>
+                </div>
+                <div class="form-group col-md-4 col-sm-4 col-xs-4">
+                    <label>Title & Date </label>
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+        <div class="footer">
+            <div class="col-sm-12 col-md-12 col-xs-12">
+
+                <div class="form-group text-center ">
+                    <p> Please Note: <i>Email to hr@epathusa.net and cc payroll@epathusa.net or FAX :630-884-3700</i></p>
+                </div>
+
+            </div>
+            <div class="col-sm-12 col-md-12 col-xs-12">
+                <hr class="style1" />
+                <div class="form-group text-center">
+                    <p class="footer-text">1075  Jordan creek Pkwy, Suite 295, West Des Moines, IA 50266 <br />Phone: 515-974-6678     |     Fax 630-884-3700 </p>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        function printpage() {
+            //Get the print button and put it into a variable
+            var printButton = document.getElementById("printpagebutton");
+            //var backButton = document.getElementById("backbutton");
+
+            //Set the print button visibility to 'hidden'
+            printButton.style.visibility = 'hidden';
+            //backButton.style.visibility = 'hidden';
+            //Print the page content
+            window.print()
+            //Set the print button to 'visible' again
+            //[Delete this line if you want it to stay hidden after printing]
+            printButton.style.visibility = 'visible';
+            //backButton.style.visibility = 'visible';
+        }
+    </script>
+
+
+</body>
+</html>

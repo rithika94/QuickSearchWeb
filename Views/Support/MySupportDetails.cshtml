@@ -1,0 +1,338 @@
+﻿@model QuickSearchWeb.Models.SupportViewModel
+@{
+    ViewBag.Title = "MySupportEdit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section Scripts{
+    <script>
+        function notFixed() {
+            debugger;
+            var comments = document.getElementById("TempComments");
+            if (comments.value == "") {
+                document.getElementById("error").innerHTML = "Comments are required";
+                //comments.setCustomValidity("Please Enter Comments");
+            } else {
+                document.getElementById("error").innerHTML = "";
+                // comments.setCustomValidity(""); // be sure to leave this empty!
+                //alert("Correct!");
+
+                $("#notFixedModal").modal("hide");
+                $('.modal-backdrop').remove();
+                $(".loader").show();
+                var formdata = $("#myform").serialize();
+                //debugger;
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("IssueFixedNo", "Support")",
+                    data: formdata,
+                    success: function () {
+                        debugger;
+
+                        //debugger;
+                        $(".loader").hide();
+                        window.location.href = "/Support/MySupportList";
+                        //debugger;
+
+                    }
+
+
+                })
+
+            }
+        }
+
+    </script>
+
+}
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+
+            @if (ViewBag.error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.error
+                </div>
+
+            }
+            @if (ViewBag.status != null)
+            {
+                <div class="alert alert-success">
+                    @ViewBag.status
+                </div>
+
+            }
+
+
+            <div class="row">
+                <div class="page-header">
+                    <div class="page-title">
+                        <div class="col-lg-4">
+                            <input type="button" value="My Service Requests" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("MySupportList", "Support")'" />
+
+                        </div>
+                        <div class="col-lg-4">
+                            <h4 class="text-center"><strong>Service Request Details</strong></h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*onclick="location.href='@Url.Action("MySupportList", "Support")'"*@>My Service Requests</a></li>
+                                <li class="active">Service Request Details</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main-content">
+                <div class="row">
+                    <div class="container-fluid">
+                        <div class="main-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="card alert">
+                                        @*<div class="card-header">
+                                                <h4>Add a new inventory</h4>
+                                                <hr />
+                                            </div>*@
+                                        <div class="card-body">
+
+                                            <form id="myform">
+                                                <div class="row">
+                                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                                    <div class="col-md-12">
+                                                        @Html.HiddenFor(m => m.SupportId)
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.SupportCode)
+                                                            @Html.TextBoxFor(m => m.SupportCode, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.AssignToName)
+                                                            @Html.TextBoxFor(m => m.AssignToName, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssueStatus)
+                                                            @Html.TextBoxFor(m => m.LookupCodeMaster1.LookupCodeName, new { @class = "form-control", @readonly = true })
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(m => m.Summary)
+                                                            @Html.TextBoxFor(m => m.Summary, new { @class = "form-control", @readonly = true })
+
+                                                        </div>
+                                                        <div class="form-group col-md-12">
+                                                            @Html.LabelFor(m => m.Description)
+                                                            @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @rows = "10", @cols = "20", @readonly = true })
+
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssueType)
+                                                            @Html.DropDownListFor(model => model.LookupIssueType, new SelectList(Model.IssueTypeList, "Id", "Name"), "Select IssueType", new { @class = "form-control", @id = "IssueType", @disabled = true })
+
+                                                        </div>
+                                                        <div class="form-group col-md-4">
+                                                            @Html.LabelFor(m => m.LookupIssuePriority)
+                                                            @Html.DropDownListFor(model => model.LookupIssuePriority, new SelectList(Model.IssuePriorityList, "Id", "Name"), "Select Priority", new { @class = "form-control", @id = "Issue Priority", disabled = true })
+                                                            @Html.ValidationMessageFor(m => m.LookupIssuePriority, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(m => m.Comments)
+                                                            @Html.TextAreaFor(model => model.Comments, new { @class = "form-control", @rows = "5", @cols = "20", @readonly = true })
+
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            @Html.LabelFor(m => m.UserComments)
+                                                            @Html.TextAreaFor(model => model.UserComments, new { @class = "form-control", @rows = "5", @cols = "20", @readonly = true })
+
+                                                        </div>
+                                                        @if (Model.LookupCodeMaster1.LookupCodeName == "Done" && Model.IsFixed != true)
+                                                        {
+                                                    <div class="form-group col-md-6">
+                                                        <label>Is issue fixed?</label>
+                                                        <div class="row">
+                                                            <input type="button" value="Yes" name="action" class="btn btn-flat btn-success m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("IssueFixedYes", "Support", new { supportId = Model.SupportId })'" />
+                                                            @* <input type="button" value="No" name="action" class="btn btn-flat btn-danger m-b-10 m-l-5" onclick="location.href='@Url.Action("EmployeeLOADownload", "Support", new { id = Model.SupportId})'"/>*@
+                                                            <input type="button" value="No" class=" btn btn-flat btn-warning m-b-10 m-l-5" data-toggle="modal" data-target="#notFixedModal" />
+                                                        </div>
+                                                    </div>
+                                                        }
+
+                                                    </div>
+
+                                                    <div class="modal fade" id="notFixedModal" tabindex="-1" role="dialog" aria-labelledby="notfixed" aria-hidden="true">
+                                                        <div class="modal-dialog modal-sm">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close"><span class="fa fa-close" aria-hidden="true"></span></button>
+                                                                    <h4 class="modal-title custom_align" id="Heading">Issue not fixed</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+
+                                                                    <div class="alert">
+                                                                        <span class="fa fa-exclamation-triangle"></span> Why do you think the issue is not fixed?
+                                                                    </div>
+
+
+
+                                                                    <div class=" row">
+                                                                        <div class="form-group col-md-6">
+                                                                            @Html.LabelFor(m => m.TempComments)
+                                                                            @Html.TextAreaFor(m => m.TempComments, new { @class = "form-control", @id = "TempComments", @rows="5" })
+                                                                            <p class="text-danger" id="error"></p>
+                                                                            @*@Html.ValidationMessageFor(m => m.TempComments, "", new { @class = "text-danger" })*@
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                                <div class="modal-footer ">
+
+                                                                    <button type="button" class="btn btn-success" id="closeYes" onclick="notFixed();"><span class="fa fa-check"></span> Yes</button>
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="fa fa-close"></span> No</button>
+
+                                                                </div>
+                                                            </div>
+                                                            <!-- /.modal-content -->
+                                                        </div>
+                                                        <!-- /.modal-dialog -->
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+                                            @*<div class="panel panel-default">
+                                                    <div class="panel-heading"> Support Documents</div>
+                                                    <div class="panel-body">
+
+                                                        <div class="col-md-12">
+                                                            <div class="row">
+                                                                <div class="bootstrap-data-table-panel">
+                                                                    @if (Model.SupportFilesList != null && Model.SupportFilesList.Count > 0)
+                                                                    {
+                                                                        string FileName = string.Empty;
+                                                                        <table id="datatable-buttons" class="table table-striped table-bordered">
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th>Document Name</th>
+
+                                                                                    <th>Action</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                @foreach (var item in Model.SupportFilesList)
+                                                                                {
+                                                                                    <tr>
+                                                                                        <td>@item.FileName</td>
+
+
+                                                                                        <td>
+
+                                                                                            @using (Html.BeginForm("GetImage", "Support", FormMethod.Get, new { @class = "form-horizontal form-label-left" }))
+                                                                                            {
+                                                                                                <input type="hidden" name="imgname" value="@item.FileName" />
+                                                                                                <input type="hidden" name="supportId" value="@item.SupportId" />
+                                                                                                <button type="submit" class="pull-right btn-warning btn-flat "><i class="ti-download"></i></button>
+                                                                                            }
+
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                }
+                                                                            </tbody>
+                                                                        </table>
+                                                                    }
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>*@
+
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading">Upload More Support Documents</div>
+                                                <div class="panel-body">
+                                                    <div class="col-md-4">
+                                                        @if (Model.LookupCodeMaster1.LookupCodeName != "Closed")
+                                                        {
+                                                            <!--Common Document Upload-->
+                                                            using (Html.BeginForm("EditDocumentUpload", "Support", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                                            {
+
+                                                                <div>
+                                                                    <label for="selectFile" class="hidden">Choose File</label>
+                                                                    <input type="file" name="FILEPhoto" id="FILEPhoto" multiple="multiple">
+                                                                    @Html.HiddenFor(m => m.SupportId)
+                                                                    <input type="submit" value="Upload" class="btn btn-primary" onclick="return validate(5);" />
+                                                                </div>
+
+                                                            }
+                                                        }
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <div class="row">
+                                                            <div class="bootstrap-data-table-panel">
+                                                                @if (Model.SupportFilesList != null && Model.SupportFilesList.Count > 0)
+                                                                {
+                                                                    string FileName = string.Empty;
+                                                                    <table id="datatable-buttons" class="table table-striped table-bordered">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Document Name</th>
+                                                                                @*<th>Upload New</th>*@
+                                                                                <th>Action</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach (var item in Model.SupportFilesList)
+                                                                            {
+                                                                                <tr>
+                                                                                    <td>@item.FileName</td>
+
+                                                                                    @*<td>
+                                                                                            @using (Html.BeginForm("SaveImge", "Recruitment", FormMethod.Post, new { @class = "form-horizontal form-label-left" }))
+                                                                                            {
+                                                                                                FileName = "flDocument" + @item.Id;
+                                                                                                <input type="file" name="@FileName" id="@FileName" />
+                                                                                                <button type="submit">Update</button>
+                                                                                            }
+                                                                                        </td>*@
+                                                                                    <td>
+                                                                                        @if (Model.LookupCodeMaster1.LookupCodeName != "Closed" && Model.LookupCodeMaster1.LookupCodeName != "Done")
+                                                                                        {
+                                                                                            <button type="button" class="pull-left btn-danger btn-flat" href="javascript:void(0)" onclick="funImageRemove('@item.Id','@item.FileServerPath','@item.FileName','@item.SupportId');"> <i class="ti-trash"></i></button>
+                                                                                        }
+                                                                                        @using (Html.BeginForm("GetImage", "Support", FormMethod.Get, new { @class = "form-horizontal form-label-left" }))
+                                                                                        {
+                                                                                            <input type="hidden" name="imgname" value="@item.FileName" />
+                                                                                            <input type="hidden" name="supportId" value="@item.SupportId" />
+                                                                                            <button type="submit" class="pull-right btn-warning btn-flat "><i class="ti-download"></i></button>
+                                                                                        }
+                                                                                        @*<button type="button" class="pull-left btn-warning btn-flat m-l-5" href="javascript:void(0)" onclick="downloadImage('@item.FileServerPath','@item.FileName','@item.SupportId');"> <i class="ti-download"></i></button>*@
+
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        </tbody>
+                                                                    </table>
+                                                                }
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

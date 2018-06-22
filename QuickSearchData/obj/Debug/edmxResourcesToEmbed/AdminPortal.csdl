@@ -1,0 +1,1226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="AdminPortalModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="AdminPortalEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="AdminPortalModel.C__MigrationHistory" />
+    <EntitySet Name="AspNetRoles" EntityType="AdminPortalModel.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="AdminPortalModel.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="AdminPortalModel.AspNetUserLogin" />
+    <EntitySet Name="LookupCodeMasters" EntityType="AdminPortalModel.LookupCodeMaster" />
+    <EntitySet Name="LookupTypeMasters" EntityType="AdminPortalModel.LookupTypeMaster" />
+    <EntitySet Name="Products" EntityType="AdminPortalModel.Product" />
+    <EntitySet Name="UserInfoes" EntityType="AdminPortalModel.UserInfo" />
+    <AssociationSet Name="FK_LookupCodeMaster_LookupTypeMaster" Association="AdminPortalModel.FK_LookupCodeMaster_LookupTypeMaster">
+      <End Role="LookupTypeMaster" EntitySet="LookupTypeMasters" />
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupCategory" Association="AdminPortalModel.FK_Products_LookupCategory">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupPlatform" Association="AdminPortalModel.FK_Products_LookupPlatform">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupProductStatus" Association="AdminPortalModel.FK_Products_LookupProductStatus">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_LookupProductType" Association="AdminPortalModel.FK_Products_LookupProductType">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="RecruitmentClients" EntityType="AdminPortalModel.RecruitmentClient" />
+    <AssociationSet Name="FK_RecruitmentClients_LookupCodeMaster1" Association="AdminPortalModel.FK_RecruitmentClients_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="RecruitmentClient" EntitySet="RecruitmentClients" />
+    </AssociationSet>
+    <EntitySet Name="TimeSheetSummaries" EntityType="AdminPortalModel.TimeSheetSummary" />
+    <EntitySet Name="AspNetUsers" EntityType="AdminPortalModel.AspNetUser" />
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="AdminPortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="AdminPortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsers_LookupCodeMaster" Association="AdminPortalModel.FK_AspNetUsers_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_AspNetUsersID_AspNetUsersReportingManager" Association="AdminPortalModel.FK_AspNetUsersID_AspNetUsersReportingManager">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_AspNetUsers" Association="AdminPortalModel.FK_Products_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserInfo_AspNetUsers" Association="AdminPortalModel.FK_UserInfo_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserInfo" EntitySet="UserInfoes" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="AdminPortalModel.AspNetUserRoles">
+      <End Role="AspNetRole" EntitySet="AspNetRoles" />
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <EntitySet Name="sysdiagrams" EntityType="AdminPortalModel.sysdiagram" />
+    <EntitySet Name="LOAs" EntityType="AdminPortalModel.LOA" />
+    <AssociationSet Name="FK_LOA_AspNetUsers" Association="AdminPortalModel.FK_LOA_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="LOA" EntitySet="LOAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_AspNetUsers1" Association="AdminPortalModel.FK_LOA_AspNetUsers1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="LOA" EntitySet="LOAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster" Association="AdminPortalModel.FK_LOA_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="LOA" EntitySet="LOAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster1" Association="AdminPortalModel.FK_LOA_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="LOA" EntitySet="LOAs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LOA_LookupCodeMaster2" Association="AdminPortalModel.FK_LOA_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="LOA" EntitySet="LOAs" />
+    </AssociationSet>
+    <EntitySet Name="Recruitments" EntityType="AdminPortalModel.Recruitment" />
+    <AssociationSet Name="FK_Recruitments_AspNetUsers" Association="AdminPortalModel.FK_Recruitments_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="Recruitment" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitments_LookupCodeMaster1" Association="AdminPortalModel.FK_Recruitments_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Recruitment" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Recruitments_LookupCodeMaster2" Association="AdminPortalModel.FK_Recruitments_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="Recruitment" EntitySet="Recruitments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecruitmentClients_Recruitments" Association="AdminPortalModel.FK_RecruitmentClients_Recruitments">
+      <End Role="Recruitment" EntitySet="Recruitments" />
+      <End Role="RecruitmentClient" EntitySet="RecruitmentClients" />
+    </AssociationSet>
+    <EntitySet Name="RecruitmentDocuments" EntityType="AdminPortalModel.RecruitmentDocument" />
+    <AssociationSet Name="FK_RecruitmentDocuments_Recruitments" Association="AdminPortalModel.FK_RecruitmentDocuments_Recruitments">
+      <End Role="Recruitment" EntitySet="Recruitments" />
+      <End Role="RecruitmentDocument" EntitySet="RecruitmentDocuments" />
+    </AssociationSet>
+    <EntitySet Name="RecruitmentClientDocuments" EntityType="AdminPortalModel.RecruitmentClientDocument" />
+    <AssociationSet Name="FK_RecruitmentClientDocuments_RecruitmentClients" Association="AdminPortalModel.FK_RecruitmentClientDocuments_RecruitmentClients">
+      <End Role="RecruitmentClient" EntitySet="RecruitmentClients" />
+      <End Role="RecruitmentClientDocument" EntitySet="RecruitmentClientDocuments" />
+    </AssociationSet>
+    <EntitySet Name="SupportMasters" EntityType="AdminPortalModel.SupportMaster" />
+    <AssociationSet Name="FK_SupportMaster_AspNetUsers" Association="AdminPortalModel.FK_SupportMaster_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_AspNetUsers1" Association="AdminPortalModel.FK_SupportMaster_AspNetUsers1">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster1" Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster2" Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SupportMaster_LookupCodeMaster3" Association="AdminPortalModel.FK_SupportMaster_LookupCodeMaster3">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+    </AssociationSet>
+    <EntitySet Name="SupportAttachments" EntityType="AdminPortalModel.SupportAttachment" />
+    <AssociationSet Name="FK_SupportAttachments_SupportMaster" Association="AdminPortalModel.FK_SupportAttachments_SupportMaster">
+      <End Role="SupportMaster" EntitySet="SupportMasters" />
+      <End Role="SupportAttachment" EntitySet="SupportAttachments" />
+    </AssociationSet>
+    <EntitySet Name="ExpenseMasters" EntityType="AdminPortalModel.ExpenseMaster" />
+    <AssociationSet Name="FK_ExpenseMaster_AspNetUsers" Association="AdminPortalModel.FK_ExpenseMaster_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="ExpenseMaster" EntitySet="ExpenseMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ExpenseMaster_LookupCodeMaster" Association="AdminPortalModel.FK_ExpenseMaster_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="ExpenseMaster" EntitySet="ExpenseMasters" />
+    </AssociationSet>
+    <EntitySet Name="ExpenseAttachments" EntityType="AdminPortalModel.ExpenseAttachment" />
+    <AssociationSet Name="FK_ExpenseAttachments_ExpenseMaster" Association="AdminPortalModel.FK_ExpenseAttachments_ExpenseMaster">
+      <End Role="ExpenseMaster" EntitySet="ExpenseMasters" />
+      <End Role="ExpenseAttachment" EntitySet="ExpenseAttachments" />
+    </AssociationSet>
+    <EntitySet Name="ExpenseSummaries" EntityType="AdminPortalModel.ExpenseSummary" />
+    <AssociationSet Name="FK_ExpenseSummary_ExpenseMaster" Association="AdminPortalModel.FK_ExpenseSummary_ExpenseMaster">
+      <End Role="ExpenseMaster" EntitySet="ExpenseMasters" />
+      <End Role="ExpenseSummary" EntitySet="ExpenseSummaries" />
+    </AssociationSet>
+    <EntitySet Name="TimeSheetsMasters" EntityType="AdminPortalModel.TimeSheetsMaster" />
+    <AssociationSet Name="FK_TimeSheetsMaster_AspNetUsers" Association="AdminPortalModel.FK_TimeSheetsMaster_AspNetUsers">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster1" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster1">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster2" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster2">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster3" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster3">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster4" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster4">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster5" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster5">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster6" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster6">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetsMaster_LookupCodeMaster7" Association="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster7">
+      <End Role="LookupCodeMaster" EntitySet="LookupCodeMasters" />
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TimeSheetSummary_TimeSheetsMaster" Association="AdminPortalModel.FK_TimeSheetSummary_TimeSheetsMaster">
+      <End Role="TimeSheetsMaster" EntitySet="TimeSheetsMasters" />
+      <End Role="TimeSheetSummary" EntitySet="TimeSheetSummaries" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ContextKey" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Model" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+    <Property Name="ProductVersion" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AdminPortalModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+  </EntityType>
+  <EntityType Name="LookupCodeMaster">
+    <Key>
+      <PropertyRef Name="LookupCodeId" />
+    </Key>
+    <Property Name="LookupCodeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LookupTypeId" Type="Int32" Nullable="false" />
+    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LookupCodeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LookupTypeMaster" Relationship="AdminPortalModel.FK_LookupCodeMaster_LookupTypeMaster" FromRole="LookupCodeMaster" ToRole="LookupTypeMaster" />
+    <NavigationProperty Name="Products" Relationship="AdminPortalModel.FK_Products_LookupCategory" FromRole="LookupCodeMaster" ToRole="Product" />
+    <NavigationProperty Name="Products1" Relationship="AdminPortalModel.FK_Products_LookupPlatform" FromRole="LookupCodeMaster" ToRole="Product" />
+    <NavigationProperty Name="Products2" Relationship="AdminPortalModel.FK_Products_LookupProductStatus" FromRole="LookupCodeMaster" ToRole="Product" />
+    <NavigationProperty Name="Products3" Relationship="AdminPortalModel.FK_Products_LookupProductType" FromRole="LookupCodeMaster" ToRole="Product" />
+    <NavigationProperty Name="RecruitmentClients" Relationship="AdminPortalModel.FK_RecruitmentClients_LookupCodeMaster1" FromRole="LookupCodeMaster" ToRole="RecruitmentClient" />
+    <NavigationProperty Name="AspNetUsers" Relationship="AdminPortalModel.FK_AspNetUsers_LookupCodeMaster" FromRole="LookupCodeMaster" ToRole="AspNetUser" />
+    <NavigationProperty Name="LOAs" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster" FromRole="LookupCodeMaster" ToRole="LOA" />
+    <NavigationProperty Name="LOAs1" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster1" FromRole="LookupCodeMaster" ToRole="LOA" />
+    <NavigationProperty Name="LOAs2" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster2" FromRole="LookupCodeMaster" ToRole="LOA" />
+    <NavigationProperty Name="Recruitments" Relationship="AdminPortalModel.FK_Recruitments_LookupCodeMaster1" FromRole="LookupCodeMaster" ToRole="Recruitment" />
+    <NavigationProperty Name="Recruitments1" Relationship="AdminPortalModel.FK_Recruitments_LookupCodeMaster2" FromRole="LookupCodeMaster" ToRole="Recruitment" />
+    <NavigationProperty Name="SupportMasters" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster1" FromRole="LookupCodeMaster" ToRole="SupportMaster" />
+    <NavigationProperty Name="SupportMasters1" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster2" FromRole="LookupCodeMaster" ToRole="SupportMaster" />
+    <NavigationProperty Name="SupportMasters2" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster3" FromRole="LookupCodeMaster" ToRole="SupportMaster" />
+    <NavigationProperty Name="ExpenseMasters" Relationship="AdminPortalModel.FK_ExpenseMaster_LookupCodeMaster" FromRole="LookupCodeMaster" ToRole="ExpenseMaster" />
+    <NavigationProperty Name="TimeSheetsMasters" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters1" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster1" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters2" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster2" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters3" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster3" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters4" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster4" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters5" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster5" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters6" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster6" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+    <NavigationProperty Name="TimeSheetsMasters7" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster7" FromRole="LookupCodeMaster" ToRole="TimeSheetsMaster" />
+  </EntityType>
+  <EntityType Name="LookupTypeMaster">
+    <Key>
+      <PropertyRef Name="LookupTypeId" />
+    </Key>
+    <Property Name="LookupTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LookupTypeName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="LookupCodeMasters" Relationship="AdminPortalModel.FK_LookupCodeMaster_LookupTypeMaster" FromRole="LookupTypeMaster" ToRole="LookupCodeMaster" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProductCode" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="LookupCategory" Type="Int32" Nullable="false" />
+    <Property Name="LookupProductType" Type="Int32" Nullable="false" />
+    <Property Name="MakeModel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PurchaseDate" Type="DateTime" Precision="0" />
+    <Property Name="Version" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AssignTo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="LookupStatus" Type="Int32" />
+    <Property Name="LookupPlatform" Type="Int32" />
+    <Property Name="Url" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ActivationKey" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="ProductCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Category" Relationship="AdminPortalModel.FK_Products_LookupCategory" FromRole="Product" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="Platform" Relationship="AdminPortalModel.FK_Products_LookupPlatform" FromRole="Product" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="Status" Relationship="AdminPortalModel.FK_Products_LookupProductStatus" FromRole="Product" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="ProductType" Relationship="AdminPortalModel.FK_Products_LookupProductType" FromRole="Product" ToRole="LookupCodeMaster" />
+    <Property Name="OtherProductType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MembershipId" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="GrantNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="AssignedDate" Type="DateTime" Precision="0" />
+    <Property Name="AssignToHardware" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AssignedUser" Relationship="AdminPortalModel.FK_Products_AspNetUsers" FromRole="Product" ToRole="AspNetUser" />
+    <Property Name="Location" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="OtherAssignedUser" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ProfilePicBinary" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_UserInfo_AspNetUsers" FromRole="UserInfo" ToRole="AspNetUser" />
+  </EntityType>
+  <Association Name="FK_LookupCodeMaster_LookupTypeMaster">
+    <End Type="AdminPortalModel.LookupTypeMaster" Role="LookupTypeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupTypeMaster">
+        <PropertyRef Name="LookupTypeId" />
+      </Principal>
+      <Dependent Role="LookupCodeMaster">
+        <PropertyRef Name="LookupTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupCategory">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="LookupCategory" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupPlatform">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="LookupPlatform" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupProductStatus">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="LookupStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_LookupProductType">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="LookupProductType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RecruitmentClient">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecruitmentId" Type="Int32" Nullable="false" />
+    <Property Name="ClientName" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SubmissionDate" Type="DateTime" Precision="3" />
+    <Property Name="JobLocation" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="JobTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LookupCandidateStatus" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_RecruitmentClients_LookupCodeMaster1" FromRole="RecruitmentClient" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="Recruitment" Relationship="AdminPortalModel.FK_RecruitmentClients_Recruitments" FromRole="RecruitmentClient" ToRole="Recruitment" />
+    <NavigationProperty Name="RecruitmentClientDocuments" Relationship="AdminPortalModel.FK_RecruitmentClientDocuments_RecruitmentClients" FromRole="RecruitmentClient" ToRole="RecruitmentClientDocument" />
+    <Property Name="ClientDocument1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="ClientDocument2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentName1" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="DocumentName2" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_RecruitmentClients_LookupCodeMaster1">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.RecruitmentClient" Role="RecruitmentClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="RecruitmentClient">
+        <PropertyRef Name="LookupCandidateStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TimeSheetSummary">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeSheetID" Type="Int32" Nullable="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Day1Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day2Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day3Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day4Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day5Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day6Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day7Hours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <NavigationProperty Name="TimeSheetsMaster" Relationship="AdminPortalModel.FK_TimeSheetSummary_TimeSheetsMaster" FromRole="TimeSheetSummary" ToRole="TimeSheetsMaster" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="Firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LookupGender" Type="Int32" Nullable="false" />
+    <Property Name="JoiningDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="ReportingManager" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="AdminPortalModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="AdminPortalModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_AspNetUsers_LookupCodeMaster" FromRole="AspNetUser" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="AspNetUsers1" Relationship="AdminPortalModel.FK_AspNetUsersID_AspNetUsersReportingManager" FromRole="AspNetUser" ToRole="AspNetUser1" />
+    <NavigationProperty Name="AspNetUser1" Relationship="AdminPortalModel.FK_AspNetUsersID_AspNetUsersReportingManager" FromRole="AspNetUser1" ToRole="AspNetUser" />
+    <NavigationProperty Name="Products" Relationship="AdminPortalModel.FK_Products_AspNetUsers" FromRole="AspNetUser" ToRole="Product" />
+    <NavigationProperty Name="UserInfoes" Relationship="AdminPortalModel.FK_UserInfo_AspNetUsers" FromRole="AspNetUser" ToRole="UserInfo" />
+    <NavigationProperty Name="AspNetRoles" Relationship="AdminPortalModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="LOAs" Relationship="AdminPortalModel.FK_LOA_AspNetUsers" FromRole="AspNetUser" ToRole="LOA" />
+    <NavigationProperty Name="Recruitments" Relationship="AdminPortalModel.FK_Recruitments_AspNetUsers" FromRole="AspNetUser" ToRole="Recruitment" />
+    <NavigationProperty Name="SupportMasters" Relationship="AdminPortalModel.FK_SupportMaster_AspNetUsers" FromRole="AspNetUser" ToRole="SupportMaster" />
+    <NavigationProperty Name="SupportMasters1" Relationship="AdminPortalModel.FK_SupportMaster_AspNetUsers1" FromRole="AspNetUser" ToRole="SupportMaster" />
+    <NavigationProperty Name="ExpenseMasters" Relationship="AdminPortalModel.FK_ExpenseMaster_AspNetUsers" FromRole="AspNetUser" ToRole="ExpenseMaster" />
+    <NavigationProperty Name="TimeSheetsMasters" Relationship="AdminPortalModel.FK_TimeSheetsMaster_AspNetUsers" FromRole="AspNetUser" ToRole="TimeSheetsMaster" />
+  </EntityType>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AdminPortalModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaim">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="AdminPortalModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogin">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsers_LookupCodeMaster">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="AspNetUser">
+        <PropertyRef Name="LookupGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_AspNetUsersID_AspNetUsersReportingManager">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUser1">
+        <PropertyRef Name="ReportingManager" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="AssignTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserInfo_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.UserInfo" Role="UserInfo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserInfo">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Type="AdminPortalModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="LOA">
+    <Key>
+      <PropertyRef Name="LoaId" />
+    </Key>
+    <Property Name="LoaId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="LoaCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LookupTimeOfDay" Type="Int32" Nullable="false" />
+    <Property Name="OtherTimeOfDay" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LookupTypeOfLeave" Type="Int32" Nullable="false" />
+    <Property Name="OtherTypeOfLeave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ReasonForLeave" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LookupLoaStatus" Type="Int32" Nullable="false" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_LOA_AspNetUsers" FromRole="LOA" ToRole="AspNetUser" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster" FromRole="LOA" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster1" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster1" FromRole="LOA" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster2" Relationship="AdminPortalModel.FK_LOA_LookupCodeMaster2" FromRole="LOA" ToRole="LookupCodeMaster" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_LOA_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.LOA" Role="LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_AspNetUsers1">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.LOA" Role="LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="ApprovedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.LOA" Role="LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupTimeOfDay" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster1">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.LOA" Role="LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupTypeOfLeave" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LOA_LookupCodeMaster2">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.LOA" Role="LOA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="LOA">
+        <PropertyRef Name="LookupLoaStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Recruitment">
+    <Key>
+      <PropertyRef Name="RecruitmentId" />
+    </Key>
+    <Property Name="RecruitmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecruiterId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="PrimarySkillSet" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="SecondarySkillSet" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LookupVisaStatus" Type="Int32" Nullable="false" />
+    <Property Name="AvailableDate" Type="DateTime" Precision="0" />
+    <Property Name="CurrentLocation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LookupEmployementType" Type="Int32" Nullable="false" />
+    <Property Name="C2CContactPerson" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="C2CEmail" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="C2CCompanyName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="C2CContactNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_Recruitments_AspNetUsers" FromRole="Recruitment" ToRole="AspNetUser" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_Recruitments_LookupCodeMaster1" FromRole="Recruitment" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster1" Relationship="AdminPortalModel.FK_Recruitments_LookupCodeMaster2" FromRole="Recruitment" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="RecruitmentClients" Relationship="AdminPortalModel.FK_RecruitmentClients_Recruitments" FromRole="Recruitment" ToRole="RecruitmentClient" />
+    <NavigationProperty Name="RecruitmentDocuments" Relationship="AdminPortalModel.FK_RecruitmentDocuments_Recruitments" FromRole="Recruitment" ToRole="RecruitmentDocument" />
+  </EntityType>
+  <Association Name="FK_Recruitments_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.Recruitment" Role="Recruitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Recruitment">
+        <PropertyRef Name="RecruiterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitments_LookupCodeMaster1">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.Recruitment" Role="Recruitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Recruitment">
+        <PropertyRef Name="LookupEmployementType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Recruitments_LookupCodeMaster2">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.Recruitment" Role="Recruitment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="Recruitment">
+        <PropertyRef Name="LookupVisaStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecruitmentClients_Recruitments">
+    <End Type="AdminPortalModel.Recruitment" Role="Recruitment" Multiplicity="1" />
+    <End Type="AdminPortalModel.RecruitmentClient" Role="RecruitmentClient" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recruitment">
+        <PropertyRef Name="RecruitmentId" />
+      </Principal>
+      <Dependent Role="RecruitmentClient">
+        <PropertyRef Name="RecruitmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RecruitmentDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecruitmentId" Type="Int32" Nullable="false" />
+    <Property Name="FileServerPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="RecruitmentDocumentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Recruitment" Relationship="AdminPortalModel.FK_RecruitmentDocuments_Recruitments" FromRole="RecruitmentDocument" ToRole="Recruitment" />
+  </EntityType>
+  <Association Name="FK_RecruitmentDocuments_Recruitments">
+    <End Type="AdminPortalModel.Recruitment" Role="Recruitment" Multiplicity="1" />
+    <End Type="AdminPortalModel.RecruitmentDocument" Role="RecruitmentDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recruitment">
+        <PropertyRef Name="RecruitmentId" />
+      </Principal>
+      <Dependent Role="RecruitmentDocument">
+        <PropertyRef Name="RecruitmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RecruitmentClientDocument">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecruitmentClientId" Type="Int32" Nullable="false" />
+    <Property Name="FilePath" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClientDocumentName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="true" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="true" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="RecruitmentClient" Relationship="AdminPortalModel.FK_RecruitmentClientDocuments_RecruitmentClients" FromRole="RecruitmentClientDocument" ToRole="RecruitmentClient" />
+  </EntityType>
+  <Association Name="FK_RecruitmentClientDocuments_RecruitmentClients">
+    <End Type="AdminPortalModel.RecruitmentClient" Role="RecruitmentClient" Multiplicity="1" />
+    <End Type="AdminPortalModel.RecruitmentClientDocument" Role="RecruitmentClientDocument" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="RecruitmentClient">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RecruitmentClientDocument">
+        <PropertyRef Name="RecruitmentClientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SupportMaster">
+    <Key>
+      <PropertyRef Name="SupportId" />
+    </Key>
+    <Property Name="SupportId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupportCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Summary" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="LookupIssuePriority" Type="Int32" Nullable="false" />
+    <Property Name="LookupIssueStatus" Type="Int32" Nullable="false" />
+    <Property Name="LookupIssueType" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <Property Name="SubmittedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="AssignTo" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_SupportMaster_AspNetUsers" FromRole="SupportMaster" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="AdminPortalModel.FK_SupportMaster_AspNetUsers1" FromRole="SupportMaster" ToRole="AspNetUser" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster1" FromRole="SupportMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster1" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster2" FromRole="SupportMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster2" Relationship="AdminPortalModel.FK_SupportMaster_LookupCodeMaster3" FromRole="SupportMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="SupportAttachments" Relationship="AdminPortalModel.FK_SupportAttachments_SupportMaster" FromRole="SupportMaster" ToRole="SupportAttachment" />
+    <Property Name="FixedTime" Type="DateTime" Precision="3" />
+    <Property Name="IsFixed" Type="Boolean" />
+    <Property Name="UserComments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK_SupportMaster_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_AspNetUsers1">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="AssignTo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster1">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssuePriority" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster2">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssueStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SupportMaster_LookupCodeMaster3">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="SupportMaster">
+        <PropertyRef Name="LookupIssueType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SupportAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupportId" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileServerPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="SupportMaster" Relationship="AdminPortalModel.FK_SupportAttachments_SupportMaster" FromRole="SupportAttachment" ToRole="SupportMaster" />
+  </EntityType>
+  <Association Name="FK_SupportAttachments_SupportMaster">
+    <End Type="AdminPortalModel.SupportMaster" Role="SupportMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.SupportAttachment" Role="SupportAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SupportMaster">
+        <PropertyRef Name="SupportId" />
+      </Principal>
+      <Dependent Role="SupportAttachment">
+        <PropertyRef Name="SupportId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ExpenseMaster">
+    <Key>
+      <PropertyRef Name="ExpenseId" />
+    </Key>
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseCode" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="LookupStatus" Type="Int32" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_ExpenseMaster_AspNetUsers" FromRole="ExpenseMaster" ToRole="AspNetUser" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_ExpenseMaster_LookupCodeMaster" FromRole="ExpenseMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="ExpenseAttachments" Relationship="AdminPortalModel.FK_ExpenseAttachments_ExpenseMaster" FromRole="ExpenseMaster" ToRole="ExpenseAttachment" />
+    <NavigationProperty Name="ExpenseSummaries" Relationship="AdminPortalModel.FK_ExpenseSummary_ExpenseMaster" FromRole="ExpenseMaster" ToRole="ExpenseSummary" />
+    <Property Name="Advance" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="SubTotal" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+  </EntityType>
+  <Association Name="FK_ExpenseMaster_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.ExpenseMaster" Role="ExpenseMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ExpenseMaster">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ExpenseMaster_LookupCodeMaster">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="0..1" />
+    <End Type="AdminPortalModel.ExpenseMaster" Role="ExpenseMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="ExpenseMaster">
+        <PropertyRef Name="LookupStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ExpenseAttachment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" />
+    <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FileServerPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ExpenseMaster" Relationship="AdminPortalModel.FK_ExpenseAttachments_ExpenseMaster" FromRole="ExpenseAttachment" ToRole="ExpenseMaster" />
+  </EntityType>
+  <Association Name="FK_ExpenseAttachments_ExpenseMaster">
+    <End Type="AdminPortalModel.ExpenseMaster" Role="ExpenseMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.ExpenseAttachment" Role="ExpenseAttachment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseMaster">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="ExpenseAttachment">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ExpenseSummary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpenseId" Type="Int32" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Miles" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="MilesMultiplicationFactor" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="MilesDriven" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Transport" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Lodging" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Meals" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Phone" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Other" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Total" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <NavigationProperty Name="ExpenseMaster" Relationship="AdminPortalModel.FK_ExpenseSummary_ExpenseMaster" FromRole="ExpenseSummary" ToRole="ExpenseMaster" />
+  </EntityType>
+  <Association Name="FK_ExpenseSummary_ExpenseMaster">
+    <End Type="AdminPortalModel.ExpenseMaster" Role="ExpenseMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.ExpenseSummary" Role="ExpenseSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ExpenseMaster">
+        <PropertyRef Name="ExpenseId" />
+      </Principal>
+      <Dependent Role="ExpenseSummary">
+        <PropertyRef Name="ExpenseId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TimeSheetsMaster">
+    <Key>
+      <PropertyRef Name="TimeSheetID" />
+    </Key>
+    <Property Name="TimeSheetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TimeSheetCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="UserID" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="OverTimeHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="TotalHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day1RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day2RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day3RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day4RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day5RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day6RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day7RegularHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day1OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day2OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day3OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day4OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day5OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day6OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="Day7OverHours" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="LookupAbsenceTypeDay1" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay2" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay3" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay4" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay5" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay6" Type="Int32" Nullable="false" />
+    <Property Name="LookupAbsenceTypeDay7" Type="Int32" Nullable="false" />
+    <Property Name="AbsenceHoursDay1" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay2" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay3" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay4" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay5" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay6" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="AbsenceHoursDay7" Type="Decimal" Nullable="false" Precision="6" Scale="2" />
+    <Property Name="LookupApprovedStatus" Type="Int32" Nullable="false" />
+    <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ApprovedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedUserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="AspNetUser" Relationship="AdminPortalModel.FK_TimeSheetsMaster_AspNetUsers" FromRole="TimeSheetsMaster" ToRole="AspNetUser" />
+    <NavigationProperty Name="LookupCodeMaster" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster1" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster1" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster2" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster2" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster3" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster3" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster4" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster4" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster5" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster5" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster6" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster6" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="LookupCodeMaster7" Relationship="AdminPortalModel.FK_TimeSheetsMaster_LookupCodeMaster7" FromRole="TimeSheetsMaster" ToRole="LookupCodeMaster" />
+    <NavigationProperty Name="TimeSheetSummaries" Relationship="AdminPortalModel.FK_TimeSheetSummary_TimeSheetsMaster" FromRole="TimeSheetsMaster" ToRole="TimeSheetSummary" />
+  </EntityType>
+  <Association Name="FK_TimeSheetsMaster_AspNetUsers">
+    <End Type="AdminPortalModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay1" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster1">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay2" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster2">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay3" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster3">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay4" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster4">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay5" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster5">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay6" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster6">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupAbsenceTypeDay7" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetsMaster_LookupCodeMaster7">
+    <End Type="AdminPortalModel.LookupCodeMaster" Role="LookupCodeMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LookupCodeMaster">
+        <PropertyRef Name="LookupCodeId" />
+      </Principal>
+      <Dependent Role="TimeSheetsMaster">
+        <PropertyRef Name="LookupApprovedStatus" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TimeSheetSummary_TimeSheetsMaster">
+    <End Type="AdminPortalModel.TimeSheetsMaster" Role="TimeSheetsMaster" Multiplicity="1" />
+    <End Type="AdminPortalModel.TimeSheetSummary" Role="TimeSheetSummary" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TimeSheetsMaster">
+        <PropertyRef Name="TimeSheetID" />
+      </Principal>
+      <Dependent Role="TimeSheetSummary">
+        <PropertyRef Name="TimeSheetID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

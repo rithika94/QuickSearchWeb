@@ -1,0 +1,106 @@
+﻿@model QuickSearchWeb.Models.UserViewModel
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+<div class="content-wrap">
+    <div class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-8 p-0">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h1>Add User</h1>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+                <div class="col-lg-4 p-0">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <ol class="breadcrumb text-right">
+                                <li><a @*href="#"*@>Users</a></li>
+                                <li class="active">Add User</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div><!-- /# column -->
+            </div><!-- /# row -->
+            <div class="main-content">
+                <div class="row">
+
+                    <input type="button" value="Back to users" class="btn btn-flat btn-default m-b-10 m-l-5" form="post" onclick="location.href='@Url.Action("Index", "User")'" />
+
+                    <div class="col-md-12">
+                        <div class="card alert">
+                            <div class="card-header">
+                                <h4>Add a new user</h4>
+                            </div>
+                            <div class="card-body">
+                                @using (Html.BeginForm(FormMethod.Post))
+                                {
+                                    <form asp-action="Create">
+                                        <div class="row">
+                                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.FirstName)
+                                                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.LastName)
+                                                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.PhoneNumber)
+                                                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.Email)
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.Password)
+                                                @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.ConfirmPassword)
+                                                @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.Gender)
+                                                @Html.TextBoxFor(m => m.Gender, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="form-group col-md-6">
+                                                @Html.LabelFor(m => m.JoiningDate)
+                                                @Html.TextBoxFor(m => m.JoiningDate, new { @class = "form-control" })
+                                                @Html.ValidationMessageFor(m => m.JoiningDate, "", new { @class = "text-danger" })
+                                            </div>
+
+
+
+                                            <div class="form-group  col-md-12">
+                                                <input type="submit" value="Create" class="btn btn-flat btn-info m-b-10 m-l-5" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ePATHUSA : Quick Search</title>
+
+    @*@Styles.Render("~/Content/css")*@
+    @*@Styles.Render("~/ContentTemplate/css/")*@
+
+    @*@Scripts.Render("~/bundles/modernizr")*@
+
+    <!-- Styles -->
+    <link href="~/ContentTemplate/css/lib/font-awesome.min.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/themify-icons.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/weather-icons.css" rel="stylesheet" />
+    @*<link href="~/ContentTemplate/css/lib/data-table/dataTables.bootstrap.min.css" rel="stylesheet" />*@
+    <link href="~/ContentTemplate/css/lib/data-table/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/ContentTemplate/css/lib/mmc-chat.css" rel="stylesheet" />
+    <link href="~/ContentTemplate/css/lib/sidebar.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/bootstrap.min.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/nestable/nestable.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/unix.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/style.css" rel="stylesheet">
+    <link href="~/ContentTemplate/css/lib/jquery-ui.min.css" rel="stylesheet" />
+    @*<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">*@
+
+    @*<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+    @*<script src="http://code.jquery.com/jquery-1.12.4.min.js"></script>*@
+    @*<script src="~/Scripts/jquery-1.12.4.js"></script>*@
+
+    <style>
+
+
+        .loader {
+            display: none;
+            background: rgba(0, 0, 0, 0.6901960784313725);
+            position: fixed!important;
+            left: 0 !important;
+            right: 0 !important;
+            text-align: center;
+            top: 0px !important;
+            bottom: 0px !important;
+            z-index: 1000;
+            padding-top: 250px;
+            
+        }
+    </style>
+
+
+    <script type="text/javascript">
+        //<![CDATA[
+        var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.comodo.com/" : "http://www.trustlogo.com/");
+        document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+        //]]>
+    </script>
+
+</head>
+
+<body>
+    <div class="header">
+        <div class="pull-left">
+            <div class="logo"><a href="@Url.Action("Index", "Home")"><span>eQuicksearch</span></a></div>
+            <div class="hamburger sidebar-toggle">
+                <span class="line"></span>
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>
+        <div class="pull-right p-r-15">
+            <ul>
+
+
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div>
+    </div>
+
+    <div class="body-content">
+        <div class="sidebar sidebar-hide-to-small sidebar-shrink sidebar-gestures">
+            <div class="nano">
+                <div class="nano-content">
+                    <ul>
+
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("Home") ? "active" : "")"><a href="@Url.Action("Index", "Home")"><i class="ti-home"></i> Dashboard </a></li>
+                        @if (User.IsInRole("InventoryAdmin") || User.IsInRole("InventoryManager"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("Inventory") ? "active" : "")"><a href="@Url.Action("Index", "Inventory")"><i class="ti-book"></i>Inventory Management </a></li>
+                        }
+                        @*@if (User.IsInRole("HRAdmin") || User.IsInRole("HRManager"))
+                            {
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("HR") ? "active" : "")"><a href="app-event-calender.html"><i class="ti-target"></i> HR Department </a></li>
+                            }*@
+
+                        @{ if (User.IsInRole("TimeSheetAdmin") || User.IsInRole("TimeSheetManager") || User.IsInRole("TimeSheetReportingManager") || User.IsInRole("TimeSheetUser"))
+                            {
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("TimeSheet")||ViewContext.RouteData.Values["controller"].ToString().Equals("LOA")||ViewContext.RouteData.Values["controller"].ToString().Equals("Expense") ? "active" : "")">
+                                    <a class="sidebar-sub-toggle"><i class="ti-timer"></i> TS Management <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                    <ul>
+                                        @{
+                                            if (User.IsInRole("TimeSheetAdmin"))
+                                            {
+                                                <li><a href="@Url.Action("EmployeeAdminTimeSheetsList", "TimeSheet")">TS-Admin</a></li>
+                                                <li><a href="@Url.Action("EmployeeAdminLOAList", "LOA")">LOAs-Admin</a></li>
+                                                <li><a href="@Url.Action("EmployeeAdminExpensesList", "Expense")">Expenses-Admin</a></li>
+                                            }
+                                            if (User.IsInRole("TimeSheetManager"))
+                                            {
+                                                <li><a href="@Url.Action("EmployeeManagerTimeSheetsList", "TimeSheet")">TS-Viewer</a></li>
+                                                <li><a href="@Url.Action("EmployeeManagerLOAList", "LOA")">LOAs-Viewer</a></li>
+                                                <li><a href="@Url.Action("EmployeeManagerExpensesList", "Expense")">Expenses-Viewer</a></li>
+                                            }
+                                            if (User.IsInRole("TimeSheetReportingManager"))
+                                            {
+                                                <li><a href="@Url.Action("EmployeeRepoManTimeSheetsList", "TimeSheet")">TS-Approver</a></li>
+                                                <li><a href="@Url.Action("EmployeeRepoManLOAList", "LOA")">LOAs-Approver</a></li>
+                                                <li><a href="@Url.Action("EmployeeRepoManExpensesList", "Expense")">Expenses-Approver</a></li>
+                                            }
+                                            if (User.IsInRole("TimeSheetUser"))
+                                            {
+                                                <li><a href="@Url.Action("MyTimeSheetsList", "TimeSheet")">My Timesheets</a></li>
+                                                <li><a href="@Url.Action("MyLOAList", "LOA")">My LOAs</a></li>
+                                                <li><a href="@Url.Action("MyExpenseList", "Expense")">My Expenses</a></li>
+
+                                            }
+                                        }
+
+                                    </ul>
+                                </li>
+                            }
+
+                          
+                        }
+                        @{
+
+                            if (User.IsInRole("SupportAdmin") || User.IsInRole("SupportManager") || User.IsInRole("SupportEngineer") || User.IsInRole("SupportUser"))
+                            {
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("Support") ? "active" : "")">
+                                    <a class="sidebar-sub-toggle"><i class="ti-support"></i>IT Support <span class="sidebar-collapse-icon ti-angle-down"></span></a>
+                                    <ul>
+                                        @{
+                                            if (User.IsInRole("SupportAdmin"))
+                                            {
+                                                <li><a href="@Url.Action("SupportAdminList", "Support")">Tickets-Admin</a></li>
+                                            }
+                                            if (User.IsInRole("SupportManager"))
+                                            {
+                                                <li><a href="@Url.Action("SupportManagerList", "Support")">Tickets-Mngr</a></li>
+                                            }
+                                            if (User.IsInRole("SupportEngineer"))
+                                            {
+                                                <li><a href="@Url.Action("SupportEngineerList", "Support")">Tickets-Eng</a></li>
+                                            }
+
+                                            if (User.IsInRole("SupportUser"))
+                                            {
+                                                <li><a href="@Url.Action("MySupportList", "Support")">My Support Tickets</a></li>
+                                            }
+                                        }
+
+                                    </ul>
+                                </li>
+                            }
+                        }
+
+
+
+                        @*@if (User.IsInRole("ContractAdmin") || User.IsInRole("ContractManager"))
+                            {
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("Contract") ? "active" : "")"><a href="app-event-calender.html"><i class="ti-agenda"></i>Contracts </a></li>
+                            }
+                            @if (User.IsInRole("RecruitmentAdmin") || User.IsInRole("RecruitmentManager"))
+                            {
+                                <li @(ViewContext.RouteData.Values["controller"].ToString().Equals("Recruitment") ? "class=active" : "")><a href="@Url.Action("Index", "Recruitment")"><i class="ti-write"></i> Recruitment </a></li>
+                            }*@
+                        @if (User.IsInRole("EmployeeAdmin") || User.IsInRole("EmployeeManager"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("User") ? "active" : "")"><a href="@Url.Action("Index", "User")"><i class="ti-user"></i> Employees </a></li>
+                        }
+                        @if (User.IsInRole("EPALUser"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("EPAL") ? "active" : "")"><a href="@Url.Action("Index", "EPAL")"><i class="ti-user"></i> ePAL </a></li>
+                        }
+                        @*@if (User.IsInRole("UserAdmin") || User.IsInRole("UserUser"))
+                            {
+                                <li><a href="@Url.Action("Index","User")"><i class="ti-user"></i> Users </a></li>
+                            }*@
+                        <li class="@(ViewContext.RouteData.Values["controller"].ToString().Equals("MyProfile") ? "active" : "")"><a href="@Url.Action("Index", "MyProfile")"><i class="ti-user"></i> My Profile </a></li>
+
+                    </ul>
+
+
+                </div>
+            </div>
+        </div><!-- /# sidebar -->
+        @RenderBody()
+
+        <hr />
+        <footer class="pull-right">
+
+            <p>
+                &copy; @DateTime.Now.Year - A Product of ePATHUSA  @System.Web.Configuration.WebConfigurationManager.AppSettings["Version"] @*<img src="~/ContentTemplate/images/comodo_secure_seal_100x85_transp.png" />*@
+                <script language="JavaScript" type="text/javascript">
+                    TrustLogo("https://www.equicksearch.net/ContentTemplate/images/comodo_secure_seal_100x85_transp.png", "SC5", "none");
+                </script>
+                <a class="pull-right" href="https://www.instantssl.com/ssl-certificate.html" id="comodoTL">Instant SSL Pro</a>
+            </p>
+
+            <script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>
+        </footer>
+    </div>
+
+    @*@Scripts.Render("~/bundles/jquery")*@
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+
+    <div class="loader">
+        <img src="~/ContentTemplate/images/ajax-loader.gif" />
+    </div>
+
+
+    <script src="~/Scripts/jquery-1.12.4.js"></script>
+    <script src="~/ContentTemplate/js/lib/jquery.nanoscroller.min.js"></script><!-- nano scroller -->
+    <script src="~/ContentTemplate/js/lib/sidebar.js"></script><!-- sidebar -->
+    @*<script src="~/ContentTemplate/js/lib/bootstrap.min.js"></script>*@<!-- bootstrap -->
+    <script src="~/ContentTemplate/js/lib/data-table/datatables.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/dataTables.buttons.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/jszip.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/pdfmake.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/vfs_fonts.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/buttons.html5.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/buttons.print.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/buttons.colVis.min.js"></script>
+    <script src="~/ContentTemplate/js/lib/data-table/datatables-init.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/ContentTemplate/js/scripts.js"></script><!-- scripit init-->
+    @*<script src="~/ContentTemplate/js/Custom.js"></script>*@
+
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
